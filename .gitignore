@@ -4,4 +4,4 @@ __pycache__/
 .ruff_cache/
 *.egg-info/
 data/opsd_*.csv
-results/*/motifs.npz
+results/**/motifs.npz

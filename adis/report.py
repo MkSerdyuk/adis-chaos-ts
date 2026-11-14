@@ -120,7 +120,7 @@ def rebuild(directory, add_dlinear=False):
     metadata["comparable_cells"] = int((comparison.status == "comparable_reconstruction").sum())
     metadata["within_published_rounding"] = int(comparison.within_rounding.sum())
     metadata["methods"] = sorted(predictions)
-    metadata["forecast_pairs"] = int(truth.size)
+    metadata["forecast_pairs"] = int(np.isfinite(truth).sum())
     metadata["report_source_sha256"] = {
         p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(Path("adis").glob("*.py"))
     }
@@ -164,11 +164,14 @@ def rebuild(directory, add_dlinear=False):
     physical = metadata["dataset"] == "germany"
     multiplier, offset = (scale, minimum) if physical else (1, 0)
     lead = np.arange(1, truth.shape[1] + 1)
+    example_row = np.flatnonzero(np.isfinite(truth).all(axis=1))[0]
     for axis, name in zip(axes[:, 0], example_names, strict=True):
-        axis.plot(lead, truth[0] * multiplier + offset, color="black", label="Actual")
-        axis.plot(lead, predictions[name][0] * multiplier + offset, ".--", markersize=3, label=name)
+        axis.plot(lead, truth[example_row] * multiplier + offset, color="black", label="Actual")
+        axis.plot(lead, predictions[name][example_row] * multiplier + offset, ".--", markersize=3, label=name)
         axis.set_ylabel("Load (MW)" if physical else "Normalized x")
-        axis.set_title(f"Accepted: {np.isfinite(predictions[name][0]).sum()}/{truth.shape[1]}", fontsize=9)
+        axis.set_title(
+            f"Accepted: {np.isfinite(predictions[name][example_row]).sum()}/{truth.shape[1]}", fontsize=9
+        )
         axis.grid(alpha=0.2)
         axis.legend(fontsize=8)
     axes[-1, 0].set_xlabel("Lead time (hours)" if physical else "Lead time (steps)")
@@ -202,11 +205,26 @@ def write_report(root, all_results):
             f"## {'Немецкая нагрузка' if germany else 'Лоренц'}",
             "",
             f"Train: {metadata['train'][1]} наблюдений; validation: 1000; test: 1000. "
-            f"Общие {metadata['test_origins']} окон, горизонт {metadata['horizon']}. "
+            f"Общие {metadata['test_origins']} origins, горизонт {metadata['horizon']}. "
             "Одна и та же пара (origin, horizon) используется каждым методом. "
-            "Соседние окна перекрываются; 90 100 пар не являются независимыми наблюдениями.",
+            f"Оценивается {metadata['forecast_pairs']} пар; соседние окна перекрываются "
+            "и не являются независимыми наблюдениями.",
             "",
         ]
+        if metadata.get("evaluation") == "paper":
+            counts = metadata["targets_per_horizon"]
+            sample_size = str(min(counts)) if min(counts) == max(counts) else f"от {min(counts)} до {max(counts)}"
+            report += [
+                f"По формуле (7), на каждом горизонте оценивается {sample_size} "
+                "точек test (при test_stride=1 — весь test). "
+                "Origin равен target − horizon; значения вне test исключены из метрик. "
+                "Для AP доступна отдельная полная матрица истинных значений, включая "
+                "промежуточные точки перед началом test.",
+                f"Последние {metadata['validation_embargo']} значений validation исключены из "
+                "обучения классификаторов и настройки всех моделей: калибровка завершается "
+                "не позже самого раннего тестового origin.",
+                "",
+            ]
         if germany:
             matched = pd.read_csv(root / dataset / "matched_masks.csv")
             matched = matched[matched.selection_method == "trj_trjp_rgdbscan"].set_index("method")
@@ -249,7 +267,7 @@ def write_report(root, all_results):
             f"Из {metadata['published_numeric_cells']} числовых ячеек статьи "
             f"сравнимы {metadata['comparable_cells']}; "
             f"в пределах округления оказались {metadata['within_published_rounding']}. "
-            "Совпадение отдельных ячеек не подтверждает репликацию: экспериментальные входы отличаются.",
+            "Совпадение отдельных ячеек не подтверждает репликацию: входы и настройки авторов не восстановлены.",
             "",
             f"![Ошибка и покрытие]({dataset}/horizons.png)",
             "",
@@ -337,7 +355,7 @@ def write_report(root, all_results):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="results")
+    parser.add_argument("--output", default="results/fidelity")
     parser.add_argument("--add-dlinear", action="store_true")
     args = parser.parse_args()
     root = Path(args.output)

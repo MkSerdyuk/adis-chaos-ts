@@ -93,10 +93,15 @@ def test_candidates_match_exhaustive_search_with_missing_values():
 def test_weighted_aggregation_equations():
     candidates = (np.array([1.0, 3]), np.array([0.5, 1]), np.array([0.2, 0.8]))
     rng = np.random.default_rng(0)
-    for mode, expected in [("avg", 2), ("wavgl", 7 / 3), ("wavgd", 2.6), ("wavgc", 25 / 9)]:
+    for mode, expected, weight in [
+        ("avg", 2, 0.75),
+        ("wavgl", 7 / 3, 0.75),
+        ("wavgd", 2.6, 0.5),
+        ("wavgc", 25 / 9, 0.45),
+    ]:
         value, reliability = aggregate(candidates, ForecastConfig(aggregation=mode), rng)
         assert value == pytest.approx(expected)
-        assert reliability == 0.75
+        assert reliability == pytest.approx(weight)
 
 
 def test_mfp_variance_is_not_standard_deviation():

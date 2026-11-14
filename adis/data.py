@@ -67,3 +67,19 @@ def windows(series, origins, context, horizon):
     histories = series[origins[:, None] - np.arange(context - 1, -1, -1)]
     targets = series[origins[:, None] + np.arange(1, horizon + 1)]
     return histories, targets
+
+
+def test_windows(series, start, context, horizon, stride=1, evaluation="paper"):
+    if evaluation == "paper":
+        origins = np.arange(start - horizon, len(series) - 1, stride)
+    elif evaluation == "common_origins":
+        origins = np.arange(start - 1, len(series) - horizon, stride)
+    else:
+        raise ValueError(evaluation)
+    histories = series[origins[:, None] - np.arange(context - 1, -1, -1)]
+    indices = origins[:, None] + np.arange(1, horizon + 1)
+    oracle_truth = np.full(indices.shape, np.nan)
+    available = indices < len(series)
+    oracle_truth[available] = series[indices[available]]
+    truth = np.where(indices >= start, oracle_truth, np.nan)
+    return origins, histories, truth, oracle_truth

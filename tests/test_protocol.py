@@ -6,7 +6,8 @@ import pytest
 
 from adis import MotifModel
 from adis.baselines import _recursive, seasonal_naive
-from adis.evaluation import compare_masks
+from adis.data import test_windows as make_test_windows
+from adis.evaluation import compare_masks, errors, horizon_metrics
 from adis.prediction import ForecastConfig, _spread, forecast, reduced_history_forecast, trajectory_forecast
 
 
@@ -102,9 +103,7 @@ def test_wamdt_requires_a_main_trajectory():
 @pytest.mark.parametrize("aggregation", ["wavgl", "clc", "mfp"])
 def test_trajectory_forecast_rejects_ignored_endpoint_aggregation(aggregation):
     with pytest.raises(ValueError, match="avg endpoints; intermediate steps use mfp"):
-        trajectory_forecast(
-            GrowingSpreadModel(), [0.2, 0.4], 3, ForecastConfig(aggregation=aggregation)
-        )
+        trajectory_forecast(GrowingSpreadModel(), [0.2, 0.4], 3, ForecastConfig(aggregation=aggregation))
 
 
 @pytest.mark.parametrize("aggregation", ["avg", "wavgl"])
@@ -125,3 +124,65 @@ def test_forced_prediction_rejects_aggregators_that_can_abstain(aggregation):
 def test_forced_prediction_rejects_predictability_classifier():
     with pytest.raises(ValueError, match="without a classifier"):
         forecast(GrowingSpreadModel(), [0.2, 0.4], 3, ForecastConfig(selection="fp"), classifier=object())
+
+
+def test_paper_evaluates_every_test_target_at_every_horizon():
+    series = np.arange(300.0)
+    origins, contexts, truth, oracle = make_test_windows(series, 200, 30, 10)
+    assert origins[0] == 190
+    np.testing.assert_array_equal(contexts[:, -1], origins)
+    np.testing.assert_array_equal(np.isfinite(truth).sum(axis=0), np.full(10, 100))
+    for h in range(10):
+        np.testing.assert_array_equal(truth[np.isfinite(truth[:, h]), h], series[200:])
+    assert np.isnan(truth[0, 0]) and oracle[0, 0] == 191
+    assert np.isnan(oracle[-1, -1])
+    calibration_end = min(200, origins[0] + 1)
+    validation_origins = np.arange(150 - 1, calibration_end - 10, 8)
+    assert validation_origins[-1] + 10 <= origins[0]
+
+
+def test_common_origins_protocol_keeps_original_support():
+    origins, contexts, truth, oracle = make_test_windows(
+        np.arange(300.0), 200, 30, 10, evaluation="common_origins"
+    )
+    assert truth.shape == (91, 10)
+    np.testing.assert_array_equal(truth, oracle)
+    np.testing.assert_array_equal(contexts[:, -1], origins)
+
+
+def test_metrics_exclude_targets_outside_the_evaluation_set():
+    truth = np.array([[np.nan, 2.0], [1.0, 3.0], [2.0, np.nan]])
+    prediction = np.array([[100.0, 2.0], [1.0, np.nan], [3.0, 100.0]])
+    scores = errors(truth, prediction)
+    assert scores["total"] == 4 and scores["count"] == 3
+    assert scores["rmse"] == pytest.approx(np.sqrt(1 / 3))
+    assert scores["coverage"] == 0.75
+    metrics = horizon_metrics(truth, prediction, "test", oracle=truth)
+    np.testing.assert_array_equal(metrics.total, [2, 2])
+    np.testing.assert_allclose(metrics.predictable_recall, [1, 0.5])
+    masks = compare_masks(truth, {"partial": prediction, "full": truth}, {"partial": prediction})
+    np.testing.assert_array_equal(masks.selected_count, [3, 3])
+    np.testing.assert_array_equal(masks["count"], [3, 3])
+    with pytest.raises(ValueError, match="No evaluation targets"):
+        errors(np.full(3, np.nan), np.zeros(3))
+
+
+def test_cwat_uses_the_printed_geometric_sum():
+    class ConstantModel(GrowingSpreadModel):
+        def candidates(self, histories, reliability, epsilon, decay=0.99, force=False):
+            return [(np.array([0.8]), np.ones(1), np.ones(1)) for _ in histories]
+
+    model = ConstantModel()
+    config = ForecastConfig(spread_threshold=0.1)
+    prediction = reduced_history_forecast(model, np.full(10, 0.8), 1, config, previous=1)
+    assert np.isnan(prediction).all()
+
+
+def test_selector_receives_only_the_ten_paper_features():
+    class Classifier:
+        def predict(self, features):
+            assert features.shape == (1, 10)
+            return np.ones(1)
+
+    result = forecast(GrowingSpreadModel(), [0.2, 0.4], 1, classifier=Classifier())
+    assert np.isfinite(result).all()

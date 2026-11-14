@@ -42,5 +42,19 @@
       "unchanged_prediction_matrices": 66
     },
     "source_audit": "references/source_audit.json"
+  },
+  "paper_fidelity_revision": {
+    "reviewer": "GPT Astra, read-only",
+    "tests_passed": 63,
+    "ruff": "passed",
+    "original_prediction_matrices_unchanged": 66,
+    "main_prediction_matrices": 66,
+    "controls_csv_recomputed_max_rmse_difference": 0.0,
+    "targets_per_horizon": 1000,
+    "validation_embargo": 99,
+    "parallel_equivalence_origins": 128,
+    "parallel_equivalence": "bit-identical, including NaNs",
+    "report": "results/fidelity/AUDIT.md",
+    "scope": "Literal implementation corrections and bounded parameter comparison, not exact reproduction of published tables."
   }
 }

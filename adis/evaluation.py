@@ -4,15 +4,19 @@ import pandas as pd
 
 def errors(truth, prediction, mask=None):
     truth, prediction = np.asarray(truth), np.asarray(prediction)
-    accepted = np.isfinite(prediction)
+    evaluated = np.isfinite(truth)
+    total = int(evaluated.sum())
+    if not total:
+        raise ValueError("No evaluation targets")
+    accepted = evaluated & np.isfinite(prediction)
     if mask is not None:
         accepted &= mask
     count = int(accepted.sum())
     result = {
         "count": count,
-        "total": truth.size,
-        "coverage": count / truth.size,
-        "np_percent": 100 * (1 - count / truth.size),
+        "total": total,
+        "coverage": count / total,
+        "np_percent": 100 * (1 - count / total),
     }
     if not count:
         return result | {k: np.nan for k in ["mae", "rmse", "mape", "mape_percent"]} | {"i2": 0.0}
@@ -24,7 +28,7 @@ def errors(truth, prediction, mask=None):
         "rmse": np.sqrt(np.mean(delta**2)),
         "mape": mape,
         "mape_percent": 100 * mape,
-        "i2": np.abs(delta).sum() / truth.size,
+        "i2": np.abs(delta).sum() / total,
     }
 
 
@@ -48,7 +52,8 @@ def horizon_metrics(truth, prediction, name, oracle=None):
     for h in range(truth.shape[1]):
         row = {"method": name, "horizon": h + 1} | errors(truth[:, h], prediction[:, h])
         if oracle is not None:
-            row |= mask_metrics(prediction[:, h], oracle[:, h])
+            evaluated = np.isfinite(truth[:, h])
+            row |= mask_metrics(prediction[evaluated, h], oracle[evaluated, h])
         rows.append(row)
     return pd.DataFrame(rows)
 
@@ -57,13 +62,13 @@ def compare_masks(truth, predictions, selective):
     rows = []
     for selective_name, selected in selective.items():
         for name, prediction in predictions.items():
-            if not np.isfinite(prediction).all() and name != selective_name:
+            if not np.isfinite(prediction[np.isfinite(truth)]).all() and name != selective_name:
                 continue
             rows.append(
                 {
                     "selection_method": selective_name,
                     "method": name,
-                    "selected_count": int(np.isfinite(selected).sum()),
+                    "selected_count": int((np.isfinite(selected) & np.isfinite(truth)).sum()),
                 }
                 | errors(truth, prediction, np.isfinite(selected))
             )

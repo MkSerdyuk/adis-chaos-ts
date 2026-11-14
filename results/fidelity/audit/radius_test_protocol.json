@@ -1,0 +1,22 @@
+{
+  "decisions": [
+    {
+      "dataset": "lorenz",
+      "test_epsilon_005": true
+    },
+    {
+      "dataset": "germany",
+      "test_epsilon_005": false
+    }
+  ],
+  "decision_data": "validation.csv",
+  "criterion": "epsilon=0.05 must improve validation RMSE without reducing coverage",
+  "support": "All original 901 test origins and 100 horizons; independent of new paper alignment",
+  "batch_size": 64,
+  "seed": "42 + first row index in batch, identical for both radii",
+  "reason_for_batching": "Bound candidate-array memory for the larger matching radius",
+  "parallel_batches": 2,
+  "parallel_equivalence_checked_origins": 128,
+  "parallel_equivalence": "exact, including missing values",
+  "validation_sha256": "30bf230816d6257178e8ba61d1a5eed0d71b07c2c761667d7b5403f87f41e580"
+}

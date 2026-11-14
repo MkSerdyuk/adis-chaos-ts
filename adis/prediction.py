@@ -40,6 +40,7 @@ FEATURE_NAMES = [
     "size_difference",
     "spread",
 ]
+CLASSIFIER_FEATURES = slice(1, -1)
 
 
 def candidate_features(values, config):
@@ -112,7 +113,8 @@ def aggregate(candidates, config, rng):
     value = np.average(values[mask], weights=weights[mask])
     if mode == "mfp":
         value += rng.normal(0, np.sqrt(config.perturbation_variance))
-    return value, depth[mask].mean()
+    reliability = weights if mode in {"wavgl", "wavgd", "wavgc"} else depth
+    return value, reliability[mask].mean()
 
 
 @njit(cache=True, parallel=True, nogil=True)
@@ -149,7 +151,7 @@ def _aggregate_batch(candidates, mode, eps, min_samples):
                 weight = depth[j] * distance[j]
             total += weight * values[j]
             mass += weight
-            reliability += depth[j]
+            reliability += weight if mode in (1, 2, 3) else depth[j]
             count += 1
         if mass > 0:
             result[row, 0], result[row, 1] = total / mass, reliability / count
@@ -221,7 +223,7 @@ def forecast(
         elif config.selection == "en":
             accept &= features[:, 7] <= config.entropy_threshold
         elif classifier is not None:
-            accept &= classifier.predict(features).astype(bool)
+            accept &= classifier.predict(features[:, CLASSIFIER_FEATURES]).astype(bool)
         elif config.selection in {"rg", "rgdbscan", "rgwshrt", "dbscan", "wshrt"}:
             tentative = histories[:, : stop + 2].copy()
             tentative_weights = reliability[:, : stop + 2].copy()
@@ -363,7 +365,7 @@ def reduced_history_forecast(model, history, horizon, config, previous=3, rule="
     for h in range(horizon):
         values, weights, _, _ = _step(model, paths, reliability, inner, rng)
         if rule == "cwat":
-            disagreement = abs(values[0] - np.average(values[1:], weights=geometric))
+            disagreement = abs(values[0] - geometric @ values[1:])
         elif rule in {"amd", "wamd"}:
             differences = np.abs(values[1:] - values[0])
             disagreement = differences.mean() if rule == "amd" else linear @ differences

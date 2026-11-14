@@ -9,6 +9,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
+from .prediction import CLASSIFIER_FEATURES
+
 
 def classifiers(seed=42):
     def lr(c=1.0):
@@ -39,7 +41,7 @@ def classifiers(seed=42):
 
 def fit_selectors(features, predictions, truth, tolerance=0.05, seed=42):
     nonempty = features[..., 0] > 0
-    x = features[nonempty]
+    x = features[nonempty][:, CLASSIFIER_FEATURES]
     y = (np.abs(predictions[nonempty] - truth[nonempty]) < tolerance).astype(int)
     if np.bincount(y, minlength=2).min() < 6:
         raise ValueError("Selector training needs at least six examples of each class")

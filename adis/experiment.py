@@ -17,7 +17,7 @@ from threadpoolctl import threadpool_limits
 
 from . import ForecastConfig, MotifModel, forecast
 from .baselines import run_baselines
-from .data import german_load, lorenz, windows
+from .data import german_load, lorenz, test_windows, windows
 from .diagnostics import eckmann_lyapunov, entropy_complexity, predictability_horizon
 from .evaluation import compare_masks, errors, horizon_metrics
 from .prediction import trajectory_forecast
@@ -108,14 +108,19 @@ def run(dataset, args):
         train_end, validation_end = len(raw) - 2000, len(raw) - 1000
     minimum, scale = raw[:train_end].min(), np.ptp(raw[:train_end])
     series = (raw - minimum) / scale
-    validation_origins = np.arange(train_end - 1, validation_end - args.horizon, args.validation_stride)
-    test_origins = np.arange(validation_end - 1, len(series) - args.horizon, args.test_stride)
-    config = ForecastConfig(seed=args.seed)
+    test_origins, contexts, truth, oracle_truth = test_windows(
+        series, validation_end, 30, args.horizon, args.test_stride, args.evaluation
+    )
+    calibration_end = min(validation_end, int(test_origins[0]) + 1)
+    validation_origins = np.arange(train_end - 1, calibration_end - args.horizon, args.validation_stride)
+    config = ForecastConfig(seed=args.seed, epsilon=args.epsilon)
     metadata = {
         "dataset": dataset,
         "data_sha256": hashlib.sha256(raw.tobytes()).hexdigest(),
         "train": [0, train_end],
         "validation": [train_end, validation_end],
+        "calibration": [train_end, calibration_end],
+        "validation_embargo": validation_end - calibration_end,
         "test": [validation_end, len(series)],
         "intervals": "zero-based, end-exclusive",
         "normalization": {"minimum": minimum, "range": scale, "fit": "training only"},
@@ -123,6 +128,8 @@ def run(dataset, args):
         "test_stride": args.test_stride,
         "validation_stride": args.validation_stride,
         "test_origins": len(test_origins),
+        "evaluation": args.evaluation,
+        "targets_per_horizon": np.isfinite(truth).sum(axis=0).tolist(),
         "validation_origins": len(validation_origins),
         "forecast_config": asdict(config),
         "motifs": {"length": 4, "max_gap": 10, "patterns": 1000, "r": 11, "mu": 0.2},
@@ -170,7 +177,6 @@ def run(dataset, args):
     pd.DataFrame(model.patterns, columns=["gap1", "gap2", "gap3"]).assign(motifs=model.sizes).to_csv(
         directory / "motif_counts.csv", index=False
     )
-    contexts, truth = windows(series, test_origins, model.context_size, args.horizon)
     val_contexts, val_truth = windows(series, validation_origins, model.context_size, args.horizon)
     np.savez_compressed(
         directory / "split.npz",
@@ -222,7 +228,7 @@ def run(dataset, args):
                 args.horizon,
                 current,
                 classifier=selectors.get(selection),
-                truth=truth if selection == "ap" else None,
+                truth=oracle_truth if selection == "ap" else None,
             )
         else:
             prediction = trajectory_forecast(
@@ -231,7 +237,7 @@ def run(dataset, args):
                 args.horizon,
                 current,
                 trajectories=args.trajectories,
-                truth=truth if selection == "ap" else None,
+                truth=oracle_truth if selection == "ap" else None,
             )
         predictions[name] = prediction
         np.save(directory / f"{name}.npy", prediction)
@@ -243,6 +249,8 @@ def run(dataset, args):
             flush=True,
         )
     if not args.skip_baselines:
+        if timestamps is not None:
+            timestamps = pd.date_range(timestamps[0], periods=len(series) + args.horizon, freq="h")
         baselines, trials = run_baselines(
             series, train_end, validation_origins, test_origins, args.horizon, timestamps, args.seed
         )
@@ -306,13 +314,15 @@ def run(dataset, args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", choices=["lorenz", "germany", "all"], default="all")
-    parser.add_argument("--output", default="results")
+    parser.add_argument("--output", default="results/fidelity")
     parser.add_argument("--horizon", type=int, default=100)
+    parser.add_argument("--evaluation", choices=["paper", "common_origins"], default="paper")
     parser.add_argument("--test-stride", type=int, default=1)
     parser.add_argument("--validation-stride", type=int, default=8)
     parser.add_argument("--trajectories", type=int, default=16)
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--epsilon", type=float, default=0.01)
     parser.add_argument("--reuse-motifs", action="store_true")
     parser.add_argument("--skip-baselines", action="store_true")
     args = parser.parse_args()
