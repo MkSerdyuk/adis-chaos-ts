@@ -1,0 +1,6 @@
+quantity,published,measured,absolute_difference,status
+entropy,0.68,0.5530246308128755,0.1269753691871246,estimator_underdetermined
+complexity,0.45,0.3874591230330078,0.06254087696699223,estimator_underdetermined
+highest_lyapunov,0.92,3.492668314691297,2.572668314691297,estimator_underdetermined
+horizon_time,7.5,7.50842965106754,0.0084296510675399,heuristic_arithmetic_within_published_rounding
+horizon_steps,75.0,75.0842965106754,0.08429651067540078,heuristic_arithmetic_within_published_rounding

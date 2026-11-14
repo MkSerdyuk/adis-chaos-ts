@@ -1,0 +1,46 @@
+{
+  "reviewer": "GPT Astra, read-only subagent",
+  "wishart_independent_explicit_label_comparisons": 100,
+  "dbscan_sklearn_comparisons": 500,
+  "motif_exhaustive_comparisons": 27,
+  "batched_scalar_aggregation_comparisons": 900,
+  "batched_perturbation_rng_advancement_identical": true,
+  "eckmann_reference": {
+    "source": "https://raw.githubusercontent.com/CSchoel/nolds/master/nolds/measures.py",
+    "source_sha256": "53a59a5c24d737539f584d9f86c09228852768308a0539b6cbd7d3ead3eae52a",
+    "function": "lyap_e",
+    "observations": 10000,
+    "embedding": 10,
+    "matrix_dimension": 4,
+    "min_neighbors": 12,
+    "min_separation": 20,
+    "dt": 0.1,
+    "reference_spectrum": [
+      3.492668314691302,
+      0.8378538374704725,
+      -1.6206663873913139,
+      -6.40119690081026
+    ],
+    "maximum_absolute_difference": 5.42e-14,
+    "interpretation": "Agreement with the reference algorithm under these settings; does not establish recovery of the true dynamical exponent."
+  },
+  "fidelity_review_2026_11_12": {
+    "reviewer": "GPT Astra, read-only subagent",
+    "paper_sections": [
+      "3.4, equations (4) and (5)",
+      "3.5, technique 8 and perturbed trajectory endpoints"
+    ],
+    "findings": [
+      "Intermediate mfp and final endpoint averaging follow the perturbed-trajectory construction.",
+      "Depth and distance candidate weights follow the displayed formulas.",
+      "No justified numerical formula corrections identified; unresolved author settings remain documented."
+    ],
+    "api_change": "Reject unsupported trajectory endpoint aggregation instead of silently overriding it.",
+    "validation": {
+      "pytest_passed": 58,
+      "ruff": "passed",
+      "unchanged_prediction_matrices": 66
+    },
+    "source_audit": "references/source_audit.json"
+  }
+}

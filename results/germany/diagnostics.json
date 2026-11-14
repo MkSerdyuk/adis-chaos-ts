@@ -1,0 +1,23 @@
+{
+  "entropy_complexity_dimension": 5,
+  "entropy_complexity_delay": 1,
+  "entropy_complexity": [
+    0.5399597082623799,
+    0.3221695611533277
+  ],
+  "eckmann_embedding": 10,
+  "eckmann_matrix_dimension": 4,
+  "eckmann_min_neighbors": 12,
+  "eckmann_min_separation": 20,
+  "lyapunov_spectrum": [
+    0.08947215987145335,
+    -0.002919929690207822,
+    -0.08102005305269981,
+    -0.264686035336294
+  ],
+  "paper_horizon_arithmetic": {
+    "time": 7.50842965106754,
+    "steps": 75.0842965106754
+  },
+  "status": "estimators use explicit assumptions; paper estimator settings unavailable"
+}

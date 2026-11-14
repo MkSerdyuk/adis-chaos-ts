@@ -1,0 +1,195 @@
+{
+  "checked_on": "2026-11-12",
+  "doi": "10.1155/2023/6689371",
+  "exact_numerical_replication": "not_verified",
+  "publisher_evidence": {
+    "crossref_url": "https://api.crossref.org/works/10.1155/2023/6689371",
+    "crossref_relation": {},
+    "registered_content_types": [
+      "application/pdf",
+      "application/xml"
+    ],
+    "registered_supplement_found": false,
+    "pdf_url": "https://publications.hse.ru/pubs/share/direct/861165160.pdf",
+    "pdf_sha256": "a57a25dc899b4d132086035fa92f6426f64772d64946ef4dc110b2c0084e62de",
+    "pdf_embedded_files": 0,
+    "data_availability_statement_location": "page 20",
+    "data_availability_statement_summary": "The publication claims its supporting data are included in the article; no external dataset or code identifier is supplied there.",
+    "scope": "These observations concern the inspected records; they do not establish that private or unregistered author materials do not exist."
+  },
+  "additional_sources": [
+    {
+      "repository": "https://github.com/MaruwanDono/PredictingChaoticTimeSeries",
+      "commit": "3cbff7101a0e6ff8961385d72f0c6b2d5f4bec2f",
+      "inspected_files": [
+        "readme.md",
+        "model.py",
+        "Prediction beyond a horizon of predictability - Marwan Bouabidi - M1 Data Science.pdf",
+        "Prediction beyond the horizon of predictability.pdf"
+      ],
+      "findings": [
+        "Independent student implementation using Bitcoin data.",
+        "The included article PDF is byte-identical to the HSE copy.",
+        "Uses raw motifs without clustering and future-informed error filtering; does not supply the original German series or establish the original experimental settings."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/elenakazakova/Prediction-After-the-Horizon-of-Predictability",
+      "commit": "d1b05fa79739728c8630d6fa749a5ce12c2d2f9a",
+      "inspected_files": [
+        "code/pre-processing data.py",
+        "code/clustering main.py"
+      ],
+      "findings": [
+        "Stock preprocessing and clustering scripts.",
+        "No trajectory implementation, original German series, or verified author-source link recovered."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/Shuflin80/Chaotic-timeseries-prediction",
+      "commit": "0beff6c3cc08a40a82ad4783e96837de1c6be95b",
+      "inspected_files": [
+        "README.md",
+        "datasets/lorenz.txt",
+        "datasets/PJM_Load_hourly.csv",
+        "prediction_process/datasets.py",
+        "prediction_process/trajectory.py"
+      ],
+      "findings": [
+        "Contains a 99745-value Lorenz series without its generator, initial condition, timestep, or verified original-experiment provenance.",
+        "Electricity data are US PJM rather than the German series.",
+        "The implementation normalizes train and test separately and has an indexing problem in its multi-trajectory branch; it cannot be treated as an established numerical reference."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/yaroslawwww/PaTHoP-Prediction-aftrer-the-horizont-of-predictability-Lorenz-series-",
+      "commit": "0c4349534307ba68c58002e526dfd0615f2af95f",
+      "inspected_files": [
+        ".gitmodules",
+        "mysrc/evaluation.py",
+        "mysrc/Readme.md",
+        "mysrc/main.py"
+      ],
+      "asset_repository": "https://github.com/yaroslawwww/PaTHoP-assets",
+      "asset_commit": "7d9efdc705efdaec6f11e71d63b9f87955851c59",
+      "findings": [
+        "Repository describes itself as coursework and contains later Lorenz experiments.",
+        "Its generator uses a 0.01 integration step and samples at 0.1, unlike a literal reading of the 2023 paper's integration step.",
+        "The complete asset tree has no German load dataset; no verified link to the original experimental inputs was recovered."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/at-antonova/time_series_prediction",
+      "commit": "f78c323a461e1f990105546b24d2a548c68f0a6e",
+      "inspected_files": [
+        "readme.md",
+        "data/where_what.md",
+        "code/main.ipynb",
+        "code/time_series_prediction/docs.md",
+        "code/time_series_prediction/example.py",
+        "docs/Отчет по ВКР без приложений.pdf"
+      ],
+      "findings": [
+        "2022 HSE bachelor thesis on the self-healing extension, supervised by V. A. Gromov.",
+        "Contains related prediction code and separate electricity arrays. The electricity-loading notebook reads MHLV_data-2015-2017.xlsx, not an identified German load source.",
+        "No evidence connects these arrays or settings to the 2023 German experiment."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/platonbarunin/nld-signal-gen",
+      "commit": "fa882fdbe86e9302b253614b9b2dc8e57ba2ea17",
+      "inspected_files": [
+        "README.md"
+      ],
+      "findings": [
+        "Replication code for a different 2026 trading-signal paper using Wishart clustering, cryptocurrency data, and regime classification.",
+        "Does not provide the 2023 prediction experiment or German input series."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/yaroslawwww/PaTHoP",
+      "commit": "8df69501df67941594b4d3f2c91b276ffa06badd",
+      "inspected_files": [
+        "mysrc/Readme.md",
+        "recursive repository tree"
+      ],
+      "findings": [
+        "Another repository by the previously inspected coursework author; same family of later Lorenz experiments.",
+        "Complete recursive tree inspected; no German dataset or verified original-author materials."
+      ],
+      "author_experiment_provenance_verified": false
+    },
+    {
+      "repository": "https://github.com/tebievx/thesis",
+      "commit": "9777f8638a8ed67cdc7160dc9dd4a304c542b0bf",
+      "inspected_files": [
+        "README.md",
+        "code/utils.py",
+        "code/energy/01_base/e-base.ipynb",
+        "code/energy/03_wishart_clustering/02_daemon/w-e-daemon-1.ipynb",
+        "code/lorenz/01_base/base-algorithm.ipynb",
+        "code/data/energy.csv",
+        "code/data/lorenz.csv",
+        "recursive tree and energy.csv history"
+      ],
+      "findings": [
+        "HSE master thesis implementation of related motif prediction and self-healing algorithms.",
+        "The Lorenz file is byte-identical to Shuflin80 after CRLF-to-LF normalization, SHA256 873b512e7d493021ba3c737a9401f2511355b6e2abc070ecda9f822fa4472d65.",
+        "The load file contains 26305 normalized scalar values without timestamps or a source identifier; notebook train[2000:22000] and test[22000:24000] differ from the 2023 paper.",
+        "No confirmed original author code or experimental input provenance recovered."
+      ],
+      "author_experiment_provenance_verified": false,
+      "reviewer": "GPT Astra, read-only"
+    },
+    {
+      "repository": "https://github.com/waryak/MastersDiploma",
+      "commit": "051b582e68974c43a918fcbcc6de8b8b1cdf6626",
+      "inspected_files": [
+        "README.md",
+        "src/algo/wishart.py",
+        "src/algo/runge_kutta.py",
+        "src/algo/predict.py",
+        "src/datamart/data_downloader.py",
+        "recursive tree and recent commit history"
+      ],
+      "findings": [
+        "Separate 2018 MEPhI cryptocurrency master thesis project; not an identified implementation of the 2023 article.",
+        "No original German series or confirmed author-source reference in the inspected files."
+      ],
+      "author_experiment_provenance_verified": false,
+      "reviewer": "GPT Astra, read-only"
+    }
+  ],
+  "required_author_materials": [
+    "Exact Lorenz input array, or initial state, chosen coordinate, numerical generation details, normalization, and complete split indices.",
+    "Exact German load input array or source/version/column/timezone plus preprocessing and complete split indices.",
+    "Validation construction, clustering and trajectory settings, perturbation parameters, thresholds, and unresolved aggregation conventions used for the published rows.",
+    "Metric definitions and clarification of inconsistent published table entries."
+  ],
+  "api_correction": {
+    "issue": "Forced prediction with distance-weighted aggregation returned missing predictions when every forced candidate had zero clipped weight.",
+    "resolution": "fp accepts only avg/wavgl without a predictability classifier; incompatible combinations raise ValueError before prediction.",
+    "tests_passed": 55,
+    "existing_experiment_effect": "None: fp is not used in any of the 21 published-table configurations. The 66 saved prediction matrices remain unchanged."
+  },
+  "public_implementations_found": true,
+  "verified_original_author_code_found": false,
+  "renewed_search": {
+    "record": "references/repository_search_2026-11-12.json",
+    "conclusion": "Public third-party implementations do exist. No inspected source has yet established the exact original author code, inputs, and settings for the 2023 numerical tables."
+  },
+  "fidelity_review_2026_11_12": {
+    "reviewer": "GPT Astra, read-only",
+    "trajectory_formula": "Section 3.5 requires mfp at intermediate points for perturbed trajectories and an average over endpoints. Existing numerical behavior retained.",
+    "candidate_weights": "Depth reliability and distance factors agree with equations (4) and (5); the combined-weight propagation ambiguity remains explicitly documented.",
+    "api_correction": "trajectory_forecast now requires aggregation=avg for endpoints instead of silently ignoring unsupported aggregation settings.",
+    "numerical_effect": "No changes to any of the 66 saved prediction matrices; hashes verified against previous checksums.",
+    "tests_passed": 58
+  }
+}

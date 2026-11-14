@@ -1,0 +1,74 @@
+{
+  "rows": 168,
+  "numeric_cells": 859,
+  "total_slots": 1008,
+  "f1_inconsistencies_beyond_rounding": [
+    {
+      "dataset": "germany",
+      "method": "cl_avg_en",
+      "horizon": 10,
+      "published_f1": 0.31,
+      "implied_f1": 0.297
+    },
+    {
+      "dataset": "germany",
+      "method": "trj_avg_cm",
+      "horizon": 50,
+      "published_f1": 0.65,
+      "implied_f1": 0.5611510791366906
+    }
+  ],
+  "oracle_rmse_above_threshold": [
+    {
+      "dataset": "lorenz",
+      "method": "cl_avg_ap",
+      "horizon": 1,
+      "published_rmse": 0.21,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "lorenz",
+      "method": "cl_avg_ap",
+      "horizon": 10,
+      "published_rmse": 0.21,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "lorenz",
+      "method": "cl_avg_ap",
+      "horizon": 50,
+      "published_rmse": 0.19,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "lorenz",
+      "method": "cl_avg_ap",
+      "horizon": 100,
+      "published_rmse": 0.28,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "germany",
+      "method": "cl_avg_ap",
+      "horizon": 1,
+      "published_rmse": 0.3,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "germany",
+      "method": "cl_avg_ap",
+      "horizon": 10,
+      "published_rmse": 0.24,
+      "oracle_error_bound_assumed": 0.05
+    },
+    {
+      "dataset": "germany",
+      "method": "cl_avg_ap",
+      "horizon": 50,
+      "published_rmse": 0.26,
+      "oracle_error_bound_assumed": 0.05
+    }
+  ],
+  "oracle_note": "conditional on epsilon=0.05; original oracle tolerance is not uniquely specified",
+  "precision_recall_note": "swapped predictable-set convention is inferred for cl rows; trajectory masks remain unresolved"
+}

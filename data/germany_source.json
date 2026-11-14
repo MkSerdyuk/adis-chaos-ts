@@ -1,0 +1,12 @@
+{
+  "url": "https://data.open-power-system-data.org/time_series/2020-10-06/time_series_60min_singleindex.csv",
+  "version": "2020-10-06",
+  "column": "DE_load_actual_entsoe_transparency",
+  "raw_sha256": "6a7f2bc571314cbf9c321cc03437691cd4be95c3a6f075e60ff99e8035c704c8",
+  "start": "2015-01-01 00:00:00+00:00",
+  "end": "2016-02-20 23:00:00+00:00",
+  "observations": 9984,
+  "timezone": "UTC",
+  "missing": 0,
+  "boundary": "2014-12-31T23:00Z is missing in source; start fixed at 2015-01-01T00:00Z"
+}
