@@ -9,6 +9,24 @@ from numba import njit
 
 OPSD_URL = "https://data.open-power-system-data.org/time_series/2020-10-06/time_series_60min_singleindex.csv"
 OPSD_COLUMN = "DE_load_actual_entsoe_transparency"
+LORENZ_ARCHIVE_URL = (
+    "https://raw.githubusercontent.com/at-antonova/time_series_prediction/"
+    "f78c323a461e1f990105546b24d2a548c68f0a6e/data/lorenz.txt"
+)
+LORENZ_ARCHIVE_SHA256 = "95b5ef1f03939173bf768a5cf5154a792353f39c715edef1114844d50e947c3f"
+
+
+def archived_lorenz(n, discard=3000, directory="data"):
+    path = Path(directory) / "lorenz_antonova.txt"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists():
+        urlretrieve(LORENZ_ARCHIVE_URL, path)
+    if hashlib.sha256(path.read_bytes()).hexdigest() != LORENZ_ARCHIVE_SHA256:
+        raise ValueError("Archived Lorenz data checksum differs from the pinned source")
+    values = np.loadtxt(path)
+    if discard + n > len(values):
+        raise ValueError("Requested interval exceeds the archived Lorenz series")
+    return values[discard : discard + n]
 
 
 @njit(cache=True)

@@ -1,0 +1,98 @@
+{
+  "frozen_before_search": true,
+  "source_commit": "4c44482bbb6ef2b87833e0b7425d864d60b2fc8a",
+  "profiles": [
+    "lorenz_rk4",
+    "lorenz_archive",
+    "germany"
+  ],
+  "profile_selection": "No profile is selected by its test score. All source-backed profiles are reported.",
+  "data": "Fixed original calendar/train intervals. Archived Lorenz drops first3000 of pinned Antonova file. All normalization refit on train only. Development file excludes last99 validation values. Test never loaded by search/validate.",
+  "fixed_paper_settings": {
+    "length": 4,
+    "max_gap": 10,
+    "wishart_r": 11,
+    "wishart_mu": 0.2,
+    "decay": 0.99,
+    "horizon": 100
+  },
+  "spatial_grid": {
+    "epsilon": [
+      0.01,
+      0.05
+    ],
+    "cluster_eps": [
+      0.001,
+      0.005,
+      0.01,
+      0.03
+    ],
+    "min_samples": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "spatial_screen": "Deterministic one-step largest-cluster center, all101 validation origins. Best RMSE per epsilon with coverage>=0.9; plus original spatial parameters.",
+  "coarse": {
+    "origins": "24 evenly spaced out of101",
+    "noise_variance": [
+      0,
+      1e-05,
+      0.0001
+    ],
+    "trajectories": 16,
+    "seed": 42
+  },
+  "shortlist": "Two best coarse trials by coverage deficit then macroRMSE, plus original default.",
+  "final_validation": {
+    "origins": 101,
+    "seeds": [
+      42,
+      137
+    ],
+    "trajectories": 16
+  },
+  "coverage_constraints": {
+    "early_h1_to_h10_mean": 0.9,
+    "all_horizons_mean": 0.5,
+    "each_h50_to_h100_lorenz": 0.16,
+    "each_h50_to_h100_germany": 0.37,
+    "both_seeds_must_pass": true
+  },
+  "constraint_provenance": "0.90/0.50 are declared experimental utility constraints, not author values. Late floors are lower of the two published h50/h100 coverages.",
+  "objective": "Minimum mean over100 horizon RMSEs, averaged across two fixed seeds. Only feasible trials eligible. If none, retain baseline, do not relax constraints.",
+  "zero_variance": "Allowed by article Delta>=0; identical paths collapse to deterministic clc and rapid-growth spread check becomes vacuous. Report explicitly if selected.",
+  "final_evaluation": "Baseline and frozen selected configuration on all1000 fixed test targets perh and next1000 fresh targets. Original test is previously examined, fresh targets not used for model selection. Compare common accepted masks, not only conditional errors.",
+  "batching": {
+    "batch_size": 64,
+    "seed": "base seed + first row index in batch, common across configs"
+  },
+  "no_test_tuning": [
+    "No seed search",
+    "No arbitrary date windows",
+    "No altered normalization to shrink errors",
+    "No future-conditioned acceptance outside separately labeled AP oracle",
+    "No MSE substituted for RMSE"
+  ],
+  "excluded_source": {
+    "url": "https://data.open-power-system-data.org/time_series/2016-07-14/timeseries60min.csv",
+    "reason": "load_DE_load ends2015-12-31T22Z, 1225 missing in required interval; no imputation or calendar shifts"
+  },
+  "source_sha256": {
+    "evaluation.py": "a1cd01659c7e225340a2d9a8bcbd8218b901012196727d5ad5159d02086d617e",
+    "data.py": "4a08a00d9b1179b601874eaadbf91e2cbfb58f4de121edeb377a2f2e2760461b",
+    "prediction.py": "d5561bba0217731c914f7b0e815ffcc80d874017cbb3366f1aaab2a9cc263b2f",
+    "reconstruction.py": "1d26c45ba9f82d9922a8adef027244e0ad68454ca9ee492e4491e419683e5b16",
+    "baselines.py": "d02fb26a9f0f80e1b2beceeede7b0dc891d7eca378bea2babe509c2f6251cc17",
+    "experiment.py": "04a4ea4d242ffb1070a03ba02643d739e5b9ece8e6e2f1abcf5faf24efeb06ba",
+    "selection.py": "1449728cba122013bdad6dca46f69cd051b3bdac4ca0a10589634b4e8b365a8f",
+    "diagnostics.py": "cc144e767c5e6e573d7635b08c92c7d20d30a6f6c9bc0ce989c82e87d24b5f47",
+    "report.py": "840790164ed6b3f056d1851e8efd4fb504b1b4fadabd99ac03c351ff0058f127",
+    "__init__.py": "95d6fe64276b43bc82d76ef3ce67a69beb2373b1e92a273b6e57a221cde20c1a",
+    "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+    "fidelity.py": "7ba510b2da1d9bf71061d4e02d6d147578daf53ccc8b07b980853466f2744806",
+    "clustering.py": "0d7b2ac3b5e19c3b12aa8238ef1e1df7a392ce62230ea01d040e6a377f748337"
+  }
+}

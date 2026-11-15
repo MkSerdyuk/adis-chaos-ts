@@ -1,0 +1,5 @@
+profile,trial,epsilon,cluster_eps,min_samples,perturbation_variance
+lorenz_rk4,5,0.01,0.03,3,0.0001
+lorenz_archive,8,0.05,0.03,10,0.0001
+germany,5,0.05,0.03,5,0.0001
+germany_power_statistics,5,0.05,0.03,1,0.0001

@@ -67,6 +67,13 @@ def test_wishart_duplicates_are_deterministic():
     np.testing.assert_array_equal(wishart(x), wishart(x))
 
 
+def test_wishart_merge_keeps_the_surviving_cluster_completion_state():
+    boundaries = np.array([0, 2, 4, 6, 7, 9, 11, 13, 14])
+    neighbors = np.array([6, 7, 2, 6, 1, 5, 4, 3, 5, 2, 4, 0, 1, 0])
+    labels = _wishart(np.arange(8), boundaries, neighbors, np.arange(10, 2, -1, dtype=float), 1)
+    np.testing.assert_array_equal(labels, [1, 1, 1, 3, 3, 0, 1, 1])
+
+
 def test_candidates_match_exhaustive_search_with_missing_values():
     rng = np.random.default_rng(42)
     series = rng.random(300)

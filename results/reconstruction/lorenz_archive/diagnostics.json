@@ -1,0 +1,23 @@
+{
+  "entropy_complexity": [
+    0.5568566232167176,
+    0.3882818386732264
+  ],
+  "dimension": 5,
+  "delay": 1,
+  "lyapunov_spectrum": [
+    3.4632213849138176,
+    0.8829377203757937,
+    -1.6147897791411823,
+    -6.406927160343626
+  ],
+  "eckmann_settings": {
+    "embedding": 10,
+    "matrix_dimension": 4,
+    "min_neighbors": 12,
+    "min_separation": 20
+  },
+  "status": "training-only diagnostics; estimator parameters not identified in paper; not used for selecting profiles or forecasts",
+  "entropy_complexity_method": "Ordinal Shannon entropy and MPR Jensen-Shannon complexity",
+  "entropy_complexity_paper_comparable": false
+}

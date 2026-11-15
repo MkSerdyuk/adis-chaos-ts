@@ -251,7 +251,16 @@ def forecast(
     return (predictions, feature_log) if collect_features else predictions
 
 
-def trajectory_forecast(model, contexts, horizon, config, trajectories=16, truth=None):
+def trajectory_forecast(
+    model,
+    contexts,
+    horizon,
+    config,
+    trajectories=16,
+    truth=None,
+    spread_thresholds=None,
+    collect_spreads=False,
+):
     if config.aggregation != "avg":
         raise ValueError("Trajectory forecasts require avg endpoints; intermediate steps use mfp")
     contexts = np.atleast_2d(contexts)
@@ -260,6 +269,11 @@ def trajectory_forecast(model, contexts, horizon, config, trajectories=16, truth
     histories = np.c_[histories, np.full((n * trajectories, horizon + 2), np.nan)]
     reliability = np.c_[np.ones((n * trajectories, observed)), np.zeros((n * trajectories, horizon + 2))]
     result = np.full((n, horizon), np.nan)
+    spread_log = np.full((n, horizon), np.nan) if collect_spreads else None
+    if spread_thresholds is not None:
+        spread_thresholds = np.asarray(spread_thresholds)
+        if config.selection != "spread" or spread_thresholds.shape != (horizon,):
+            raise ValueError("Per-horizon thresholds require spread selection and match the horizon")
     rng = np.random.default_rng(config.seed)
     inner = replace(config, aggregation="mfp", selection="cm")
     if config.selection == "ap" and (truth is None or np.shape(truth) != (n, horizon)):
@@ -270,6 +284,9 @@ def trajectory_forecast(model, contexts, horizon, config, trajectories=16, truth
         endpoints = values.reshape(n, trajectories)
         valid = np.isfinite(endpoints)
         counts = valid.sum(axis=1)
+        if collect_spreads:
+            for row in np.flatnonzero(counts):
+                spread_log[row, h] = np.ptp(endpoints[row, valid[row]])
         means = np.divide(np.nansum(endpoints, axis=1), counts, out=np.full(n, np.nan), where=counts > 0)
         accept = counts > 0
         if config.selection == "ap":
@@ -281,7 +298,8 @@ def trajectory_forecast(model, contexts, horizon, config, trajectories=16, truth
 
             first_spread = spread(endpoints)
             if config.selection == "spread":
-                accept &= first_spread <= config.spread_threshold
+                threshold = config.spread_threshold if spread_thresholds is None else spread_thresholds[h]
+                accept &= first_spread <= threshold
             else:
                 tentative = histories[:, : stop + 2].copy()
                 tentative_weights = reliability[:, : stop + 2].copy()
@@ -310,7 +328,25 @@ def trajectory_forecast(model, contexts, horizon, config, trajectories=16, truth
         values[np.repeat(~accept, trajectories)] = np.nan
         weights[np.repeat(~accept, trajectories)] = 0
         histories[:, stop], reliability[:, stop] = values, weights
-    return result
+    return (result, spread_log) if collect_spreads else result
+
+
+def calibrate_trajectory_spread(model, contexts, horizon, config, factor, trajectories=16):
+    if not np.isfinite(factor) or factor <= 0:
+        raise ValueError("Spread factor must be positive")
+    _, spreads = trajectory_forecast(
+        model,
+        contexts,
+        horizon,
+        replace(config, selection="cm"),
+        trajectories=trajectories,
+        collect_spreads=True,
+    )
+    counts = np.isfinite(spreads).sum(axis=0)
+    if np.any(counts == 0):
+        raise ValueError("Every horizon requires at least one finite validation spread")
+    thresholds = factor * np.nansum(spreads, axis=0) / counts
+    return thresholds, counts
 
 
 def branching_forecast(model, context, horizon, config, prune_weight=0.0, max_paths=100_000):

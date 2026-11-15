@@ -1,0 +1,33 @@
+{
+  "profile": "lorenz_rk4",
+  "source": {
+    "generator": "adis.data.lorenz",
+    "discard": 3000,
+    "dt": 0.1,
+    "component": "x"
+  },
+  "raw_sha256": "0940536675cc62a45a2a39eeb7a5ac0f04a3efb015bb33b81e67f39c5938c9bc",
+  "train": [
+    0,
+    10000
+  ],
+  "calibration": [
+    10000,
+    10901
+  ],
+  "validation_embargo": 99,
+  "test": [
+    11000,
+    12000
+  ],
+  "fresh": [
+    12000,
+    13000
+  ],
+  "normalization": {
+    "minimum": -17.882992562476442,
+    "range": 36.1450700231557,
+    "fit": "training only"
+  },
+  "exact_paper_data_identified": false
+}

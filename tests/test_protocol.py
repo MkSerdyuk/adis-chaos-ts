@@ -8,7 +8,14 @@ from adis import MotifModel
 from adis.baselines import _recursive, seasonal_naive
 from adis.data import test_windows as make_test_windows
 from adis.evaluation import compare_masks, errors, horizon_metrics
-from adis.prediction import ForecastConfig, _spread, forecast, reduced_history_forecast, trajectory_forecast
+from adis.prediction import (
+    ForecastConfig,
+    _spread,
+    calibrate_trajectory_spread,
+    forecast,
+    reduced_history_forecast,
+    trajectory_forecast,
+)
 
 
 class LastValueRegressor:
@@ -91,6 +98,39 @@ class MissingMainModel:
             else (np.full(4, 0.5), np.ones(4), np.ones(4))
             for i in range(len(histories))
         ]
+
+
+def test_spread_calibration_is_per_horizon_and_frozen_for_evaluation():
+    class DivergingPaths:
+        context_size = 2
+
+        def candidates(self, histories, reliability, epsilon, decay=0.99, force=False):
+            step = histories.shape[1] - 1
+            return [
+                (np.full(4, 0.3 + (i % 2) * 0.01 * step), np.ones(4), np.ones(4))
+                for i in range(len(histories))
+            ]
+
+    model = DivergingPaths()
+    config = ForecastConfig(selection="spread", perturbation_variance=0)
+    contexts = np.array([[0.1, 0.2], [0.2, 0.3]])
+    thresholds, counts = calibrate_trajectory_spread(model, contexts, 3, config, factor=2, trajectories=2)
+    np.testing.assert_allclose(thresholds, [0.02, 0.04, 0.06])
+    np.testing.assert_array_equal(counts, [2, 2, 2])
+    accepted = trajectory_forecast(model, contexts, 3, config, trajectories=2, spread_thresholds=thresholds)
+    rejected = trajectory_forecast(
+        model, contexts, 3, config, trajectories=2, spread_thresholds=thresholds / 4
+    )
+    assert np.isfinite(accepted).all() and np.isnan(rejected).all()
+
+
+def test_spread_calibration_records_available_trajectories_and_rejects_empty_horizons():
+    config = ForecastConfig(perturbation_variance=0)
+    thresholds, counts = calibrate_trajectory_spread(MissingMainModel(), [[0.1, 0.2]], 2, config, 1, 2)
+    np.testing.assert_array_equal(thresholds, [0, 0])
+    np.testing.assert_array_equal(counts, [1, 1])
+    with pytest.raises(ValueError, match="finite validation spread"):
+        calibrate_trajectory_spread(MissingMainModel(), [[0.1, 0.2]], 2, config, 1, 1)
 
 
 def test_wamdt_requires_a_main_trajectory():

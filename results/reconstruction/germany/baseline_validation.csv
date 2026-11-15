@@ -1,0 +1,25 @@
+method,parameters,validation_rmse
+ridge_30,Ridge(alpha=0.1),0.1441614589048571
+ridge_30,Ridge(alpha=10),0.14396573758147624
+ridge_30,Ridge(alpha=100),0.1425536037242053
+ridge,Ridge(alpha=0.1),0.14268595855485766
+ridge,Ridge(alpha=10),0.14239970137008334
+ridge,Ridge(alpha=100),0.13989965797111523
+knn,"KNeighborsRegressor(n_neighbors=3, weights='distance')",0.14201298778198124
+knn,"KNeighborsRegressor(n_neighbors=10, weights='distance')",0.13762083618114826
+decision_tree,"DecisionTreeRegressor(max_depth=8, min_samples_leaf=5, random_state=42)",0.1410437414072981
+decision_tree,"DecisionTreeRegressor(max_depth=14, min_samples_leaf=5, random_state=42)",0.13281801863039577
+random_forest,"RandomForestRegressor(max_depth=16, min_samples_leaf=3, n_estimators=80,
+                      n_jobs=4, random_state=42)",0.12866578372415946
+random_forest,"RandomForestRegressor(max_depth=16, min_samples_leaf=10, n_estimators=80,
+                      n_jobs=4, random_state=42)",0.13545181048276056
+mlp,"MLPRegressor(hidden_layer_sizes=(64, 32), random_state=42)",0.13934575449467312
+svr_recursive,"SVR(C=1, epsilon=0.005)",0.1419536423301183
+svr_recursive,"SVR(C=10, epsilon=0.005)",0.1563043922531277
+hist_gradient_boosting_recursive,"HistGradientBoostingRegressor(early_stopping=False, l2_regularization=1,
+                              max_iter=150, max_leaf_nodes=15, random_state=42)",0.1410088791363033
+hist_gradient_boosting_recursive,"HistGradientBoostingRegressor(early_stopping=False, l2_regularization=1,
+                              max_iter=150, random_state=42)",0.1351798968701798
+dlinear_ridge,"window=25, alpha=0.1",0.114282798154573
+dlinear_ridge,"window=25, alpha=10",0.11596155410558212
+dlinear_ridge,"window=25, alpha=100",0.12259938083739372

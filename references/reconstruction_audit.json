@@ -1,0 +1,253 @@
+{
+  "date": "2026-11-15",
+  "paper_doi": "10.1155/2023/6689371",
+  "reviewer": "GPT Astra, read-only",
+  "starting_commit": "4c44482bbb6ef2b87833e0b7425d864d60b2fc8a",
+  "remote_status": "Fetched origin; main already current",
+  "new_algorithm_correction": {
+    "component": "Wishart completed-state merge",
+    "paper": "Algorithm1 merges clusters into c1 and relabels samples; no OR propagation of completion flag is printed",
+    "before": "completed[c1] |= completed[c2]",
+    "after": "retain existing completion state of surviving c1",
+    "independent_evidence": "https://github.com/at-antonova/time_series_prediction/blob/f78c323a461e1f990105546b24d2a548c68f0a6e/code/time_series_prediction/wishart.py#L77-L85",
+    "scope": "Literal pseudocode correction; not proof of recovering the authors original executable",
+    "preliminary_training_check": {
+      "patterns": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          5,
+          5,
+          5
+        ],
+        [
+          10,
+          10,
+          10
+        ]
+      ],
+      "datasets": [
+        "original Lorenz",
+        "German Transparency"
+      ],
+      "changed_assignments": 5,
+      "cluster_counts_unchanged": true
+    },
+    "action": "All profiles refitted; pre-correction development trial outputs retained, no test was run before correction"
+  },
+  "spread_calibration": {
+    "paper": "Section4 first trajectory-spread technique",
+    "implementation": "per-horizon mean finite endpoint ptp on validation times explicit factor; frozen thresholds during evaluation",
+    "uncertainty": "Paper spread notation and empty-set handling not fully defined; counts returned; empty horizon fails",
+    "used_for_primary_table_row": false
+  },
+  "lorenz_archive": {
+    "url": "https://raw.githubusercontent.com/at-antonova/time_series_prediction/f78c323a461e1f990105546b24d2a548c68f0a6e/data/lorenz.txt",
+    "sha256": "95b5ef1f03939173bf768a5cf5154a792353f39c715edef1114844d50e947c3f",
+    "observations": 100001,
+    "source_intervals": {
+      "train": [
+        3000,
+        13000
+      ],
+      "validation": [
+        13000,
+        14000
+      ],
+      "test": [
+        14000,
+        15000
+      ],
+      "fresh": [
+        15000,
+        16000
+      ]
+    },
+    "normalization": "Re-fit minmax on train; cancels archived affine scaling",
+    "provenance": "Antonova thesis supervised by Gromov explicitly states RK4, Lorenz x, sigma10/r28/b8/3; first80 samples affine-match current RK4 at floating precision",
+    "limitation": "Whole post-transient file not recovered by algebraically equivalent generator variants. Shared later file equals archive[256:]. Neither proves exact2023 input."
+  },
+  "germany_power_statistics": {
+    "release": "2018-06-30",
+    "column": "DE_load_entsoe_power_statistics",
+    "url": "https://data.open-power-system-data.org/time_series/2018-06-30/time_series_60min_singleindex.csv",
+    "sha256": "6f2fb8b24614f45377518fb6528dc1925aff456ba5705b79b1d4a4fb698867e7",
+    "source": "ENTSO-E Data Portal and Power Statistics",
+    "published_date_interval": "2014-12-31 through2016-02-20 inclusive, UTC assumption",
+    "observations": 10008,
+    "train": 8008,
+    "validation": 1000,
+    "test": 1000,
+    "fresh": 1000,
+    "missing": 0,
+    "matching_upstream_interpolation_flags": 0,
+    "comparison": "Adds24trainhours relative to Transparency. Validation/test/fresh dates identical. Not a source-only causal comparison.",
+    "vintage_check": "2018-03-13 and2018-06-30 identical on fixed January2015 start interval and next1000hours; no score-based vintage selection."
+  },
+  "rejected_sources": [
+    {
+      "releases": [
+        "2016-07-14",
+        "2017-03-06",
+        "2017-07-09"
+      ],
+      "reason": "Old German source ends2015-12-31T22Z; required interval has1225missinghours; no filling or favorable date shift."
+    }
+  ],
+  "open_source_search": {
+    "queries": [
+      "\"6689371\" (github OR code OR implementation)",
+      "\"Prediction after a Horizon of Predictability\" code github"
+    ],
+    "finding": "No confirmed author implementation of2023 paper found; related student repositories audited. Absence from public internet cannot be proven.",
+    "prior_audit": "source_audit.json"
+  },
+  "still_unidentified": [
+    "Exact article input arrays/splits/timezone",
+    "DBSCAN eps/min_samples, pathcount and noise variance",
+    "Precise trj/avg vs trj/trjp experimental construction",
+    "AP threshold, histogram parameters and several classifier parameters",
+    "Normalization and diagnostic-estimator settings",
+    "Frequency of motif/normalization refitting between forecast origins; fixed train fit with rolling observed contexts retained"
+  ],
+  "search_limitations": [
+    "Bounded spatial/noise search, not global optimization",
+    "S fixed16, no ensemble convergence claim",
+    "Validation reused across tuning stages; only fresh independent of selection",
+    "Final evaluation seed42 with fixed batch seeds, no multi-seed test confidence interval"
+  ],
+  "reviewed_without_new_discrepancy": [
+    "Complete4Dmotif clustering followed by3Dprefix matching",
+    "Wishart density r/(nV) and excluding self",
+    "All boundary ties consistent with d<=dr",
+    "Candidate multiplicity retained",
+    "Gaussian std=sqrt(variance)",
+    "Three-step predicted-only rapid-growth lookahead"
+  ],
+  "dbscan_optimization": {
+    "change": "Assign each sorted position at most once using monotone neighborhood endpoints; preserve original labels and border ownership. O(n log n) including sorting.",
+    "parent_verification": {
+      "randomized_exact_label_cases": 1000,
+      "dense_5000_samples_100_calls_seconds": {
+        "previous": 0.16764128021895885,
+        "linear_scan": 0.03747331304475665
+      }
+    },
+    "astra_independent_exact_label_cases": 23298,
+    "coverage": "empty arrays, repeated values, all-noise/all-core, shared border, eps boundary and adjacent float values, min_samples1 and greater than n",
+    "numerical_effect": "Exact label equivalence; no parameter or forecast definition change. Existing development searches need not be retuned."
+  },
+  "cm_vs_fp": "Paper prose mixes nearest-motif extreme with missing-motif rejection, while Table6 distinguishes fp from cm. Keep forced nearest lookup separate from radius-based CM, consistent with Algorithm2.",
+  "independent_numeric_review": {
+    "reviewer": "GPT Astra, read-only",
+    "partition": "lorenz_rk4/test",
+    "independent_of_evaluation_module": true,
+    "scored_pairs": 100000,
+    "targets_per_horizon": 1000,
+    "maximum_metric_difference": 0.0,
+    "common_mask_count": 79274,
+    "common_rmse": [
+      0.23258872092,
+      0.208215426953
+    ],
+    "all_four_frozen_selections_verified": true,
+    "selected_trials": [
+      5,
+      8,
+      5,
+      5
+    ],
+    "causal_train_normalization_and_embargo_verified": true,
+    "limitation": "Late-horizon coverage differs substantially from paper; h100 MAPE worsens despite RMSE improvement"
+  },
+  "lyapunov_formula_review": {
+    "reference": "https://github.com/CSchoel/nolds/blob/master/nolds/measures.py#L535-L662",
+    "dataset": "10000 original Lorenz training values",
+    "settings": {
+      "embedding": 10,
+      "matrix_dimension": 4,
+      "min_neighbors": 12,
+      "min_separation": 20,
+      "dt": 0.1
+    },
+    "maximum_spectrum_difference": 5.4179e-14,
+    "confirmed": "QR iteration advances by1; target uses i+matrix_dimension*m; final normalization divides bym*dt",
+    "limitations": "Boundary ties, lstsq rank cutoff, and zero QR diagonal handling differ on degenerate data; tested Lorenz result unaffected. Paper estimator settings unidentified. No forecast selection changed."
+  },
+  "entropy_complexity_definition_audit": {
+    "paper_definition_identified": false,
+    "implemented": "normalized ordinal Shannon entropy and MPR Jensen-Shannon complexity, D5/delay1",
+    "upper_envelope_at_H_068": 0.415123139023,
+    "upper_envelope_global_maximum_approx": 0.424820413463,
+    "conclusion": "The implemented D5/MPR diagnostic cannot produce C=.45. The article does not identify its complexity formula, ordinal dimension or delay. These additional diagnostics cannot establish whether an input dataset matches the article. No estimator retuning or forecast changes were made.",
+    "sources": [
+      "https://arxiv.org/abs/2102.06786",
+      "https://github.com/arthurpessa/ordpy/blob/master/ordpy/ordpy.py#L1983-L2070"
+    ],
+    "reference_source_sha256": "c3f42d1c84615f16dcc8ce3a718114c2d220681e9e6f00bf5e8204ac0235a63d"
+  },
+  "independent_germany_numeric_review": {
+    "reviewer": "GPT Astra, read-only",
+    "independent_of_evaluation_module": true,
+    "verified_rows": 458,
+    "maximum_metric_difference": 0.0,
+    "scored_pairs_per_partition": 100000,
+    "targets_per_horizon": 1000,
+    "full_and_matched_baselines": 12,
+    "test_common_rmse": [
+      0.194752,
+      0.212185
+    ],
+    "fresh_common_rmse": [
+      0.187543,
+      0.196235
+    ],
+    "finding": "Tuning worsens German Transparency RMSE even on the common mask; report explicitly. All four frozen profiles and protocol hashes match."
+  },
+  "rgdbscan_empty_cluster_policy": {
+    "paper": "Table6 and Section4 specify monotone spread growth over three positions; no explicit empty-cluster policy.",
+    "implementation": "Empty centers give NaN spread; strict-growth predicate is false. Finite UPV may be accepted. Missing UPV is still rejected. One center gives zero spread.",
+    "status": "Explicit unresolved convention, not claimed as recovered author behavior. No new rejection rule or test-based retuning introduced.",
+    "reviewer": "GPT Astra, read-only",
+    "limitation": "High min_samples relative to trajectory count can weaken spread detection. Cluster-count attribution of archived-profile full coverage was not measured."
+  },
+  "independent_power_statistics_numeric_review": {
+    "reviewer": "GPT Astra, read-only",
+    "independent_of_evaluation_module": true,
+    "verified_rows": 458,
+    "maximum_metric_difference": 0.0,
+    "targets_per_horizon": 1000,
+    "full_and_matched_baselines": 12,
+    "source_array_and_checksum_verified": true,
+    "no_missing_or_upstream_interpolated_values": true,
+    "training_minimum": 35062,
+    "training_range": 42434,
+    "validation_embargo_verified": true,
+    "all_four_frozen_inputs_verified": true,
+    "test_common_rmse": [
+      0.20266341995616852,
+      0.22049253573671884
+    ],
+    "fresh_common_rmse": [
+      0.2159706857172454,
+      0.22079745946089144
+    ],
+    "finding": "Tuning worsens RMSE on both partitions, including the common mask. No review issue requires changing the results or protocol."
+  },
+  "final_checks": {
+    "pytest": "72 passed",
+    "ruff_check": "passed for adis and tests",
+    "ruff_format": "passed for changed Python files",
+    "independent_all_profile_artifact_verification": "reconstruction_verification.json",
+    "plots": "test.png and fresh.png visually inspected",
+    "test_tuning_after_freeze": false
+  }
+}

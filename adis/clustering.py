@@ -57,7 +57,6 @@ def _wishart(order, indptr, neighbors, density, mu):
             parent[c] = target
             low[target] = min(low[target], low[c])
             high[target] = max(high[target], high[c])
-            completed[target] = completed[target] or completed[c]
         labels[point] = target
         low[target] = min(low[target], density[point])
         high[target] = max(high[target], density[point])
@@ -100,14 +99,15 @@ def dbscan_1d(x, eps=0.01, min_samples=3):
         left[i], right[i] = lo, hi
     cluster = -1
     last_core = -1
+    assigned_until = 0
     for i in range(n):
         if right[i] - left[i] < min_samples:
             continue
         if last_core < 0 or x[order[i]] - x[order[last_core]] > eps:
             cluster += 1
-        for j in range(left[i], right[i]):
-            if labels[order[j]] < 0:
-                labels[order[j]] = cluster
+        for j in range(max(left[i], assigned_until), right[i]):
+            labels[order[j]] = cluster
+        assigned_until = right[i]
         last_core = i
     return labels
 

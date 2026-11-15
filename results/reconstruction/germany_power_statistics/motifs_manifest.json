@@ -1,0 +1,13 @@
+{
+  "training_sha256": "ad86b38e27fb593fb1bb7875609318a7e7df483b50187c566ae2595a9517dd89",
+  "clustering_source_sha256": "60aafbc80803ad8026ed9dc357b063bc915b39eb8c8e880a7d85334c2bb2e01d",
+  "motifs_source_sha256": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+  "model_sha256": "5359ecac88b382b050021c20212c263f1e868a92363a613f3acedc2198f10623",
+  "settings": {
+    "length": 4,
+    "max_gap": 10,
+    "r": 11,
+    "mu": 0.2
+  },
+  "centers": 169129
+}

@@ -1,0 +1,13 @@
+{
+  "state": "superseded before test evaluation",
+  "reason": "new literal Algorithm1 merge correction; all models refit and same search repeated",
+  "complete_phases": [
+    "prepare",
+    "screen",
+    "search"
+  ],
+  "partial_phases": [
+    "validate lorenz_rk4"
+  ],
+  "test_evaluated": false
+}
