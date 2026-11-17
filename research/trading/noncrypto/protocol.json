@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "method": "Partial multistep prediction (Gromov–Baranov), perturbed trajectories, terminal avg and rgdbscan; daily trading adaptation",
+  "instruments": {
+    "AAPL": "equity",
+    "MSFT": "equity",
+    "XOM": "equity",
+    "SPY": "equity",
+    "QQQ": "equity",
+    "TLT": "treasury_bonds",
+    "GLD": "gold"
+  },
+  "universe_rationale": "Fixed convenience panel: three individual US stocks, two broad equity ETFs, long Treasury ETF, physical-gold ETF. All existed before2005. These are known surviving instruments, not a survivorship-free or representative universe of all stocks. No replacements or choosing best assets after results.",
+  "prior_information": "BTC and other crypto strategy results for2022–2025 and Jan–Oct2026 are already known. This extension evaluates new instruments in correlated macro periods, not a fully independent prospective confirmation. All strategy results for these seven instruments are unopened at protocol creation.",
+  "data_source": "Yahoo Finance chart endpoint snapshot: daily split-adjusted OHLC, splits and dividends. Endpoint is not a guaranteed documented API. Preserve raw responses and checksums, cross-check corporate actions against issuer information.",
+  "snapshot_start": "2005-01-01",
+  "snapshot_end_exclusive": "2026-11-17",
+  "evaluation_end_exclusive": "2026-11-01",
+  "calendar": "XNYS regular-session dates using exchange_calendars; US equity/ETF holiday dates shared by this panel. Match all observed sessions; no weekend or holiday forward fills. Incomplete scheduled sessions fail data audit.",
+  "forecast_price": "Split-adjusted Close, not dividend-adjusted total return. Normalize minmax only within each training window; no clipping. The model does not receive future dividend schedule.",
+  "parameters_source": "results/trading/selected.json",
+  "selection_sha256": "67f55ff869520e21fb3d725eb26212a7d915107aae7d20e27db9b050b130c366",
+  "parameter_policy": "Reuse BTC-selected L/K, Wishart r/mu, radius, DBSCAN, noise variance, paths without new tuning. Separate published-geometry control from experiment.PAPER. Temporal settings deliberately changed before evaluation:2520 daily sessions of training,5-session horizon, weekly decisions and13-prior-week target control.",
+  "training_sessions": 2520,
+  "horizon_sessions": 5,
+  "refit": "quarterly before first quarterly decision, excluding all observations at/after quarter boundary",
+  "forecast_start": "2021-01-01",
+  "historical_test": [
+    "2022-01-01",
+    "2026-01-01"
+  ],
+  "holdout": [
+    "2026-01-01",
+    "2026-11-01"
+  ],
+  "decision": "After close of last scheduled session of each exchange week, including shortened holiday weeks; never infer weekly endpoint from a truncated observations array.",
+  "execution": "Next scheduled real session Open. Additional one-session execution delay is a fixed sensitivity. Long/cash, no leverage or shorting,95% target on accepted forecast price return>0.003; otherwise0. Unchanged targets hold shares, except weekly-rebalanced causal exposure and volatility controls.",
+  "initial_equity_usd": 100000,
+  "cash_interest": 0,
+  "cost_bps_per_side": 15,
+  "cost_sensitivity": [
+    0,
+    5,
+    30
+  ],
+  "dividends": "Separate ledger. Prior-close holdings earn cash dividend before ex-date opening orders: seller at ex-open entitled, buyer at ex-open not entitled. Primary assumes cash available on ex-date because provider lacks payment dates. Prespecified30-calendar-day settlement sensitivity recognizes receivable in equity but excludes it from buying power; it is a timing assumption, not actual payment-date reconstruction.",
+  "splits": "Use constant split-adjusted share units for fractional execution, equivalent to raw prices and changing shares under proportional costs. Dividend units must match price units; verify AAPL before/after splits with issuer. Save full split events through snapshot cutoff; reconstruct raw prices/quantities for independent accounting. No synthetic total-return execution prices.",
+  "terminal": "Liquidation is scheduled before last session Open in the fixed evaluation calendar. Report cash and pending dividends separately; final equity includes receivables. No dividends earned after liquidation.",
+  "baselines": [
+    "cash",
+    "buy_hold",
+    "sma50_200",
+    "momentum90",
+    "donchian20_10",
+    "rsi14",
+    "vol_target20pct_30",
+    "random_forest5"
+  ],
+  "forest": "200 trees,max_depth6,min_samples_leaf50,max_features0.8,seed42; quarterly fit on prior2520 sessions, purge5-session labels; features lagged price/volume/volatility only; same weekly decisions and trade rule.",
+  "causal_control": "Mean of13 preceding weekly targets of main method; same weekly decisions/nextOpen execution; weekly rebalance. Actual exposure reported for both; not exact equality of every risk budget.",
+  "primary_estimand": "2026Jan–Oct class-balanced mean of per-instrument daily ES95(method)-ES95(causal_control): each of5equity instruments weight1/15,TLT1/3,GLD1/3. Negative favors method. This is mean instrument-level risk, not risk of a portfolio.",
+  "metrics": "Session returns only,annualization sqrt252; ES95 mean loss in worst ceil(0.05*n) sessions floored0, max drawdown close equity, net return,CAGR,mean actual exposure,entries,turnover,costs,dividends,cash and receivables. No weekend zeros in ES. No tax/account-specific financing claims.",
+  "bootstrap": {
+    "replicates": 10000,
+    "block_sessions": 10,
+    "sensitivity_blocks": [
+      5,
+      20
+    ],
+    "seed": 20261117,
+    "method": "Paired circular blocks synchronized across all7instruments and bothstrategies; class-weighted aggregate95%CI, per-instrument Bonferroni7 intervals alpha=0.05/7; other comparisons descriptive."
+  },
+  "seeds": {
+    "main": 42,
+    "robustness": [
+      7,
+      123
+    ]
+  },
+  "activity": "Publish forecast coverage and actual exposure; zero/low exposure is not evidence of risk recognition. All selected instruments remain in fixed aggregate.",
+  "stopping": "Run all seven instruments and all declared comparisons. No new tuning, representations, assets, dates, costs or thresholds chosen from results; publish negative/inconclusive outcomes. Any later revision of trading policy needs a new evaluation."
+}

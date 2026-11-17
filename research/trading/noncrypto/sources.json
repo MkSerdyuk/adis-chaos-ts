@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Gromov\u2013Baranov original article",
+    "url": "https://doi.org/10.1155/2023/6689371",
+    "use": "Forecasting mechanism; trading policy is separate."
+  },
+  {
+    "title": "Yahoo adjustment methodology",
+    "url": "https://help.yahoo.com/kb/SLN28256.html",
+    "use": "Distinguish split-adjusted Close from dividend-adjusted Adj Close; the latter is not an execution price."
+  },
+  {
+    "title": "Yahoo historical data",
+    "url": "https://finance.yahoo.com/quote/AAPL/history/",
+    "use": "Daily quote source with split-adjusted close and corporate actions; save endpoint snapshots."
+  },
+  {
+    "title": "Apple corporate actions",
+    "url": "https://investor.apple.com/dividend-history/",
+    "use": "Issuer comparison of split ratios and raw per-share dividend amounts."
+  },
+  {
+    "title": "iShares TLT",
+    "url": "https://www.ishares.com/us/products/239454/TLT",
+    "use": "Instrument identity and exact recent dividend amounts; identifies rounding in the quote provider."
+  },
+  {
+    "title": "SPDR Gold Shares",
+    "url": "https://www.spdrgoldshares.com/usa/gld/",
+    "use": "Fund identity and history from2004."
+  },
+  {
+    "title": "Exchange calendars",
+    "url": "https://github.com/gerrymanoim/exchange_calendars",
+    "use": "Holiday/shortened-week session scheduling, version pinned."
+  },
+  {
+    "title": "Backtesting.py",
+    "url": "https://kernc.github.io/backtesting.py/doc/backtesting/backtesting.html",
+    "use": "Existing order-execution engine; explicit dividend ledger extension."
+  }
+]

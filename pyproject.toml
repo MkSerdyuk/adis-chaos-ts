@@ -21,6 +21,7 @@ adis = "adis.experiment:main"
 [project.optional-dependencies]
 trading = [
     "backtesting>=0.6.5,<0.7",
+    "exchange-calendars>=4.11,<5",
     "optuna>=4.5,<5",
 ]
 

@@ -9,3 +9,4 @@ data/trading/
 results/trading/models/
 results/trading/study.db*
 results/trading/transfer/*/models/
+results/trading/noncrypto/*/models/

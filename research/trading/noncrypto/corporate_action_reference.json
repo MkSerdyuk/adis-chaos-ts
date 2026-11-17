@@ -1,0 +1,77 @@
+{
+  "checks": [
+    {
+      "symbol": "AAPL",
+      "date": "2014-05-08",
+      "column": "RawDividend",
+      "issuer_value": 3.29,
+      "provider_decimals": 6,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2014-08-07",
+      "column": "RawDividend",
+      "issuer_value": 0.47,
+      "provider_decimals": 6,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2020-08-07",
+      "column": "RawDividend",
+      "issuer_value": 0.82,
+      "provider_decimals": 6,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2020-11-06",
+      "column": "RawDividend",
+      "issuer_value": 0.205,
+      "provider_decimals": 6,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2005-02-28",
+      "column": "Split",
+      "issuer_value": 2,
+      "provider_decimals": 0,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2014-06-09",
+      "column": "Split",
+      "issuer_value": 7,
+      "provider_decimals": 0,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "AAPL",
+      "date": "2020-08-31",
+      "column": "Split",
+      "issuer_value": 4,
+      "provider_decimals": 0,
+      "source": "https://investor.apple.com/dividend-history/"
+    },
+    {
+      "symbol": "TLT",
+      "date": "2026-10-01",
+      "column": "RawDividend",
+      "issuer_value": 0.311581,
+      "provider_decimals": 3,
+      "source": "https://www.ishares.com/us/products/239454/TLT"
+    },
+    {
+      "symbol": "TLT",
+      "date": "2026-09-01",
+      "column": "RawDividend",
+      "issuer_value": 0.314686,
+      "provider_decimals": 3,
+      "source": "https://www.ishares.com/us/products/239454/TLT"
+    }
+  ],
+  "limitation": "Selected issuer checks only. Yahoo rounds the checked TLT dividends to0.001USD per share; retain and disclose provider precision, do not claim exact issuer amounts or exhaustive independent validation."
+}
