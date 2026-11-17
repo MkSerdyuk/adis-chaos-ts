@@ -1,0 +1,33 @@
+{
+  "cluster_eps": 0.1,
+  "clustered": false,
+  "decay": 0.99,
+  "endpoint_eps": 0.012,
+  "endpoint_min_samples": 1,
+  "epsilon": 0.04,
+  "growth_rule": "strict",
+  "length": 5,
+  "max_gap": 168,
+  "min_samples": 1,
+  "mu": 0.2,
+  "noise_law": "normal",
+  "noise_schedule": "fixed",
+  "noise_variance": 9e-06,
+  "patterns": [
+    [
+      1,
+      166,
+      1,
+      1
+    ],
+    [
+      1,
+      165,
+      1,
+      2
+    ]
+  ],
+  "r": 11,
+  "seed": 42,
+  "trajectories": 16
+}

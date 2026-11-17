@@ -3,5 +3,3 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
-data/opsd_*.csv
-results/**/motifs.npz

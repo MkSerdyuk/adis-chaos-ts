@@ -1,0 +1,9 @@
+Horizon,Paper RMSE,Paper-parameter RMSE,Custom-parameter RMSE,Dataset
+1,0.01,0.026021,0.046810,Lorenz
+10,0.03,0.075502,0.081152,Lorenz
+50,0.04,0.261395,0.254824,Lorenz
+100,0.04,0.245543,0.227748,Lorenz
+1,0.01,0.078322,0.029688,German electricity load
+10,0.01,0.115260,0.064532,German electricity load
+50,0.05,0.234916,0.055781,German electricity load
+100,0.03,0.219611,0.050491,German electricity load

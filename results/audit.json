@@ -1,0 +1,51 @@
+{
+  "full_runs": [
+    {
+      "dataset": "lorenz",
+      "variant": "paper",
+      "horizons": 100,
+      "raw_arrays_exactly_match_reference": true
+    },
+    {
+      "dataset": "lorenz",
+      "variant": "custom",
+      "horizons": 100,
+      "raw_arrays_exactly_match_reference": true
+    },
+    {
+      "dataset": "germany",
+      "variant": "paper",
+      "horizons": 100,
+      "raw_arrays_exactly_match_reference": true
+    },
+    {
+      "dataset": "germany",
+      "variant": "custom",
+      "horizons": 100,
+      "raw_arrays_exactly_match_reference": true
+    }
+  ],
+  "horizons_independently_rescored": 400,
+  "history_rows": 72043,
+  "single_final_print_verified": true,
+  "only_two_markdown_files": [
+    "EXPERIMENTS.md",
+    "README.md"
+  ],
+  "tests_removed_from_git": true,
+  "tests_passed_before_removal": 70,
+  "forecast_source_hashes": {
+    "src/model.py": "048479b61ba1a20c80cf17e8578b2fbc312876030a1ea1130283d56c9c6f67d5",
+    "src/evaluation.py": "a1cd01659c7e225340a2d9a8bcbd8218b901012196727d5ad5159d02086d617e",
+    "src/data.py": "d1a76db47e13f5cdbe7eb970823d926ce67141baff80a4d85b29f54d160a7677",
+    "src/prediction.py": "1b209ffd851b87fe016d8d38b99f947b87f6075016850a3f58ac16bd17222ac6",
+    "src/baselines.py": "33cc006289865b1202bd76cc12f5465901197e681d59350bf92c67e2f9492c29",
+    "src/selection.py": "b2be3cd337c3800a14719a1383b3ae374919e0774767cfbfc3598f2134315803",
+    "src/diagnostics.py": "cc144e767c5e6e573d7635b08c92c7d20d30a6f6c9bc0ce989c82e87d24b5f47",
+    "src/__init__.py": "9f874947237d84f7c29ef769dfcac8638d850ac97e42349d7be177c0a215faf6",
+    "src/motifs.py": "22b3ee7916c71bf15ebec8bd3ca41d1d3a2592626e121debaf32c1a94efbdc2e",
+    "src/clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+    "run.py": "53bb38cb43a6154ee0ef7c50fd680bd0556b9b4c0becbc882f67dc3658ea91b4"
+  },
+  "exact_paper_replication_claimed": false
+}

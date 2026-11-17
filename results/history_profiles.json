@@ -1,0 +1,916 @@
+[
+  {
+    "name": "rk4_immediate",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "rk4_immediate",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.882992562476442,
+      "range": 36.1450700231557
+    },
+    "data_sha256": "37024955053a5c4ba4e96ff8b38f3b37947021d2a84f7aa8fabf24d88b963bf9"
+  },
+  {
+    "name": "archive_immediate",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "Numerically consistent with Lorenz x and RK4 dt=.1 on the initial prefix and tested distant windows; original 2023 experiment provenance remains unverified.",
+    "metadata": {
+      "name": "archive_immediate",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": 0.02843972575691881,
+      "range": 0.966378078209031
+    },
+    "data_sha256": "b0d8fb1fa711c27cd85c823b78fbc8a5e3f02f66473b7c4065dc0f925dfbf219"
+  },
+  {
+    "name": "rk4_y",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "rk4_y",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -25.107107120207345,
+      "range": 49.7818269050585
+    },
+    "data_sha256": "4726fb68752b0a63d3bbb18562f890a9d5a29d294d2a8ee74d17200af91521c9"
+  },
+  {
+    "name": "rk4_z",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "rk4_z",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": 3.3540275783847044,
+      "range": 40.96940655719608
+    },
+    "data_sha256": "5ce863f22d769096d490cb7d43ef19c84eddb53164779990cb18f10a5f0d806c"
+  },
+  {
+    "name": "cpp_extended_generated",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "cpp_extended_generated",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.876519738842916,
+      "range": 35.838856236363085
+    },
+    "data_sha256": "cc37e27f60a889599b83e9581bdd30c044bb96063a158e72a23f8c1140d27fc2"
+  },
+  {
+    "name": "cpp_single_generated",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "cpp_single_generated",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.888404846191406,
+      "range": 36.172645568847656
+    },
+    "data_sha256": "5279745e49aac3d212388d25912d1c22e704322711963480f11e3b934caa0b8e"
+  },
+  {
+    "name": "germany_power_statistics_9008",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0
+    },
+    "data_sha256": "9395c328eaabc3961db065267765884ad4ab46a35d73b20c5db8ecb46d0eb30c"
+  },
+  {
+    "name": "rk4_initial_0",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_0",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.60112955859254,
+      "range": 35.97693742456069,
+      "initial": [
+        0,
+        1,
+        1
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "2cb5225f6f0d9efbb36bd7adb63124eafc98d0954e793d6eba6eef49beaa8527"
+  },
+  {
+    "name": "rk4_initial_1",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_1",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.69703190286176,
+      "range": 35.8309614249446,
+      "initial": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "1fe8075ea7053b3a8a26a1b69fb698b73b8e001d98aea21e6572cf6fe3d432d4"
+  },
+  {
+    "name": "rk4_initial_2",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_2",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.51440461914106,
+      "range": 35.2592695437326,
+      "initial": [
+        1,
+        0,
+        0
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "ff2b773fc51f3749c91e96c51e172aa8a13cfff2e4954fc19a48d044c5440d80"
+  },
+  {
+    "name": "rk4_initial_3",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_3",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -18.247364632924707,
+      "range": 35.96506684456925,
+      "initial": [
+        10,
+        10,
+        10
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "64947d1fa750b19bfdf55f303337a329095123ba9e8118a57092486e5608339b"
+  },
+  {
+    "name": "rk4_initial_4",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_4",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.868048763536994,
+      "range": 35.435493849969816,
+      "initial": [
+        -8,
+        8,
+        27
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "f8405374d5d0ab82cc87bdb3352a045e56e5bd18bd33c952791d76720d541284"
+  },
+  {
+    "name": "rk4_initial_5",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_5",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.920575266847912,
+      "range": 35.89664979685573,
+      "initial": [
+        -10,
+        -10,
+        20
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "35ebce8158cb613af08e3953753e03dc3fc306a3918598d3bfc34e005ec6c74e"
+  },
+  {
+    "name": "rk4_initial_6",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_6",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -18.276287810631555,
+      "range": 36.26168280452501,
+      "initial": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "dd52ede2a9d0973f829300afa9964dec8ac86e38c7d1fd766274ee3080c54dec"
+  },
+  {
+    "name": "rk4_initial_7",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_7",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.84356860806529,
+      "range": 35.51227850440547,
+      "initial": [
+        5,
+        5,
+        5
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "320911d5f4e1b351382e052ff94cc658b45178776656d92fd5eb7ca084687d36"
+  },
+  {
+    "name": "rk4_immediate__self_included",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "rk4_immediate__self_included",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.882992562476442,
+      "range": 36.1450700231557
+    },
+    "data_sha256": "37024955053a5c4ba4e96ff8b38f3b37947021d2a84f7aa8fabf24d88b963bf9"
+  },
+  {
+    "name": "archive_immediate__self_included",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "Numerically consistent with Lorenz x and RK4 dt=.1 on the initial prefix and tested distant windows; original 2023 experiment provenance remains unverified.",
+    "metadata": {
+      "name": "archive_immediate__self_included",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": 0.02843972575691881,
+      "range": 0.966378078209031
+    },
+    "data_sha256": "b0d8fb1fa711c27cd85c823b78fbc8a5e3f02f66473b7c4065dc0f925dfbf219"
+  },
+  {
+    "name": "germany_power_statistics_9008__self_included",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008__self_included",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0
+    },
+    "data_sha256": "9395c328eaabc3961db065267765884ad4ab46a35d73b20c5db8ecb46d0eb30c"
+  },
+  {
+    "name": "germany_power_statistics_9008__symmetric_minmax",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "symmetric_minmax",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008__symmetric_minmax",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0,
+      "normalization": "symmetric_minmax",
+      "normalization_shift": 56279.0,
+      "normalization_scale": 21217.0
+    },
+    "data_sha256": "c37f744aa72b91ad8df94d49beb54b82d26dfb977cc741b8fa36f5b654636646"
+  },
+  {
+    "name": "germany_power_statistics_9008__zscore",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "zscore",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008__zscore",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0,
+      "normalization": "zscore",
+      "normalization_shift": 57617.3730017762,
+      "normalization_scale": 10247.29931260534
+    },
+    "data_sha256": "0d56f2e61e916f40176440d7f6047edd740121ba1fc56c04d0b5796540f5d466"
+  },
+  {
+    "name": "germany_power_statistics_9008__l2",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "l2",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008__l2",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0,
+      "normalization": "l2",
+      "normalization_shift": 0.0,
+      "normalization_scale": 5554306.210857482
+    },
+    "data_sha256": "b6314cf691a9d4e8abf5169feabe59afce3b08a5578fa32d417b67e69c6c538b"
+  },
+  {
+    "name": "rk4_initial_random_02",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_random_02",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -18.150537475345118,
+      "range": 36.614770666906075,
+      "initial": [
+        -13.013385923088848,
+        -0.9809104181189294,
+        30.171045510827668
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "initial_design_seed": 20261117
+    },
+    "data_sha256": "e1cede60eb2a7509ccecd41c68539f9a6f998e1fb0949b22cd46eb227d3d9947"
+  },
+  {
+    "name": "rk4_initial_random_07",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_random_07",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.647159096330743,
+      "range": 35.494694696193505,
+      "initial": [
+        11.011277075271451,
+        11.79172808487273,
+        23.190920494971678
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "initial_design_seed": 20261117
+    },
+    "data_sha256": "9801164f35ffe1a81d0c3e6c71368b279e4bd554ff547ecaf499684616401c84"
+  },
+  {
+    "name": "rk4_initial_random_11",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_random_11",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.57251440112367,
+      "range": 35.83682195397508,
+      "initial": [
+        -10.415859488175222,
+        2.595882126739234,
+        14.184269292980085
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "initial_design_seed": 20261117
+    },
+    "data_sha256": "88ca0c9366c9ae42adf5aad99d0b2ad486a204ca36a2c148bca8e71e4a2d822d"
+  },
+  {
+    "name": "rk4_initial_random_27",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_random_27",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.68179913268883,
+      "range": 35.338916323466485,
+      "initial": [
+        -12.109821420000806,
+        7.761860599377471,
+        22.535980236183363
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "initial_design_seed": 20261117
+    },
+    "data_sha256": "fcc10b1a8365f43f848c0de36b108dbbac6c6d71289d590a74f717041e266992"
+  },
+  {
+    "name": "rk4_initial_random_31",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_random_31",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -18.007079529391,
+      "range": 36.109250534173825,
+      "initial": [
+        2.240550790568623,
+        -7.985841474515913,
+        30.37736522134237
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "initial_design_seed": 20261117
+    },
+    "data_sha256": "1028e27d232134eb6642518379875edd27a8938c90f38172366fc63b093bed66"
+  },
+  {
+    "name": "rk4_initial_2__symmetric_minmax",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "symmetric_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_2__symmetric_minmax",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.51440461914106,
+      "range": 35.2592695437326,
+      "initial": [
+        1,
+        0,
+        0
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "normalization": "symmetric_minmax",
+      "normalization_shift": 0.11523015272523907,
+      "normalization_scale": 17.6296347718663
+    },
+    "data_sha256": "449d36f507aa14804e21b07e32c8e671068a23aac66cfc6dce29b6e24c352cf1"
+  },
+  {
+    "name": "rk4_initial_2__zscore",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "zscore",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_2__zscore",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.51440461914106,
+      "range": 35.2592695437326,
+      "initial": [
+        1,
+        0,
+        0
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "normalization": "zscore",
+      "normalization_shift": -0.14418296514281279,
+      "normalization_scale": 7.784849135309132
+    },
+    "data_sha256": "2d70ad7c507bc360817b09cd00a6575956077575d713bfa5a54a83cb054c2dda"
+  },
+  {
+    "name": "rk4_initial_2__l2",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "l2",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_2__l2",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.51440461914106,
+      "range": 35.2592695437326,
+      "initial": [
+        1,
+        0,
+        0
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4",
+      "normalization": "l2",
+      "normalization_shift": 0.0,
+      "normalization_scale": 778.6184225084885
+    },
+    "data_sha256": "64302cdaab489eb4932275bdbb77ac90cfdfaae9f00d515aa7308bee4332b89f"
+  },
+  {
+    "name": "rk4_immediate__quicksort",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters",
+    "metadata": {
+      "name": "rk4_immediate",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.882992562476442,
+      "range": 36.1450700231557
+    },
+    "data_sha256": "37024955053a5c4ba4e96ff8b38f3b37947021d2a84f7aa8fabf24d88b963bf9"
+  },
+  {
+    "name": "rk4_initial_2__quicksort",
+    "train": 10000,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "generated RK4 with stated physical parameters and disclosed initial state",
+    "metadata": {
+      "name": "rk4_initial_2",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": -17.51440461914106,
+      "range": 35.2592695437326,
+      "initial": [
+        1,
+        0,
+        0
+      ],
+      "sigma": 10,
+      "beta": 2.6666666666666665,
+      "rho": 28,
+      "dt": 0.1,
+      "discard": 3000,
+      "component": 0,
+      "integrator": "RK4"
+    },
+    "data_sha256": "ff2b773fc51f3749c91e96c51e172aa8a13cfff2e4954fc19a48d044c5440d80"
+  },
+  {
+    "name": "germany_power_statistics_9008__quicksort",
+    "train": 9008,
+    "test": 1000,
+    "normalization": "train_minmax",
+    "data_status": "published date range retained; German train-size not separately explicit",
+    "metadata": {
+      "name": "germany_power_statistics_9008",
+      "source_start": 0,
+      "train": 9008,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 42434.0
+    },
+    "data_sha256": "9395c328eaabc3961db065267765884ad4ab46a35d73b20c5db8ecb46d0eb30c"
+  },
+  {
+    "name": "archive_later",
+    "metadata": {
+      "name": "archive_later",
+      "source_start": 10000,
+      "train": 10000,
+      "test": 1000,
+      "minimum": 0.0,
+      "range": 0.9849566014192092
+    },
+    "normalization": "train_minmax",
+    "original_author_data_verified": false
+  },
+  {
+    "name": "germany_power_statistics_10000",
+    "metadata": {
+      "name": "germany_power_statistics_10000",
+      "source_start": 0,
+      "train": 10000,
+      "test": 1000,
+      "minimum": 35062.0,
+      "range": 44058.0
+    },
+    "normalization": "train_minmax",
+    "original_author_data_verified": false
+  },
+  {
+    "name": "historical_reconstruction/germany",
+    "normalization": "train_minmax",
+    "metadata": {
+      "profile": "germany",
+      "source": {
+        "url": "https://data.open-power-system-data.org/time_series/2020-10-06/time_series_60min_singleindex.csv",
+        "column": "DE_load_actual_entsoe_transparency",
+        "sha256": "6a7f2bc571314cbf9c321cc03437691cd4be95c3a6f075e60ff99e8035c704c8",
+        "start": "2015-01-01 00:00:00+00:00",
+        "end": "2016-04-02 15:00:00+00:00"
+      },
+      "raw_sha256": "d18a5d062fb5b7fdd7b9764644d5f0d2939ae2ac73f65428df791b75947488e8",
+      "train": [
+        0,
+        7984
+      ],
+      "calibration": [
+        7984,
+        8885
+      ],
+      "validation_embargo": 99,
+      "test": [
+        8984,
+        9984
+      ],
+      "fresh": [
+        9984,
+        10984
+      ],
+      "normalization": {
+        "minimum": 32418.0,
+        "range": 43399.0,
+        "fit": "training only"
+      },
+      "exact_paper_data_identified": false
+    }
+  },
+  {
+    "name": "historical_reconstruction/germany_power_statistics",
+    "normalization": "train_minmax",
+    "metadata": {
+      "profile": "germany_power_statistics",
+      "source": {
+        "url": "https://data.open-power-system-data.org/time_series/2018-06-30/time_series_60min_singleindex.csv",
+        "column": "DE_load_entsoe_power_statistics",
+        "sha256": "6f2fb8b24614f45377518fb6528dc1925aff456ba5705b79b1d4a4fb698867e7",
+        "start": "2014-12-31 00:00:00+00:00",
+        "end": "2016-04-02 15:00:00+00:00"
+      },
+      "raw_sha256": "cd145ea1ef9da2c9903da01c854733f10de59a21613e54e64127e96612d3c090",
+      "train": [
+        0,
+        8008
+      ],
+      "calibration": [
+        8008,
+        8909
+      ],
+      "validation_embargo": 99,
+      "test": [
+        9008,
+        10008
+      ],
+      "fresh": [
+        10008,
+        11008
+      ],
+      "normalization": {
+        "minimum": 35062.0,
+        "range": 42434.0,
+        "fit": "training only"
+      },
+      "exact_paper_data_identified": false
+    }
+  },
+  {
+    "name": "historical_reconstruction/lorenz_archive",
+    "normalization": "train_minmax",
+    "metadata": {
+      "profile": "lorenz_archive",
+      "source": {
+        "url": "https://raw.githubusercontent.com/at-antonova/time_series_prediction/f78c323a461e1f990105546b24d2a548c68f0a6e/data/lorenz.txt",
+        "sha256": "95b5ef1f03939173bf768a5cf5154a792353f39c715edef1114844d50e947c3f",
+        "discard": 3000
+      },
+      "raw_sha256": "a1d53149c788152422ad0cb66fe6d411ab200e033ad6e17f86106def8633b072",
+      "train": [
+        0,
+        10000
+      ],
+      "calibration": [
+        10000,
+        10901
+      ],
+      "validation_embargo": 99,
+      "test": [
+        11000,
+        12000
+      ],
+      "fresh": [
+        12000,
+        13000
+      ],
+      "normalization": {
+        "minimum": 0.02843972575691881,
+        "range": 0.966378078209031,
+        "fit": "training only"
+      },
+      "exact_paper_data_identified": false
+    }
+  },
+  {
+    "name": "historical_reconstruction/lorenz_rk4",
+    "normalization": "train_minmax",
+    "metadata": {
+      "profile": "lorenz_rk4",
+      "source": {
+        "generator": "adis.data.lorenz",
+        "discard": 3000,
+        "dt": 0.1,
+        "component": "x"
+      },
+      "raw_sha256": "0940536675cc62a45a2a39eeb7a5ac0f04a3efb015bb33b81e67f39c5938c9bc",
+      "train": [
+        0,
+        10000
+      ],
+      "calibration": [
+        10000,
+        10901
+      ],
+      "validation_embargo": 99,
+      "test": [
+        11000,
+        12000
+      ],
+      "fresh": [
+        12000,
+        13000
+      ],
+      "normalization": {
+        "minimum": -17.882992562476442,
+        "range": 36.1450700231557,
+        "fit": "training only"
+      },
+      "exact_paper_data_identified": false
+    }
+  }
+]

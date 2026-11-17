@@ -1,0 +1,12 @@
+{
+  "raw_sha256": "454f41b4acb4d75a3beaf12f16356327fc91a1dfcec73967d02a229354dcd2ec",
+  "train": 10000,
+  "test": 1000,
+  "normalization": "train_minmax",
+  "minimum": -17.51440461914106,
+  "scale": 35.2592695437326,
+  "evaluation": "all available targets from origins within the test interval",
+  "metrics": "conditional on finite predictions; unavailable targets excluded",
+  "selection": "exploratory reconstruction; test period inspected during prior searches",
+  "original_author_data_verified": false
+}

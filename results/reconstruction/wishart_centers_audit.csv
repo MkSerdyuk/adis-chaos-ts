@@ -1,4 +1,0 @@
-profile,old_centers,new_centers,patterns_with_changed_count,changed_centers_after_matching,max_matched_center_distance
-lorenz_rk4,231135,231135,0,119,0.02810760386170378
-lorenz_archive,223661,223661,0,106,0.0270765415591585
-germany,144543,144543,0,49,0.02762950483290211

@@ -1,29 +1,27 @@
 [project]
-name = "adis"
+name = "chaos-ts"
 version = "0.1.0"
 description = "Partial multistep prediction with generalized motifs and German load benchmarks"
 requires-python = ">=3.12"
 dependencies = [
     "imbalanced-learn>=0.14.2",
-    "matplotlib>=3.11.2",
     "numba>=0.68.1",
     "numpy>=2.5.4",
     "pandas>=3.1.1",
-    "pytest>=9.2.0",
-    "ruff>=0.17.4",
     "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
+    "threadpoolctl>=3.6.0",
 ]
 
-[project.scripts]
-adis = "adis.experiment:main"
+[dependency-groups]
+dev = ["ruff>=0.17.4"]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
 
 [tool.ruff]
 line-length = 110

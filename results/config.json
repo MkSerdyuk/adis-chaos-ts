@@ -1,0 +1,113 @@
+{
+  "Lorenz": {
+    "train": 10000,
+    "data": {
+      "n": 11000,
+      "discard": 3000,
+      "dt": 0.1,
+      "initial": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "sigma": 10.0,
+      "rho": 28.0,
+      "beta": 2.6666666666666665,
+      "component": 0
+    },
+    "paper": {
+      "length": 4,
+      "max_gap": 10,
+      "r": 11,
+      "mu": 0.2,
+      "clustered": true,
+      "epsilon": 0.01,
+      "cluster_eps": 0.2046638891241483,
+      "min_samples": 1,
+      "trajectories": 16,
+      "noise_variance": 0.0001,
+      "endpoint_eps": 0.013503140378698722,
+      "endpoint_min_samples": 1,
+      "decay": 0.99,
+      "seed": 42,
+      "noise_schedule": "fixed",
+      "growth_rule": "strict"
+    },
+    "custom": {
+      "length": 4,
+      "max_gap": 10,
+      "r": 11,
+      "mu": 0.2,
+      "clustered": true,
+      "epsilon": 0.02,
+      "cluster_eps": 0.2,
+      "min_samples": 1,
+      "trajectories": 16,
+      "noise_variance": 0.0001,
+      "endpoint_eps": 0.013503140378698722,
+      "endpoint_min_samples": 1,
+      "decay": 0.99,
+      "seed": 42,
+      "noise_schedule": "fixed",
+      "growth_rule": "strict"
+    }
+  },
+  "German electricity load": {
+    "train": 9008,
+    "data": {
+      "path": "data/germany.csv"
+    },
+    "paper": {
+      "cluster_eps": 0.1,
+      "clustered": true,
+      "decay": 0.99,
+      "endpoint_eps": 0.013503140378698722,
+      "endpoint_min_samples": 1,
+      "epsilon": 0.05,
+      "growth_rule": "strict",
+      "length": 4,
+      "max_gap": 10,
+      "min_samples": 50,
+      "mu": 0.2,
+      "noise_law": "normal",
+      "noise_schedule": "fixed",
+      "noise_variance": 0.0001,
+      "patterns": null,
+      "r": 11,
+      "seed": 42,
+      "trajectories": 16
+    },
+    "custom": {
+      "length": 5,
+      "max_gap": 168,
+      "r": 11,
+      "mu": 0.2,
+      "clustered": false,
+      "patterns": [
+        [
+          1,
+          166,
+          1,
+          1
+        ],
+        [
+          1,
+          165,
+          1,
+          2
+        ]
+      ],
+      "epsilon": 0.04,
+      "cluster_eps": 0.1,
+      "min_samples": 1,
+      "trajectories": 16,
+      "noise_variance": 9e-06,
+      "endpoint_eps": 0.012,
+      "endpoint_min_samples": 1,
+      "decay": 0.99,
+      "seed": 42,
+      "noise_schedule": "fixed",
+      "growth_rule": "strict"
+    }
+  }
+}

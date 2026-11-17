@@ -1,0 +1,154 @@
+{
+  "source": "Gromov and Baranov, 2023, DOI 10.1155/2023/6689371",
+  "author_code_or_original_arrays_verified": false,
+  "selection": "Exploratory; test observations and published results were inspected in prior work",
+  "lorenz_paper": "Lowest mean anchor RMSE among the five audited full strict Python runs on the selected RK4 input",
+  "germany_paper": "The prose radius .05 with inner .1/min50 gave lower mean anchor RMSE than Algorithm2 radius .01 with inner .3/min1 on identical data; both preserve other published parameters.",
+  "lorenz_custom": "Nine transferred finalists failed the coverage rule on 96 origins. Four full-pattern matching-radius candidates followed; minimum mean anchor RMSE subject to coverage .8/.7/.1/.1 selected wide_1. The winner was rerun on all1000 origins. No claim of global optimality.",
+  "germany_custom": "Compare transferred c270 and f8 configurations; c270 retained for its substantially higher coverage at every anchor",
+  "normalization": "Training-only min-max, shared within each dataset",
+  "comparison": "Conditional normalized RMSE; masks can differ; acceptance counts are in EXPERIMENTS.md",
+  "lorenz_shortlist": [
+    {
+      "name": "wide_1",
+      "config": {
+        "length": 4,
+        "max_gap": 10,
+        "r": 11,
+        "mu": 0.2,
+        "clustered": true,
+        "epsilon": 0.02,
+        "cluster_eps": 0.2,
+        "min_samples": 1,
+        "trajectories": 16,
+        "noise_variance": 0.0001,
+        "endpoint_eps": 0.013503140378698722,
+        "endpoint_min_samples": 1,
+        "decay": 0.99,
+        "seed": 42,
+        "noise_schedule": "fixed",
+        "growth_rule": "strict"
+      },
+      "rmse": [
+        0.04250899181606245,
+        0.11059689694888278,
+        0.26383934263933306,
+        0.21294344210873214
+      ],
+      "coverage": [
+        0.96875,
+        0.7894736842105263,
+        0.7362637362637363,
+        0.7816091954022989
+      ],
+      "eligible": true,
+      "score": 0.15747216837825262
+    },
+    {
+      "name": "wide_0",
+      "config": {
+        "length": 4,
+        "max_gap": 10,
+        "r": 11,
+        "mu": 0.2,
+        "clustered": true,
+        "epsilon": 0.02,
+        "cluster_eps": 0.03,
+        "min_samples": 1,
+        "trajectories": 16,
+        "noise_variance": 0.0001,
+        "endpoint_eps": 0.013503140378698722,
+        "endpoint_min_samples": 1,
+        "decay": 0.99,
+        "seed": 42,
+        "noise_schedule": "fixed",
+        "growth_rule": "strict"
+      },
+      "rmse": [
+        0.02838788814760492,
+        0.08476284531358579,
+        0.29237181034963383,
+        0.24177085138903046
+      ],
+      "coverage": [
+        0.9895833333333334,
+        0.9263157894736842,
+        0.7142857142857143,
+        0.6206896551724138
+      ],
+      "eligible": true,
+      "score": 0.16182334879996374
+    },
+    {
+      "name": "wide_2",
+      "config": {
+        "length": 4,
+        "max_gap": 10,
+        "r": 11,
+        "mu": 0.2,
+        "clustered": true,
+        "epsilon": 0.04,
+        "cluster_eps": 0.1,
+        "min_samples": 1,
+        "trajectories": 16,
+        "noise_variance": 0.0001,
+        "endpoint_eps": 0.013503140378698722,
+        "endpoint_min_samples": 1,
+        "decay": 0.99,
+        "seed": 42,
+        "noise_schedule": "fixed",
+        "growth_rule": "strict"
+      },
+      "rmse": [
+        0.0799218247726484,
+        0.15087978331751922,
+        0.2219320845451957,
+        0.2289526716577261
+      ],
+      "coverage": [
+        0.9791666666666666,
+        0.7684210526315789,
+        0.7692307692307693,
+        0.8045977011494253
+      ],
+      "eligible": true,
+      "score": 0.17042159107327237
+    },
+    {
+      "name": "wide_3",
+      "config": {
+        "length": 4,
+        "max_gap": 10,
+        "r": 11,
+        "mu": 0.2,
+        "clustered": true,
+        "epsilon": 0.08,
+        "cluster_eps": 0.1,
+        "min_samples": 1,
+        "trajectories": 16,
+        "noise_variance": 0.0001,
+        "endpoint_eps": 0.013503140378698722,
+        "endpoint_min_samples": 1,
+        "decay": 0.99,
+        "seed": 42,
+        "noise_schedule": "fixed",
+        "growth_rule": "strict"
+      },
+      "rmse": [
+        0.13300939031250947,
+        0.21078541808733062,
+        0.24006916274005388,
+        0.21346783566893066
+      ],
+      "coverage": [
+        1.0,
+        0.9052631578947369,
+        0.6373626373626373,
+        0.7701149425287356
+      ],
+      "eligible": true,
+      "score": 0.19933295170220616
+    }
+  ],
+  "history_rows": 72043
+}
