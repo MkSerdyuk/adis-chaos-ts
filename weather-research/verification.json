@@ -1,5 +1,5 @@
 {
-  "run": "1974c15bd4209715b076",
+  "run": "f91f36e0b694ed5723b7",
   "src_unchanged_from": "21d07ec",
   "forecast_rows": 281160,
   "metric_rows": 972,
@@ -48,12 +48,27 @@
     "title": "Weather research",
     "plot_groups": 3,
     "errors": [],
-    "report": "/home/mkserdyuk/.codex/worktrees/forecast-library/ADIS/weather-research/results/1974c15bd4209715b076/report.html"
+    "report": "/home/mkserdyuk/.codex/worktrees/forecast-library/ADIS/weather-research/results/f91f36e0b694ed5723b7/report.html"
   },
   "published_report": {
     "file": "weather.html",
-    "sha256": "732c83f840e9bb10863b78a08e9081c27d70f878645148698402c0219285b595"
+    "sha256": "fb2f546bd5defe16ffeb12fed65c21589158e0f481d7625e10c0467b8fc41944"
   },
   "cached_rerun_forecasts_identical": true,
-  "cached_rerun_metrics_unchanged": true
+  "cached_rerun_metrics_unchanged": true,
+  "numerical_outputs_unchanged_from_run": "1974c15bd4209715b076",
+  "comparison_summary": {
+    "file": "comparison.csv",
+    "rows": 32,
+    "methods": 8,
+    "horizons": [
+      1,
+      6,
+      12,
+      24
+    ],
+    "station_weights": "equal",
+    "independently_verified_from_forecasts": true,
+    "sha256": "a8acda95a7c3f441e9b8e1966cfbfb156564b34010a6f7f53aa4a2c89dcc865d"
+  }
 }

@@ -13,6 +13,38 @@ from .baselines import NAMES
 
 def write_report(output, predictions, measured, intervals, config):
     sections = []
+    paired = measured[(measured.period == "holdout") & (measured["mask"] == "forecaster")]
+    groups = paired.groupby(["horizon", "method"])
+    assert groups.station.nunique().eq(len(config["stations"])).all()
+    assert paired["count"].gt(0).all() and paired[["mae", "rmse"]].notna().all().all()
+    comparison = (
+        groups.agg(
+            stations=("station", "nunique"),
+            paired_targets=("count", "sum"),
+            mean_station_mae=("mae", "mean"),
+            mean_station_rmse=("rmse", "mean"),
+        )
+        .reset_index()
+        .sort_values(["horizon", "mean_station_mae"])
+    )
+    comparison.to_csv(output / "comparison.csv", index=False)
+    display = comparison.rename(
+        columns={
+            "horizon": "Horizon (hours)",
+            "method": "Method",
+            "stations": "Stations",
+            "paired_targets": "Paired targets",
+            "mean_station_mae": "Mean station MAE (°C)",
+            "mean_station_rmse": "Mean station RMSE (°C)",
+        }
+    )
+    sections.append(
+        "<h2>All methods: 2026, 24 hours</h2>"
+        + display[comparison.horizon == 24].to_html(index=False, float_format=lambda v: f"{v:.4f}")
+        + "<details><summary>All methods at every horizon</summary>"
+        + display.to_html(index=False, float_format=lambda v: f"{v:.4f}")
+        + "</details>"
+    )
     primary = intervals[intervals.primary]
     sections.append(
         "<h2>Primary comparison: 2026, 24 hours</h2>"
@@ -140,6 +172,9 @@ def write_report(output, predictions, measured, intervals, config):
     Validation: 2021. Historical test: 2022–2025. Historical holdout: January–October 2026. No weather tuning.
     Quarterly training on the preceding 10000 hours; daily forecasts issued after the 23:00 UTC observation.</p>
     <p>MAE, RMSE, bias and tail95 are in °C. Tail95 is the mean largest 5% of absolute errors.
+    Comparators: persistence, daily seasonal, harmonic climatology, Ridge, SVR, Random Forest and gradient boosting.
+    The summary gives equal-weight averages of station MAEs and station RMSEs, on the same accepted Forecaster targets within each horizon.
+    Mean station RMSE is not pooled RMSE. Accepted targets can differ between horizons.
     Primary differences are equal-station MAE(Forecaster) minus MAE(comparator), on the same accepted targets.
     Negative differences favor Forecaster. Intervals use synchronized 14-day blocks and Bonferroni correction for seven comparisons.
     Coverage is accepted forecasts divided by eligible observed targets. Eligibility requires the current and preceding 168 hourly observations. Forward-fill is confined to model inputs; verification targets remain original observations. Available-case scores with different coverage are not a ranking of overall forecasting quality.</p>
