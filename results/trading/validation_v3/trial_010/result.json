@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "length": 4,
+    "max_gap": 3,
+    "r": 11,
+    "mu": 0.2,
+    "epsilon": 0.022774843764061786,
+    "cluster_eps": 0.012012328417524712,
+    "min_samples": 3,
+    "perturbation_variance": 1.4119062440630156e-06,
+    "paths": 16,
+    "training_hours": 10000
+  },
+  "metrics": {
+    "total_return": 0.11822912000559671,
+    "cagr": 0.11831471092269674,
+    "max_drawdown": 0.3359815710734463,
+    "daily_volatility": 0.4166182384507941,
+    "es95": 0.054206916464900966,
+    "worst_day": -0.1058618293643021,
+    "downside_deviation": 0.28075415911360885,
+    "mean_exposure": 0.3146740079678218,
+    "time_in_market": 0.3312785388127854,
+    "turnover_initial_capital": 117.9271435266919,
+    "entries": 60,
+    "fees": 17689.071529003784,
+    "final_equity": 111822.91200055968
+  },
+  "constraints": [
+    -2.1467400796782177,
+    -4.0,
+    1.0
+  ],
+  "quarterly_es": [
+    0.0,
+    0.07418865712129408,
+    0.04929074255957864,
+    0.042304612939773834
+  ],
+  "score": 0.05479733668726855
+}

@@ -1,0 +1,83 @@
+{
+  "conclusion": "У Partial multistep prediction ниже одновременно просадка, волатильность и ES95, чем у 1 из 7 обычных стратегий в этом тесте.",
+  "primary_inference": "Парный блочный интервал основной разности ES95 целиком выше нуля: Partial multistep prediction имеет больший хвостовой риск, чем заданный причинный контроль.",
+  "validation_eligible": true,
+  "primary_bootstrap": {
+    "comparator": "causal_exposure_control",
+    "primary": true,
+    "difference": 0.014696120056902798,
+    "lower": 0.007932166194608277,
+    "upper": 0.02050292225427702,
+    "block_days": 14,
+    "replicates": 2000,
+    "seed": 20261117
+  },
+  "tuned_metrics": {
+    "total_return": -0.4775841385518532,
+    "cagr": -0.14983330308486997,
+    "max_drawdown": 0.5138577894714815,
+    "daily_volatility": 0.30265050457151477,
+    "es95": 0.04247150916221819,
+    "worst_day": -0.12619220046942237,
+    "downside_deviation": 0.2190033614394849,
+    "mean_exposure": 0.39697899064254616,
+    "time_in_market": 0.4182067077344285,
+    "turnover_initial_capital": 159.26195476424775,
+    "entries": 115.0,
+    "fees": 23889.293214637164,
+    "final_equity": 52241.586144814675
+  },
+  "causal_control_metrics": {
+    "total_return": 0.681027659405745,
+    "cagr": 0.13865908300001561,
+    "max_drawdown": 0.40905482820827044,
+    "daily_volatility": 0.23209633798801485,
+    "es95": 0.02777538910531539,
+    "worst_day": -0.10239637968755344,
+    "downside_deviation": 0.1557714958638887,
+    "mean_exposure": 0.39512051142595,
+    "time_in_market": 0.95134610997034,
+    "turnover_initial_capital": 12.292685734270087,
+    "entries": 705.0,
+    "fees": 1843.902860140513,
+    "final_equity": 168102.7659405745
+  },
+  "completed": {
+    "strategies": 14,
+    "test_start": "2022-01-01",
+    "test_end_exclusive": "2026-01-01",
+    "forecast_origins": 1461,
+    "seeds": [
+      42,
+      7,
+      123
+    ],
+    "freeze": {
+      "selection_sha256": "67f55ff869520e21fb3d725eb26212a7d915107aae7d20e27db9b050b130c366",
+      "identity": {
+        "source_hashes": {
+          "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+          "clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+          "prediction.py": "9c6423981b33a3b394a00597b895c7e85a5664ab9b6c4dce787824e5f8357e96",
+          "forecasts.py": "14bf1a0957c4b61b509bc108e252df6366c1503cb5887ba039ef5d712dc3a7cf",
+          "backtest.py": "adf5f4fc3217ffe5266023eae7095bb5c8a12898f8aa71f05e96dd276e4f0d3e",
+          "baselines.py": "e4290d6771e0d69d30879df31002c57a5d6fe456d0ed698f3376885f7a71e5fb",
+          "experiment.py": "75c673510e54ad3bdf83c16a7d28970f497d25145e929aefe2740f0f8e60c36c"
+        },
+        "protocol_sha256": "ad3dad77ca34512740d2a5dabc6aa403342949c43725463cf6af6d70a6118743",
+        "data_sha256": "4001412262219346fd560733f5847611719dc1bd05b388d6d39a9bb2990e9468",
+        "manifest_sha256": "ed8146f23dcef51004280c02f55e5cf632a022b00fa5b03fbf4421b5a07dd191",
+        "packages": {
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "scipy": "1.18.1",
+          "numba": "0.68.1",
+          "scikit-learn": "1.9.1",
+          "backtesting": "0.6.6",
+          "optuna": "4.9.0"
+        }
+      },
+      "evaluation_code_sha256": "668d2b5ab9e79e9bd36babf2eeb679b4384a18c8ca09d058530ff5dd845bcef5"
+    }
+  }
+}

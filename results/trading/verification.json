@@ -1,0 +1,33 @@
+{
+  "tests": "85 passed; 7 Backtesting.py/Pandas deprecation warnings",
+  "lint": "ruff check adis tests: passed",
+  "btc_artifact_audit": {
+    "forecast_rows": 8766,
+    "unique_test_models": 32,
+    "strategies": 14,
+    "closed_trade_records": 689041,
+    "frozen_selection_verified": true,
+    "data_and_code_hashes_verified": true,
+    "training_boundaries_verified": true,
+    "no_synthetic_fills": true,
+    "next_real_open_order_fills_verified": true,
+    "independent_cash_pnl_verified": true,
+    "risk_metrics_independently_recomputed": true,
+    "yearly_returns_compound_to_total": true
+  },
+  "transfer_artifact_audit": {
+    "models": 114,
+    "forecast_rows": 10115,
+    "backtests": 90,
+    "closed_trade_records": 2466887,
+    "training_hashes_and_boundaries_verified": true,
+    "targets_and_lagged_control_verified": true,
+    "saved_fills_fees_pnl_and_risk_verified": true,
+    "retirement_and_fixed_panel_verified": true
+  },
+  "btc_revision_csv_parity": 80,
+  "visual_review": "Both scientific comparison figures inspected; local report links verified. Native Backtesting.py Bokeh HTML generated with inline resources. No installed browser available for a browser-rendering test.",
+  "independent_review": "GPT Astra, read-only: protocol, implementation causality, statistical procedure, and final conclusions reviewed.",
+  "audit_source_sha256": "ad6675aa4db6086fb1bb1a32df22f489fcb3736773d6b713775726214dd68986",
+  "scope": "One cryptocurrency asset class; BTC research plus fixed historical-universe transfer. Negative and inconclusive risk findings preserved. No test-driven market/parameter changes."
+}

@@ -1,0 +1,1369 @@
+<!doctype html><html lang="ru"><meta charset="utf-8">
+<title>Partial multistep prediction: перенос между криптоактивами</title>
+<style>body{max-width:1280px;margin:40px auto;padding:0 24px;font:16px/1.6 system-ui;color:#203040;background:#fafcfe}h1,h2{line-height:1.2}table{border-collapse:collapse;font-size:13px;width:100%}td,th{padding:8px;border-bottom:1px solid #dce3ea;text-align:right}td:first-child,th:first-child{text-align:left}.scroll{overflow:auto}.panel{padding:24px;background:white;border:1px solid #dce3ea;border-radius:10px}img{width:100%}pre{padding:20px;background:#edf2f7;overflow:auto}a{color:#145fa1}</style>
+<h1>Partial multistep prediction: перенос между криптоактивами</h1>
+<p>Gromov–Baranov, возмущённые траектории с усреднением и rgdbscan. Торговая надстройка на Backtesting.py.</p>
+<div class="panel"><strong>Основной блочный интервал разности ES95 включает ноль. Преимущество метода по хвостовому риску не подтверждено; это не доказательство эквивалентности.</strong><p>Январь–октябрь 2026: средняя разность ES95
++0.584 п.п.; 95% интервал [-0.234; +1.198] п.п.
+Исторически выбрано пять пар; активных в этом периоде — 4. EOS — закрытый слот с деньгами.</p></div>
+<p><a href="../test/report.html">Исходное исследование BTC и интерактивный бэк-тест</a> ·
+<a href="metrics.csv">Все метрики CSV</a> · <a href="primary_comparison.csv">Основное сравнение CSV</a> ·
+<a href="../../../research/trading/transfer_protocol.json">Протокол</a> · <a href="frozen.json">Хеши входов и кода</a> ·
+<a href="audit.json">Проверка исполнения и бухгалтерии</a></p>
+<h2>Как исключён выбор удобного рынка</h2>
+<p>Состав определён до расчёта стратегий: пять не-BTC пар USDT с наибольшим оборотом в котируемой валюте за 2019 год.
+Требовались торги с начала 2019 года, все 12 месячных архивов и не менее 99% реальных часов. Stablecoins,
+фиатные и leveraged-токены исключались по заранее заданному правилу. Список восстановлен по историческим
+архивам Binance; сохранённость абсолютно всех прежних тикеров доказать нельзя.
+<a href="universe.json">Все кандидаты, исключения, обороты и контрольные суммы</a>.</p>
+<p>Параметры перенесены из BTC trial 26 без подбора на новых активах. Для каждого актива мотивы переобучаются
+поквартально только на предыдущих 10 000 часах. 2021 год нужен для истории сигналов контрольной стратегии,
+а не для нового выбора параметров. Цена нормируется по train, горизонт — 24 часа. Стратегия long/cash,
+без плеча, вход на 95% капитала при принятом прогнозе роста более 0,3%; издержки — 15 bps с каждой стороны.
+Комиссионная модель одинакова, а фактическая ликвидность и проскальзывание разных активов могут различаться.</p>
+<p>Результаты BTC за 2022–2025 уже были известны при постановке расширения. Поэтому перенос на тот же период
+показан как дополнительная историческая проверка. Основная проверка — заранее закрытый от исследования
+период январь–октябрь 2026; это исторический holdout, а не сбор будущих данных. Оба периода начинают с
+отдельных 100 000 USDT. Ни один результат не меняет рынки, параметры, пороги или даты.</p>
+<h2>Основное сравнение</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>period</th>
+      <th>symbol</th>
+      <th>retired_slot</th>
+      <th>inactive_pair</th>
+      <th>method_es95</th>
+      <th>control_es95</th>
+      <th>es_difference</th>
+      <th>method_return</th>
+      <th>control_return</th>
+      <th>method_exposure</th>
+      <th>control_exposure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>historical</td>
+      <td>ETHUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>6.41%</td>
+      <td>3.55%</td>
+      <td>+2.860 п.п.</td>
+      <td>-78.49%</td>
+      <td>20.39%</td>
+      <td>35.48%</td>
+      <td>33.85%</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>BNBUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4.56%</td>
+      <td>3.13%</td>
+      <td>+1.425 п.п.</td>
+      <td>31.74%</td>
+      <td>95.64%</td>
+      <td>39.56%</td>
+      <td>40.16%</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>XRPUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>5.77%</td>
+      <td>4.04%</td>
+      <td>+1.736 п.п.</td>
+      <td>-37.39%</td>
+      <td>54.00%</td>
+      <td>39.30%</td>
+      <td>38.86%</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>EOSUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>7.41%</td>
+      <td>5.63%</td>
+      <td>+1.782 п.п.</td>
+      <td>-86.04%</td>
+      <td>-9.80%</td>
+      <td>41.48%</td>
+      <td>41.98%</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>LTCUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>6.97%</td>
+      <td>4.97%</td>
+      <td>+1.997 п.п.</td>
+      <td>-60.82%</td>
+      <td>-20.04%</td>
+      <td>42.99%</td>
+      <td>42.70%</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>ETHUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>4.77%</td>
+      <td>4.01%</td>
+      <td>+0.756 п.п.</td>
+      <td>9.63%</td>
+      <td>-9.49%</td>
+      <td>41.56%</td>
+      <td>46.41%</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>BNBUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.31%</td>
+      <td>2.45%</td>
+      <td>+0.859 п.п.</td>
+      <td>3.76%</td>
+      <td>9.13%</td>
+      <td>56.15%</td>
+      <td>55.81%</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>XRPUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.83%</td>
+      <td>3.93%</td>
+      <td>-0.098 п.п.</td>
+      <td>59.59%</td>
+      <td>-19.81%</td>
+      <td>59.87%</td>
+      <td>60.80%</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>EOSUSDT</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>+0.000 п.п.</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>LTCUSDT</td>
+      <td>False</td>
+      <td>False</td>
+      <td>3.88%</td>
+      <td>2.48%</td>
+      <td>+1.405 п.п.</td>
+      <td>-23.45%</td>
+      <td>-17.89%</td>
+      <td>26.20%</td>
+      <td>27.69%</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>ES95 — средняя потеря в худших ceil(5% × n) днях, ограниченная снизу нулём. Контроль ежедневно поддерживает долю актива по среднему
+предыдущих 90 targets метода. Показываются фактические доли: они могут различаться. Средняя разность по
+пяти слотам — характеристика качества переноса, а не риск инвестиционного портфеля. Нулевая активность
+не считается успехом распознавания риска.</p><img src="comparison.png" alt="Разности хвостового риска метода и контроля на всех выбранных рынках">
+<p>На XRP в 2026 доходность метода +59.59%, контроля -19.81%.
+Однако разность ES95 -0.098 п.п. имеет скорректированный интервал
+[-2.373; +1.363] п.п.
+Эта положительная строка по доходности не меняет основной вывод панели. Выбор XRP на основании этого результата
+был бы выбором рынка по test и потребовал бы новой проверки на будущих данных.</p>
+<p>На рисунке интервалы отдельных активов — 99% (поправка Bonferroni на пять сравнений), общего среднего — 95%.
+Это приближённые bootstrap-интервалы. 10 000 повторов используют одинаковые календарные блоки для всех
+активов и обеих стратегий, сохраняя их корреляцию. Основной блок — 14 дней, 7 и 28 дней проверяют чувствительность.
+Криптоактивы не считаются независимыми наблюдениями; лучший рынок не выбирается для заявления о превосходстве.
+В историческом периоде 1461 календарный день, в holdout — 304.</p>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>period</th>
+      <th>block_days</th>
+      <th>mean_difference</th>
+      <th>lower</th>
+      <th>upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>historical</td>
+      <td>7</td>
+      <td>+1.960 п.п.</td>
+      <td>+1.515 п.п.</td>
+      <td>+2.398 п.п.</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>14</td>
+      <td>+1.960 п.п.</td>
+      <td>+1.485 п.п.</td>
+      <td>+2.421 п.п.</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>28</td>
+      <td>+1.960 п.п.</td>
+      <td>+1.451 п.п.</td>
+      <td>+2.460 п.п.</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>7</td>
+      <td>+0.584 п.п.</td>
+      <td>-0.267 п.п.</td>
+      <td>+1.188 п.п.</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>14</td>
+      <td>+0.584 п.п.</td>
+      <td>-0.234 п.п.</td>
+      <td>+1.198 п.п.</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>28</td>
+      <td>+0.584 п.п.</td>
+      <td>-0.135 п.п.</td>
+      <td>+1.186 п.п.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>EOS и прекращение торгов</h2><p>EOS вошёл в список по обороту 2019 года и остался в нём.
+<a href="https://www.binance.com/en/support/announcement/detail/1e89a9ca957c4b0ca7502e60b993e201">Уведомление биржи</a>
+датировано 14 мая 2025; поскольку часовой пояс публикации не подписан, правило доступности добавляет 48 часов
+после начала этой даты UTC. Все стратегии переводят target в ноль после закрытия бара 15 мая 23:00,
+исполнение — 16 мая 01:00, до прекращения торгов 26 мая 03:00 UTC. После этого новые мотивы не строятся,
+доходность денег равна нулю. EOS не заменён на следующий по обороту актив и не сшит с Vaulta/A.
+Его вклад в 2026 равен нулю, знаменатель среднего остаётся пять; это не пятый активный рынок с успешным прогнозом.</p>
+<h2>Все стратегии: 2022–2025</h2><div class="scroll"><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>strategy</th>
+      <th>total_return</th>
+      <th>max_drawdown</th>
+      <th>daily_volatility</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+      <th>entries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-20.04%</td>
+      <td>72.93%</td>
+      <td>63.86%</td>
+      <td>7.63%</td>
+      <td>91.66%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-32.24%</td>
+      <td>62.39%</td>
+      <td>42.20%</td>
+      <td>5.63%</td>
+      <td>47.93%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Momentum 90</td>
+      <td>36.86%</td>
+      <td>45.35%</td>
+      <td>43.11%</td>
+      <td>5.49%</td>
+      <td>48.69%</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>-21.69%</td>
+      <td>48.19%</td>
+      <td>38.24%</td>
+      <td>5.11%</td>
+      <td>32.82%</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>RSI 14</td>
+      <td>-47.71%</td>
+      <td>62.42%</td>
+      <td>34.22%</td>
+      <td>4.88%</td>
+      <td>17.44%</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>31.00%</td>
+      <td>30.30%</td>
+      <td>22.27%</td>
+      <td>2.59%</td>
+      <td>33.72%</td>
+      <td>812</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-78.49%</td>
+      <td>86.39%</td>
+      <td>43.30%</td>
+      <td>6.41%</td>
+      <td>35.48%</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>20.39%</td>
+      <td>42.72%</td>
+      <td>28.59%</td>
+      <td>3.55%</td>
+      <td>33.85%</td>
+      <td>749</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>60.81%</td>
+      <td>61.43%</td>
+      <td>54.09%</td>
+      <td>6.65%</td>
+      <td>93.31%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>SMA 50/200</td>
+      <td>33.53%</td>
+      <td>57.03%</td>
+      <td>43.88%</td>
+      <td>5.55%</td>
+      <td>53.15%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Momentum 90</td>
+      <td>44.42%</td>
+      <td>45.86%</td>
+      <td>39.15%</td>
+      <td>4.89%</td>
+      <td>53.22%</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>69.78%</td>
+      <td>40.39%</td>
+      <td>37.10%</td>
+      <td>4.66%</td>
+      <td>41.43%</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>RSI 14</td>
+      <td>48.84%</td>
+      <td>42.14%</td>
+      <td>24.60%</td>
+      <td>2.91%</td>
+      <td>12.45%</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>73.45%</td>
+      <td>33.85%</td>
+      <td>22.55%</td>
+      <td>2.67%</td>
+      <td>41.71%</td>
+      <td>790</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>31.74%</td>
+      <td>48.94%</td>
+      <td>33.64%</td>
+      <td>4.56%</td>
+      <td>39.56%</td>
+      <td>141</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>95.64%</td>
+      <td>33.36%</td>
+      <td>26.05%</td>
+      <td>3.13%</td>
+      <td>40.16%</td>
+      <td>711</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>111.10%</td>
+      <td>64.51%</td>
+      <td>81.52%</td>
+      <td>8.11%</td>
+      <td>93.49%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>SMA 50/200</td>
+      <td>28.70%</td>
+      <td>67.22%</td>
+      <td>66.56%</td>
+      <td>6.94%</td>
+      <td>48.92%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Momentum 90</td>
+      <td>-56.33%</td>
+      <td>83.71%</td>
+      <td>57.14%</td>
+      <td>7.05%</td>
+      <td>49.77%</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>90.80%</td>
+      <td>51.20%</td>
+      <td>51.46%</td>
+      <td>6.27%</td>
+      <td>31.79%</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>RSI 14</td>
+      <td>5.39%</td>
+      <td>52.21%</td>
+      <td>25.50%</td>
+      <td>3.24%</td>
+      <td>11.95%</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>103.89%</td>
+      <td>25.66%</td>
+      <td>29.60%</td>
+      <td>2.58%</td>
+      <td>31.52%</td>
+      <td>838</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-37.39%</td>
+      <td>73.84%</td>
+      <td>47.75%</td>
+      <td>5.77%</td>
+      <td>39.30%</td>
+      <td>146</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>54.00%</td>
+      <td>51.87%</td>
+      <td>34.70%</td>
+      <td>4.04%</td>
+      <td>38.86%</td>
+      <td>754</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-71.30%</td>
+      <td>83.46%</td>
+      <td>67.49%</td>
+      <td>8.89%</td>
+      <td>70.34%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-64.19%</td>
+      <td>69.62%</td>
+      <td>40.64%</td>
+      <td>5.75%</td>
+      <td>22.23%</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Momentum 90</td>
+      <td>-37.45%</td>
+      <td>63.64%</td>
+      <td>53.07%</td>
+      <td>7.07%</td>
+      <td>29.46%</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>-27.69%</td>
+      <td>72.61%</td>
+      <td>52.16%</td>
+      <td>6.79%</td>
+      <td>27.83%</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>RSI 14</td>
+      <td>-21.46%</td>
+      <td>55.23%</td>
+      <td>29.59%</td>
+      <td>4.17%</td>
+      <td>17.04%</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>-6.26%</td>
+      <td>38.11%</td>
+      <td>21.05%</td>
+      <td>2.65%</td>
+      <td>23.94%</td>
+      <td>691</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-86.04%</td>
+      <td>88.28%</td>
+      <td>49.51%</td>
+      <td>7.41%</td>
+      <td>41.48%</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-9.80%</td>
+      <td>58.70%</td>
+      <td>42.79%</td>
+      <td>5.63%</td>
+      <td>41.98%</td>
+      <td>633</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-46.56%</td>
+      <td>69.85%</td>
+      <td>70.63%</td>
+      <td>8.66%</td>
+      <td>90.95%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-59.65%</td>
+      <td>71.48%</td>
+      <td>51.31%</td>
+      <td>7.33%</td>
+      <td>41.65%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Momentum 90</td>
+      <td>-14.22%</td>
+      <td>60.53%</td>
+      <td>51.26%</td>
+      <td>6.93%</td>
+      <td>42.14%</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>-77.35%</td>
+      <td>81.13%</td>
+      <td>47.36%</td>
+      <td>6.78%</td>
+      <td>33.75%</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>RSI 14</td>
+      <td>50.52%</td>
+      <td>49.45%</td>
+      <td>28.20%</td>
+      <td>3.29%</td>
+      <td>10.80%</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>16.29%</td>
+      <td>25.91%</td>
+      <td>22.10%</td>
+      <td>2.70%</td>
+      <td>30.24%</td>
+      <td>808</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-60.82%</td>
+      <td>65.03%</td>
+      <td>49.99%</td>
+      <td>6.97%</td>
+      <td>42.99%</td>
+      <td>172</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-20.04%</td>
+      <td>60.73%</td>
+      <td>38.98%</td>
+      <td>4.97%</td>
+      <td>42.70%</td>
+      <td>721</td>
+    </tr>
+  </tbody>
+</table></div><h2>Все стратегии: январь–октябрь 2026</h2><div class="scroll"><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>strategy</th>
+      <th>total_return</th>
+      <th>max_drawdown</th>
+      <th>daily_volatility</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+      <th>entries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-23.96%</td>
+      <td>52.54%</td>
+      <td>56.10%</td>
+      <td>6.33%</td>
+      <td>92.86%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-8.60%</td>
+      <td>20.21%</td>
+      <td>17.18%</td>
+      <td>2.53%</td>
+      <td>19.05%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Momentum 90</td>
+      <td>-19.76%</td>
+      <td>23.15%</td>
+      <td>23.38%</td>
+      <td>3.39%</td>
+      <td>31.62%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>-26.29%</td>
+      <td>30.19%</td>
+      <td>28.32%</td>
+      <td>3.77%</td>
+      <td>37.83%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>RSI 14</td>
+      <td>-17.85%</td>
+      <td>28.20%</td>
+      <td>35.87%</td>
+      <td>4.94%</td>
+      <td>19.52%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>-13.04%</td>
+      <td>30.36%</td>
+      <td>24.38%</td>
+      <td>2.79%</td>
+      <td>39.04%</td>
+      <td>182</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>9.63%</td>
+      <td>38.48%</td>
+      <td>41.93%</td>
+      <td>4.77%</td>
+      <td>41.56%</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-9.49%</td>
+      <td>33.51%</td>
+      <td>33.40%</td>
+      <td>4.01%</td>
+      <td>46.41%</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-17.94%</td>
+      <td>41.28%</td>
+      <td>41.36%</td>
+      <td>5.16%</td>
+      <td>93.23%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-2.69%</td>
+      <td>12.87%</td>
+      <td>16.61%</td>
+      <td>2.34%</td>
+      <td>18.13%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Momentum 90</td>
+      <td>4.49%</td>
+      <td>12.89%</td>
+      <td>24.19%</td>
+      <td>2.90%</td>
+      <td>29.74%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>11.71%</td>
+      <td>18.39%</td>
+      <td>27.12%</td>
+      <td>2.97%</td>
+      <td>47.36%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>RSI 14</td>
+      <td>-15.66%</td>
+      <td>24.75%</td>
+      <td>22.24%</td>
+      <td>2.91%</td>
+      <td>9.88%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>2.46%</td>
+      <td>23.05%</td>
+      <td>24.38%</td>
+      <td>2.83%</td>
+      <td>55.30%</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>3.76%</td>
+      <td>16.48%</td>
+      <td>28.33%</td>
+      <td>3.31%</td>
+      <td>56.15%</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>9.13%</td>
+      <td>15.81%</td>
+      <td>22.92%</td>
+      <td>2.45%</td>
+      <td>55.81%</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-31.90%</td>
+      <td>56.27%</td>
+      <td>60.32%</td>
+      <td>5.99%</td>
+      <td>92.79%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-20.23%</td>
+      <td>24.85%</td>
+      <td>14.99%</td>
+      <td>2.51%</td>
+      <td>12.08%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Momentum 90</td>
+      <td>-18.21%</td>
+      <td>26.01%</td>
+      <td>27.63%</td>
+      <td>4.03%</td>
+      <td>24.30%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>-21.56%</td>
+      <td>36.09%</td>
+      <td>35.84%</td>
+      <td>3.99%</td>
+      <td>27.57%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>RSI 14</td>
+      <td>-12.23%</td>
+      <td>28.90%</td>
+      <td>36.95%</td>
+      <td>4.09%</td>
+      <td>17.37%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>-10.76%</td>
+      <td>28.94%</td>
+      <td>23.98%</td>
+      <td>2.44%</td>
+      <td>38.94%</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>59.59%</td>
+      <td>23.72%</td>
+      <td>44.27%</td>
+      <td>3.83%</td>
+      <td>59.87%</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-19.81%</td>
+      <td>40.03%</td>
+      <td>40.60%</td>
+      <td>3.93%</td>
+      <td>60.80%</td>
+      <td>164</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>SMA 50/200</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Momentum 90</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>RSI 14</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Buy &amp; hold</td>
+      <td>-28.66%</td>
+      <td>50.66%</td>
+      <td>49.14%</td>
+      <td>5.51%</td>
+      <td>92.41%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>SMA 50/200</td>
+      <td>-9.78%</td>
+      <td>25.71%</td>
+      <td>23.10%</td>
+      <td>2.79%</td>
+      <td>11.86%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Momentum 90</td>
+      <td>5.60%</td>
+      <td>25.95%</td>
+      <td>29.79%</td>
+      <td>3.36%</td>
+      <td>24.52%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Donchian 20/10</td>
+      <td>11.65%</td>
+      <td>16.99%</td>
+      <td>30.93%</td>
+      <td>2.99%</td>
+      <td>31.07%</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>RSI 14</td>
+      <td>-20.80%</td>
+      <td>31.29%</td>
+      <td>29.25%</td>
+      <td>4.07%</td>
+      <td>22.96%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Vol-target 20%</td>
+      <td>-10.01%</td>
+      <td>28.54%</td>
+      <td>22.71%</td>
+      <td>2.57%</td>
+      <td>44.21%</td>
+      <td>177</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-23.45%</td>
+      <td>34.80%</td>
+      <td>25.61%</td>
+      <td>3.88%</td>
+      <td>26.20%</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-17.89%</td>
+      <td>25.01%</td>
+      <td>19.31%</td>
+      <td>2.48%</td>
+      <td>27.69%</td>
+      <td>153</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Охват прогнозов</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>period</th>
+      <th>retired_slot</th>
+      <th>active_origins</th>
+      <th>accepted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>historical</td>
+      <td>False</td>
+      <td>1461</td>
+      <td>1273</td>
+    </tr>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>holdout</td>
+      <td>False</td>
+      <td>304</td>
+      <td>300</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>historical</td>
+      <td>False</td>
+      <td>1461</td>
+      <td>1309</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>holdout</td>
+      <td>False</td>
+      <td>304</td>
+      <td>301</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>historical</td>
+      <td>False</td>
+      <td>1461</td>
+      <td>1326</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>holdout</td>
+      <td>False</td>
+      <td>304</td>
+      <td>278</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>historical</td>
+      <td>False</td>
+      <td>1230</td>
+      <td>1118</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>holdout</td>
+      <td>True</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>historical</td>
+      <td>False</td>
+      <td>1461</td>
+      <td>1359</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>holdout</td>
+      <td>False</td>
+      <td>304</td>
+      <td>216</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Рейтинг до теста</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>symbol</th>
+      <th>observed_hours</th>
+      <th>quote_volume_2019</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ETHUSDT</td>
+      <td>8731</td>
+      <td>26,669,721,206</td>
+    </tr>
+    <tr>
+      <td>BNBUSDT</td>
+      <td>8731</td>
+      <td>17,480,959,096</td>
+    </tr>
+    <tr>
+      <td>XRPUSDT</td>
+      <td>8731</td>
+      <td>11,393,685,554</td>
+    </tr>
+    <tr>
+      <td>EOSUSDT</td>
+      <td>8731</td>
+      <td>10,809,334,544</td>
+    </tr>
+    <tr>
+      <td>LTCUSDT</td>
+      <td>8731</td>
+      <td>9,378,814,060</td>
+    </tr>
+    <tr>
+      <td>TRXUSDT</td>
+      <td>8731</td>
+      <td>6,320,399,392</td>
+    </tr>
+    <tr>
+      <td>ADAUSDT</td>
+      <td>8731</td>
+      <td>3,161,750,791</td>
+    </tr>
+    <tr>
+      <td>NEOUSDT</td>
+      <td>8731</td>
+      <td>2,224,443,791</td>
+    </tr>
+    <tr>
+      <td>XLMUSDT</td>
+      <td>8731</td>
+      <td>1,670,079,593</td>
+    </tr>
+    <tr>
+      <td>ETCUSDT</td>
+      <td>8730</td>
+      <td>1,615,000,374</td>
+    </tr>
+    <tr>
+      <td>ONTUSDT</td>
+      <td>8731</td>
+      <td>1,566,515,294</td>
+    </tr>
+    <tr>
+      <td>VETUSDT</td>
+      <td>8731</td>
+      <td>1,331,165,791</td>
+    </tr>
+    <tr>
+      <td>ICXUSDT</td>
+      <td>8731</td>
+      <td>719,632,801</td>
+    </tr>
+    <tr>
+      <td>QTUMUSDT</td>
+      <td>8730</td>
+      <td>679,983,412</td>
+    </tr>
+    <tr>
+      <td>IOTAUSDT</td>
+      <td>8731</td>
+      <td>625,907,726</td>
+    </tr>
+    <tr>
+      <td>NULSUSDT</td>
+      <td>8730</td>
+      <td>152,732,376</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Воспроизведение</h2><p>Готовые universe и selection уже сохранены. Восстановление данных и расчётов:</p>
+<pre>uv sync --locked --extra trading
+uv run --extra trading python -m adis.trading.transfer_data
+uv run --extra trading python -m adis.trading.transfer
+uv run --extra trading python -m adis.trading.audit --transfer
+uv run --extra trading python -m adis.trading.transfer_report</pre>
+<p>Проверяется исполнение только на реальных Open, комиссии, PnL и конечный капитал; дневные доходности,
+ES и просадки пересчитаны независимо. Даты обучения и код зафиксированы хешами. Сохранены результаты всех
+заранее заданных рынков и стратегий, включая отрицательные. Записи частичных закрытий позиций в журнале
+не считаются независимыми статистическими наблюдениями. Новая оптимизация после просмотра этого отчёта
+потребует другого внешнего теста.</p>
+</html>

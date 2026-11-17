@@ -167,7 +167,11 @@ def build_report():
     pivot = subset.pivot(index="year", columns="strategy", values="es95")
     for i, name in enumerate(pivot.columns):
         axes[1, 1].bar(
-            np.arange(len(pivot)) + (i - 1) * 0.25, pivot[name] * 100, width=0.25, label=LABELS[name]
+            np.arange(len(pivot)) + (i - 1) * 0.25,
+            pivot[name] * 100,
+            width=0.25,
+            label=LABELS[name],
+            color={"partial_prediction_tuned": "C0", "causal_exposure_control": "C5", "buy_hold": "C1"}[name],
         )
     axes[1, 1].set_xticks(np.arange(len(pivot)), pivot.index)
     axes[1, 1].set(title="ES95 по календарным годам", ylabel="%")

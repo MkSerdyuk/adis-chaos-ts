@@ -1,0 +1,15 @@
+{
+  "total_return": 0.7947081951015833,
+  "cagr": 0.15743993176765603,
+  "max_drawdown": 0.6402656371403406,
+  "daily_volatility": 0.4819444882058029,
+  "es95": 0.057733784653593516,
+  "worst_day": -0.1405238533401797,
+  "downside_deviation": 0.328069505736446,
+  "mean_exposure": 0.9402327281151235,
+  "time_in_market": 0.9992584987451517,
+  "turnover_initial_capital": 2.695906319936592,
+  "entries": 1,
+  "fees": 404.38594799048883,
+  "final_equity": 179470.81951015833
+}

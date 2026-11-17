@@ -27,6 +27,11 @@ def build_report():
         conclusion = "Основной блочный интервал разности ES95 включает ноль. Преимущество метода по хвостовому риску не подтверждено; это не доказательство эквивалентности."
     active = int((~coverage.loc[coverage.period == "holdout", "retired_slot"]).sum())
     figures, axes = plt.subplots(1, 2, figsize=(14, 5), layout="constrained")
+    figures.suptitle("Partial multistep prediction: хвостовой риск относительно контроля")
+    figures.supxlabel(
+        "Интервалы активов: 99% (Bonferroni, 5 сравнений); среднего: 95%. Отрицательная разность благоприятна для метода.",
+        fontsize=9,
+    )
     differences = []
     for axis, period, title in zip(
         axes,
@@ -38,6 +43,8 @@ def build_report():
         estimates = row["asset_differences"] + [row["mean_difference"]]
         lower, upper = row["asset_lower"] + [row["lower"]], row["asset_upper"] + [row["upper"]]
         labels = [symbol.removesuffix("USDT") for symbol in row["symbols"]] + ["Среднее пяти слотов"]
+        if period == "holdout":
+            labels = ["EOS (деньги)" if label == "EOS" else label for label in labels]
         for i, (label, value, lo, hi) in enumerate(zip(labels, estimates, lower, upper, strict=True)):
             axis.plot([lo * 100, hi * 100], [i, i], color="C0" if i < 5 else "C3", linewidth=2)
             axis.scatter(value * 100, i, color="C0" if i < 5 else "C3", s=35)
@@ -85,6 +92,8 @@ def build_report():
             )
     comparison = pd.DataFrame(comparisons)
     comparison.to_csv(ROOT / "primary_comparison.csv", index=False)
+    xrp = comparison.loc[(comparison.period == "holdout") & (comparison.symbol == "XRPUSDT")].iloc[0]
+    xrp_index = primary["symbols"].index("XRPUSDT")
     display = comparison.copy()
     for name in [
         "method_es95",
@@ -152,14 +161,20 @@ def build_report():
 период январь–октябрь 2026; это исторический holdout, а не сбор будущих данных. Оба периода начинают с
 отдельных 100 000 USDT. Ни один результат не меняет рынки, параметры, пороги или даты.</p>
 <h2>Основное сравнение</h2><div class="scroll">{display.to_html(index=False, border=0)}</div>
-<p>ES95 — средняя потеря в худших ceil(5% × n) днях. Контроль ежедневно поддерживает долю актива по среднему
+<p>ES95 — средняя потеря в худших ceil(5% × n) днях, ограниченная снизу нулём. Контроль ежедневно поддерживает долю актива по среднему
 предыдущих 90 targets метода. Показываются фактические доли: они могут различаться. Средняя разность по
 пяти слотам — характеристика качества переноса, а не риск инвестиционного портфеля. Нулевая активность
 не считается успехом распознавания риска.</p><img src="comparison.png" alt="Разности хвостового риска метода и контроля на всех выбранных рынках">
+<p>На XRP в 2026 доходность метода {xrp.method_return * 100:+.2f}%, контроля {xrp.control_return * 100:+.2f}%.
+Однако разность ES95 {xrp.es_difference * 100:+.3f} п.п. имеет скорректированный интервал
+[{primary["asset_lower"][xrp_index] * 100:+.3f}; {primary["asset_upper"][xrp_index] * 100:+.3f}] п.п.
+Эта положительная строка по доходности не меняет основной вывод панели. Выбор XRP на основании этого результата
+был бы выбором рынка по test и потребовал бы новой проверки на будущих данных.</p>
 <p>На рисунке интервалы отдельных активов — 99% (поправка Bonferroni на пять сравнений), общего среднего — 95%.
 Это приближённые bootstrap-интервалы. 10 000 повторов используют одинаковые календарные блоки для всех
 активов и обеих стратегий, сохраняя их корреляцию. Основной блок — 14 дней, 7 и 28 дней проверяют чувствительность.
-Криптоактивы не считаются независимыми наблюдениями; лучший рынок не выбирается для заявления о превосходстве.</p>
+Криптоактивы не считаются независимыми наблюдениями; лучший рынок не выбирается для заявления о превосходстве.
+В историческом периоде 1461 календарный день, в holdout — 304.</p>
 {aggregate.to_html(index=False, border=0)}
 <h2>EOS и прекращение торгов</h2><p>EOS вошёл в список по обороту 2019 года и остался в нём.
 <a href="https://www.binance.com/en/support/announcement/detail/1e89a9ca957c4b0ca7502e60b993e201">Уведомление биржи</a>
@@ -178,8 +193,10 @@ uv run --extra trading python -m adis.trading.transfer
 uv run --extra trading python -m adis.trading.audit --transfer
 uv run --extra trading python -m adis.trading.transfer_report</pre>
 <p>Проверяется исполнение только на реальных Open, комиссии, PnL и конечный капитал; дневные доходности,
-ES и просадки пересчитаны независимо. Даты обучения и код зафиксированы хешами. Полный перебор сохранён,
-включая отрицательные результаты. Новая оптимизация после просмотра этого отчёта потребует другого внешнего теста.</p>
+ES и просадки пересчитаны независимо. Даты обучения и код зафиксированы хешами. Сохранены результаты всех
+заранее заданных рынков и стратегий, включая отрицательные. Записи частичных закрытий позиций в журнале
+не считаются независимыми статистическими наблюдениями. Новая оптимизация после просмотра этого отчёта
+потребует другого внешнего теста.</p>
 </html>"""
     (ROOT / "report.html").write_text(report)
     summary = dict(

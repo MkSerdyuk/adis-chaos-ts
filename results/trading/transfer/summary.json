@@ -1,0 +1,177 @@
+{
+  "conclusion": "Основной блочный интервал разности ES95 включает ноль. Преимущество метода по хвостовому риску не подтверждено; это не доказательство эквивалентности.",
+  "primary": {
+    "period": "holdout",
+    "primary": true,
+    "symbols": [
+      "ETHUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "EOSUSDT",
+      "LTCUSDT"
+    ],
+    "mean_difference": 0.005844071122093783,
+    "lower": -0.0023365537851942203,
+    "upper": 0.011975821883577199,
+    "asset_differences": [
+      0.0075600396756629745,
+      0.008585873194095268,
+      -0.0009777129383818015,
+      0.0,
+      0.014052155679092473
+    ],
+    "asset_lower": [
+      -0.01111104621818225,
+      -0.0013086315636225778,
+      -0.023728808591441112,
+      0.0,
+      -0.009836925221537724
+    ],
+    "asset_upper": [
+      0.027029220595009534,
+      0.020151347282368344,
+      0.013632743472905029,
+      0.0,
+      0.029797373800424715
+    ],
+    "asset_interval_confidence": 0.99,
+    "block_days": 14,
+    "repetitions": 10000,
+    "seed": 20261117
+  },
+  "selected_assets": 5,
+  "active_holdout_assets": 4,
+  "comparisons": [
+    {
+      "period": "historical",
+      "symbol": "ETHUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.06411327541329667,
+      "control_es95": 0.035514951627714876,
+      "es_difference": 0.028598323785581796,
+      "method_return": -0.7849433068439191,
+      "control_return": 0.20392012426977346,
+      "method_exposure": 0.3548335200540794,
+      "control_exposure": 0.33848309116065467
+    },
+    {
+      "period": "historical",
+      "symbol": "BNBUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.045581654997347114,
+      "control_es95": 0.03132891454645617,
+      "es_difference": 0.014252740450890942,
+      "method_return": 0.3174352560792586,
+      "control_return": 0.9563766740789501,
+      "method_exposure": 0.39561547103019,
+      "control_exposure": 0.4016376047101467
+    },
+    {
+      "period": "historical",
+      "symbol": "XRPUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.0577245735511715,
+      "control_es95": 0.04036859602291469,
+      "es_difference": 0.017355977528256808,
+      "method_return": -0.37385614380816934,
+      "control_return": 0.539959286033179,
+      "method_exposure": 0.39295929731344365,
+      "control_exposure": 0.3885707328891532
+    },
+    {
+      "period": "historical",
+      "symbol": "EOSUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.07409060735321159,
+      "control_es95": 0.05626810414396386,
+      "es_difference": 0.017822503209247727,
+      "method_return": -0.860370132004166,
+      "control_return": -0.09803676506061743,
+      "method_exposure": 0.41483125261227666,
+      "control_exposure": 0.4198134224585966
+    },
+    {
+      "period": "historical",
+      "symbol": "LTCUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.06966887208109923,
+      "control_es95": 0.049703453260844896,
+      "es_difference": 0.019965418820254335,
+      "method_return": -0.6082019747916425,
+      "control_return": -0.20037012871011295,
+      "method_exposure": 0.42986064164144633,
+      "control_exposure": 0.42697485186886364
+    },
+    {
+      "period": "holdout",
+      "symbol": "ETHUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.04767220359319224,
+      "control_es95": 0.04011216391752927,
+      "es_difference": 0.0075600396756629745,
+      "method_return": 0.09626024308156511,
+      "control_return": -0.09489442075990007,
+      "method_exposure": 0.41555011469273617,
+      "control_exposure": 0.4640870026212766
+    },
+    {
+      "period": "holdout",
+      "symbol": "BNBUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.033109241446266036,
+      "control_es95": 0.024523368252170767,
+      "es_difference": 0.008585873194095268,
+      "method_return": 0.037556256784373465,
+      "control_return": 0.0913063043464204,
+      "method_exposure": 0.5615311231793384,
+      "control_exposure": 0.558070769744739
+    },
+    {
+      "period": "holdout",
+      "symbol": "XRPUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.038341525956335526,
+      "control_es95": 0.03931923889471733,
+      "es_difference": -0.0009777129383818015,
+      "method_return": 0.5959074646103946,
+      "control_return": -0.19814479403166863,
+      "method_exposure": 0.5986657223705497,
+      "control_exposure": 0.6080436630497018
+    },
+    {
+      "period": "holdout",
+      "symbol": "EOSUSDT",
+      "retired_slot": true,
+      "inactive_pair": true,
+      "method_es95": 0.0,
+      "control_es95": 0.0,
+      "es_difference": 0.0,
+      "method_return": 0.0,
+      "control_return": 0.0,
+      "method_exposure": 0.0,
+      "control_exposure": 0.0
+    },
+    {
+      "period": "holdout",
+      "symbol": "LTCUSDT",
+      "retired_slot": false,
+      "inactive_pair": false,
+      "method_es95": 0.03883784947381505,
+      "control_es95": 0.024785693794722577,
+      "es_difference": 0.014052155679092473,
+      "method_return": -0.234474834043358,
+      "control_return": -0.17887012972312744,
+      "method_exposure": 0.26195940152616526,
+      "control_exposure": 0.27689198189481007
+    }
+  ],
+  "backtests": 90
+}

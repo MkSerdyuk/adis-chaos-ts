@@ -1,0 +1,542 @@
+{
+  "ETHUSDT/historical/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/sma_50_200_daily": {
+    "trades": 5,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/momentum_90_daily": {
+    "trades": 25,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/donchian_20_10_daily": {
+    "trades": 23,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/rsi_14_daily": {
+    "trades": 8,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/vol_target_20pct_30daily": {
+    "trades": 221223,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/partial_prediction": {
+    "trades": 145,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/historical/causal_exposure_control": {
+    "trades": 225988,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/sma_50_200_daily": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/momentum_90_daily": {
+    "trades": 5,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/donchian_20_10_daily": {
+    "trades": 6,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/rsi_14_daily": {
+    "trades": 2,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/vol_target_20pct_30daily": {
+    "trades": 11306,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/partial_prediction": {
+    "trades": 38,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "ETHUSDT/holdout/causal_exposure_control": {
+    "trades": 10805,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/sma_50_200_daily": {
+    "trades": 6,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/momentum_90_daily": {
+    "trades": 42,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/donchian_20_10_daily": {
+    "trades": 19,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/rsi_14_daily": {
+    "trades": 10,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/vol_target_20pct_30daily": {
+    "trades": 244396,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/partial_prediction": {
+    "trades": 141,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/historical/causal_exposure_control": {
+    "trades": 255945,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/sma_50_200_daily": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/momentum_90_daily": {
+    "trades": 4,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/donchian_20_10_daily": {
+    "trades": 4,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/rsi_14_daily": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/vol_target_20pct_30daily": {
+    "trades": 11607,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/partial_prediction": {
+    "trades": 21,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "BNBUSDT/holdout/causal_exposure_control": {
+    "trades": 15085,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/sma_50_200_daily": {
+    "trades": 6,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/momentum_90_daily": {
+    "trades": 43,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/donchian_20_10_daily": {
+    "trades": 16,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/rsi_14_daily": {
+    "trades": 8,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/vol_target_20pct_30daily": {
+    "trades": 250080,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/partial_prediction": {
+    "trades": 146,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/historical/causal_exposure_control": {
+    "trades": 269410,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/sma_50_200_daily": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/momentum_90_daily": {
+    "trades": 4,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/donchian_20_10_daily": {
+    "trades": 6,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/rsi_14_daily": {
+    "trades": 2,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/vol_target_20pct_30daily": {
+    "trades": 10785,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/partial_prediction": {
+    "trades": 18,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "XRPUSDT/holdout/causal_exposure_control": {
+    "trades": 12910,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "EOSUSDT/historical/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/sma_50_200_daily": {
+    "trades": 3,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/momentum_90_daily": {
+    "trades": 20,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/donchian_20_10_daily": {
+    "trades": 17,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/rsi_14_daily": {
+    "trades": 9,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/vol_target_20pct_30daily": {
+    "trades": 183252,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/partial_prediction": {
+    "trades": 95,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/historical/causal_exposure_control": {
+    "trades": 206314,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/buy_hold": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/sma_50_200_daily": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/momentum_90_daily": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/donchian_20_10_daily": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/rsi_14_daily": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/vol_target_20pct_30daily": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/partial_prediction": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "EOSUSDT/holdout/causal_exposure_control": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": true
+  },
+  "LTCUSDT/historical/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/sma_50_200_daily": {
+    "trades": 6,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/momentum_90_daily": {
+    "trades": 32,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/donchian_20_10_daily": {
+    "trades": 21,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/rsi_14_daily": {
+    "trades": 9,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/vol_target_20pct_30daily": {
+    "trades": 241033,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/partial_prediction": {
+    "trades": 172,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/historical/causal_exposure_control": {
+    "trades": 272591,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/cash": {
+    "trades": 0,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/buy_hold": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/sma_50_200_daily": {
+    "trades": 1,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/momentum_90_daily": {
+    "trades": 4,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/donchian_20_10_daily": {
+    "trades": 4,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/rsi_14_daily": {
+    "trades": 2,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/vol_target_20pct_30daily": {
+    "trades": 12549,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/partial_prediction": {
+    "trades": 13,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  },
+  "LTCUSDT/holdout/causal_exposure_control": {
+    "trades": 10434,
+    "cash_pnl_verified": true,
+    "observed_open_fills_verified": true,
+    "retirement_verified": false
+  }
+}

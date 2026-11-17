@@ -1,0 +1,1526 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><title>Partial multistep prediction: торговля BTC/USDT и риск</title>
+<style>body{max-width:1280px;margin:40px auto;padding:0 24px;font:16px/1.6 system-ui;color:#203040;background:#fafcfe}
+h1,h2{line-height:1.2}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:8px;border-bottom:1px solid #dce3ea;text-align:right}td:first-child,th:first-child{text-align:left}pre{background:#edf2f7;padding:20px;overflow:auto}img{width:100%}.lead{font-size:20px}.panel{background:white;border:1px solid #dce3ea;border-radius:10px;padding:22px;margin:24px 0}a{color:#145fa1}.scroll{overflow:auto}</style>
+<h1>Partial multistep prediction в торговле BTC/USDT: проверка риска</h1>
+<p>Метод Gromov–Baranov из статьи «Prediction after a Horizon of Predictability: Nonpredictable Points and
+Partial Multistep Prediction for Chaotic Time Series». Используется вариант с возмущёнными траекториями,
+усреднением конечных значений и правилом отказа rgdbscan. Торговые правила добавлены в этом исследовании.</p>
+<p class="lead">Парный блочный интервал основной разности ES95 целиком выше нуля: Partial multistep prediction имеет больший хвостовой риск, чем заданный причинный контроль.</p><p>У Partial multistep prediction ниже одновременно просадка, волатильность и ES95, чем у 1 из 7 обычных стратегий в этом тесте. Выбранная настройка выполнила ограничения активности на validation.</p>
+<div class="panel"><strong>Основной результат:</strong> разность дневного ES95 Partial multistep prediction − причинный контроль:
+1.470 процентного пункта; 95% блочный интервал [0.793; 2.050].
+Средняя фактическая доля BTC: 39.70% у Partial multistep prediction и 39.51% у контроля.
+Это сравнение с причинно сглаженной долей, а не точное равенство риск-бюджетов.</div>
+<p>Чистая доходность Partial multistep prediction за четыре года: -47.76%; у причинного контроля:
+68.10%. При нулевых издержках и той же задержке результат Partial multistep prediction:
+-27.50%. Поэтому весь результат нельзя объяснить одними комиссиями.</p>
+<p><a href="partial_prediction_backtest.html">Открыть интерактивный бэк-тест: капитал, сделки и просадки</a> ·
+<a href="metrics.csv">Все метрики CSV</a> · <a href="../selected.json">Выбранные параметры</a> ·
+<a href="../../../research/trading/protocol.json">Протокол</a></p>
+<h2>Данные и исполнение</h2><p>Официальные часовые свечи Binance BTCUSDT spot, 2019–2025. Архивы проверены SHA256.
+63 отсутствующих или нулевых часа отмечены отдельно. Синтетические свечи используются только для причинного
+заполнения сетки модели; на них сделки не исполняются. Начальный капитал 100 000 USDT, без плеча и шортов,
+доходность денег равна нулю. Решение после закрытия бара 23:00 UTC, исполнение на следующем реальном открытии
+после ещё одного законченного часа: обычно в 01:00 UTC. Издержки 15 bps в каждую сторону:
+10 bps комиссии плюс 5 bps дополнительной пропорциональной платы за проскальзывание.</p>
+<h2>Подбор и проверка</h2><p>Финальный Optuna TPE: 32 оценки, четыре последовательных квартала 2021 года.
+Критерий: средний квартальный ES95 плюс половина его стандартного отклонения. Ограничения: средняя экспозиция
+не ниже 10% и минимум 12 входов за validation-год. Затем параметры заморожены;
+тест 2022–2025 выполняется с квартальным переобучением на последних 10 000 часах. Предыдущие наблюдения теста
+становятся обучающей историей только после наступления их времени. В гиперпараметры test не передаётся.</p>
+<p>Протокол разрабатывался на validation: до финального поиска выполнено ещё 19 завершённых оценок.
+Всего сохранено 51 завершённых оценок и 40 уникальных конфигураций,
+часть повторов использовала кэш. Первый инженерный запуск остановлен для усиления проверки кэшей.
+В следующем запуске было требование 2% экспозиции в каждом квартале; первые 16 вариантов его не выполнили.
+Его сняли до просмотра test, сохранив общие ограничения активности. Длительный отказ от торговли допустим
+для этого метода. Отсутствие входов в Q1 2021 связано с выходом цены за исторический диапазон мотивов,
+а само по себе не доказывает распознавание повышенного риска. Все предыдущие trials сохранены.</p>
+<p>Разрешённый пользователем поиск меняет L/K, r/μ Wishart и параметры прогноза. Все комбинации промежутков
+выбранного L/K сохраняются, Wishart включён. Прогноз всегда на 24 часа. Long на 95% доступного капитала при
+принятом прогнозе роста более 0,3%, иначе cash. Неизменный сигнал не вызывает повторного входа; отдельно
+указанные exposure controls и vol-target ребалансируются ежедневно. Правило торговли — новая надстройка,
+не торговая стратегия из исходной статьи. Её опубликованная конфигурация оставлена отдельным контролем.</p>
+<pre>{
+  &quot;length&quot;: 3,
+  &quot;max_gap&quot;: 3,
+  &quot;r&quot;: 5,
+  &quot;mu&quot;: 0.02,
+  &quot;epsilon&quot;: 0.06502211399080364,
+  &quot;cluster_eps&quot;: 0.008371633741976994,
+  &quot;min_samples&quot;: 3,
+  &quot;perturbation_variance&quot;: 5.8071705698799575e-05,
+  &quot;paths&quot;: 16,
+  &quot;training_hours&quot;: 10000
+}</pre>
+<h2>Общие результаты после издержек</h2><div class="scroll"><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>strategy</th>
+      <th>total_return</th>
+      <th>cagr</th>
+      <th>max_drawdown</th>
+      <th>daily_volatility</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+      <th>entries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>79.47%</td>
+      <td>15.74%</td>
+      <td>64.03%</td>
+      <td>48.19%</td>
+      <td>5.77%</td>
+      <td>94.02%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>66.04%</td>
+      <td>13.51%</td>
+      <td>37.72%</td>
+      <td>35.12%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Momentum 90</td>
+      <td>118.11%</td>
+      <td>21.53%</td>
+      <td>38.44%</td>
+      <td>33.38%</td>
+      <td>4.20%</td>
+      <td>52.57%</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>Donchian 20/10</td>
+      <td>34.13%</td>
+      <td>7.62%</td>
+      <td>37.88%</td>
+      <td>30.24%</td>
+      <td>3.90%</td>
+      <td>43.05%</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>RSI 14</td>
+      <td>54.86%</td>
+      <td>11.55%</td>
+      <td>23.81%</td>
+      <td>22.28%</td>
+      <td>2.58%</td>
+      <td>14.67%</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Vol-target 20%</td>
+      <td>59.58%</td>
+      <td>12.39%</td>
+      <td>31.47%</td>
+      <td>22.30%</td>
+      <td>2.66%</td>
+      <td>45.08%</td>
+      <td>808</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-47.76%</td>
+      <td>-14.98%</td>
+      <td>51.39%</td>
+      <td>30.27%</td>
+      <td>4.25%</td>
+      <td>39.70%</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · параметры статьи</td>
+      <td>-33.01%</td>
+      <td>-9.53%</td>
+      <td>40.86%</td>
+      <td>26.67%</td>
+      <td>3.73%</td>
+      <td>27.49%</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>-50.96%</td>
+      <td>-16.32%</td>
+      <td>51.91%</td>
+      <td>30.74%</td>
+      <td>4.30%</td>
+      <td>40.08%</td>
+      <td>117</td>
+    </tr>
+    <tr>
+      <td>Ближайшие мотивы + avg</td>
+      <td>-68.51%</td>
+      <td>-25.09%</td>
+      <td>68.95%</td>
+      <td>30.25%</td>
+      <td>4.26%</td>
+      <td>29.15%</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>-70.08%</td>
+      <td>-26.04%</td>
+      <td>75.64%</td>
+      <td>28.54%</td>
+      <td>4.33%</td>
+      <td>25.80%</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>68.10%</td>
+      <td>13.87%</td>
+      <td>40.91%</td>
+      <td>23.21%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+      <td>705</td>
+    </tr>
+    <tr>
+      <td>Ретроспективная постоянная доля</td>
+      <td>42.89%</td>
+      <td>9.33%</td>
+      <td>33.82%</td>
+      <td>20.42%</td>
+      <td>2.45%</td>
+      <td>39.67%</td>
+      <td>725</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>daily_volatility — стандартное отклонение дневных доходностей × √365. ES95 — средняя потеря в худших
+ceil(5% × n) днях, ограниченная снизу нулём. max_drawdown использует часовую переоценку по Close; внутрисвечные
+просадки не измерены. Экспозиция фактическая, после изменения стоимости позиций. Доходность публикуется
+вместе с риском: уменьшение риска не означает прибыльности.</p><img src="comparison.png" alt="Капитал, просадки и риск">
+<h2>По годам</h2><div class="scroll"><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>year</th>
+      <th>strategy</th>
+      <th>total_return</th>
+      <th>cagr</th>
+      <th>max_drawdown</th>
+      <th>daily_volatility</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+      <th>entries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2022</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Деньги</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Buy &amp; hold</td>
+      <td>-62.05%</td>
+      <td>-62.08%</td>
+      <td>64.03%</td>
+      <td>58.11%</td>
+      <td>7.96%</td>
+      <td>90.66%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Buy &amp; hold</td>
+      <td>135.10%</td>
+      <td>135.24%</td>
+      <td>19.76%</td>
+      <td>40.28%</td>
+      <td>4.08%</td>
+      <td>91.71%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Buy &amp; hold</td>
+      <td>114.51%</td>
+      <td>114.17%</td>
+      <td>31.24%</td>
+      <td>51.03%</td>
+      <td>5.33%</td>
+      <td>96.17%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Buy &amp; hold</td>
+      <td>-6.22%</td>
+      <td>-6.23%</td>
+      <td>34.08%</td>
+      <td>40.62%</td>
+      <td>4.77%</td>
+      <td>97.55%</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>SMA 50/200</td>
+      <td>-9.28%</td>
+      <td>-9.29%</td>
+      <td>14.14%</td>
+      <td>7.86%</td>
+      <td>0.83%</td>
+      <td>3.37%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>SMA 50/200</td>
+      <td>33.64%</td>
+      <td>33.66%</td>
+      <td>20.72%</td>
+      <td>37.48%</td>
+      <td>4.21%</td>
+      <td>73.09%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>SMA 50/200</td>
+      <td>87.85%</td>
+      <td>87.61%</td>
+      <td>31.53%</td>
+      <td>47.80%</td>
+      <td>5.30%</td>
+      <td>75.88%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>SMA 50/200</td>
+      <td>-27.09%</td>
+      <td>-27.11%</td>
+      <td>37.72%</td>
+      <td>34.23%</td>
+      <td>4.48%</td>
+      <td>71.88%</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Momentum 90</td>
+      <td>-34.12%</td>
+      <td>-34.14%</td>
+      <td>34.57%</td>
+      <td>17.14%</td>
+      <td>2.76%</td>
+      <td>6.49%</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Momentum 90</td>
+      <td>48.85%</td>
+      <td>48.89%</td>
+      <td>27.40%</td>
+      <td>38.84%</td>
+      <td>4.26%</td>
+      <td>74.74%</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Momentum 90</td>
+      <td>97.45%</td>
+      <td>97.18%</td>
+      <td>22.21%</td>
+      <td>44.53%</td>
+      <td>4.97%</td>
+      <td>74.36%</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Momentum 90</td>
+      <td>12.65%</td>
+      <td>12.66%</td>
+      <td>15.65%</td>
+      <td>25.61%</td>
+      <td>3.34%</td>
+      <td>54.61%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Donchian 20/10</td>
+      <td>-35.73%</td>
+      <td>-35.75%</td>
+      <td>37.88%</td>
+      <td>27.67%</td>
+      <td>4.18%</td>
+      <td>29.58%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Donchian 20/10</td>
+      <td>52.30%</td>
+      <td>52.34%</td>
+      <td>19.61%</td>
+      <td>31.01%</td>
+      <td>3.57%</td>
+      <td>52.07%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Donchian 20/10</td>
+      <td>55.82%</td>
+      <td>55.68%</td>
+      <td>29.38%</td>
+      <td>37.70%</td>
+      <td>4.48%</td>
+      <td>53.88%</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Donchian 20/10</td>
+      <td>-12.05%</td>
+      <td>-12.06%</td>
+      <td>30.02%</td>
+      <td>22.32%</td>
+      <td>3.09%</td>
+      <td>36.62%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>RSI 14</td>
+      <td>16.31%</td>
+      <td>16.32%</td>
+      <td>23.81%</td>
+      <td>35.53%</td>
+      <td>4.59%</td>
+      <td>32.48%</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>RSI 14</td>
+      <td>22.14%</td>
+      <td>22.15%</td>
+      <td>4.50%</td>
+      <td>13.44%</td>
+      <td>0.26%</td>
+      <td>4.16%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>RSI 14</td>
+      <td>8.85%</td>
+      <td>8.83%</td>
+      <td>14.59%</td>
+      <td>16.81%</td>
+      <td>1.72%</td>
+      <td>9.35%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>RSI 14</td>
+      <td>0.16%</td>
+      <td>0.16%</td>
+      <td>11.48%</td>
+      <td>16.24%</td>
+      <td>1.90%</td>
+      <td>12.71%</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Vol-target 20%</td>
+      <td>-31.04%</td>
+      <td>-31.06%</td>
+      <td>31.47%</td>
+      <td>22.32%</td>
+      <td>3.17%</td>
+      <td>34.64%</td>
+      <td>218</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Vol-target 20%</td>
+      <td>61.25%</td>
+      <td>61.30%</td>
+      <td>14.94%</td>
+      <td>23.01%</td>
+      <td>2.37%</td>
+      <td>51.68%</td>
+      <td>182</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Vol-target 20%</td>
+      <td>47.94%</td>
+      <td>47.83%</td>
+      <td>16.30%</td>
+      <td>22.39%</td>
+      <td>2.32%</td>
+      <td>41.51%</td>
+      <td>212</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Vol-target 20%</td>
+      <td>-3.00%</td>
+      <td>-3.00%</td>
+      <td>20.48%</td>
+      <td>21.26%</td>
+      <td>2.62%</td>
+      <td>52.51%</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-46.17%</td>
+      <td>-46.19%</td>
+      <td>51.39%</td>
+      <td>39.32%</td>
+      <td>5.68%</td>
+      <td>54.04%</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>46.68%</td>
+      <td>46.71%</td>
+      <td>16.58%</td>
+      <td>26.73%</td>
+      <td>3.09%</td>
+      <td>44.22%</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-4.98%</td>
+      <td>-4.97%</td>
+      <td>24.89%</td>
+      <td>29.06%</td>
+      <td>3.83%</td>
+      <td>36.60%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Partial multistep prediction · TPE</td>
+      <td>-30.37%</td>
+      <td>-30.39%</td>
+      <td>35.65%</td>
+      <td>23.51%</td>
+      <td>3.78%</td>
+      <td>23.94%</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Partial multistep prediction · параметры статьи</td>
+      <td>-38.81%</td>
+      <td>-38.84%</td>
+      <td>40.86%</td>
+      <td>34.99%</td>
+      <td>5.18%</td>
+      <td>28.09%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Partial multistep prediction · параметры статьи</td>
+      <td>25.97%</td>
+      <td>25.99%</td>
+      <td>22.58%</td>
+      <td>23.05%</td>
+      <td>2.82%</td>
+      <td>23.94%</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Partial multistep prediction · параметры статьи</td>
+      <td>1.01%</td>
+      <td>1.01%</td>
+      <td>27.11%</td>
+      <td>25.09%</td>
+      <td>3.43%</td>
+      <td>30.11%</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Partial multistep prediction · параметры статьи</td>
+      <td>-13.95%</td>
+      <td>-13.96%</td>
+      <td>23.09%</td>
+      <td>21.43%</td>
+      <td>3.07%</td>
+      <td>27.82%</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>-48.56%</td>
+      <td>-48.59%</td>
+      <td>51.91%</td>
+      <td>39.71%</td>
+      <td>5.71%</td>
+      <td>55.06%</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>47.77%</td>
+      <td>47.81%</td>
+      <td>16.58%</td>
+      <td>26.74%</td>
+      <td>3.09%</td>
+      <td>44.48%</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>-1.80%</td>
+      <td>-1.80%</td>
+      <td>24.68%</td>
+      <td>30.79%</td>
+      <td>4.01%</td>
+      <td>36.85%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>-34.30%</td>
+      <td>-34.32%</td>
+      <td>38.43%</td>
+      <td>23.02%</td>
+      <td>3.77%</td>
+      <td>23.94%</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Ближайшие мотивы + avg</td>
+      <td>-59.23%</td>
+      <td>-59.26%</td>
+      <td>61.51%</td>
+      <td>43.52%</td>
+      <td>6.75%</td>
+      <td>44.84%</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Ближайшие мотивы + avg</td>
+      <td>10.05%</td>
+      <td>10.06%</td>
+      <td>20.89%</td>
+      <td>24.44%</td>
+      <td>3.14%</td>
+      <td>23.43%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Ближайшие мотивы + avg</td>
+      <td>-4.06%</td>
+      <td>-4.05%</td>
+      <td>22.71%</td>
+      <td>26.50%</td>
+      <td>3.53%</td>
+      <td>26.46%</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Ближайшие мотивы + avg</td>
+      <td>-26.84%</td>
+      <td>-26.86%</td>
+      <td>33.36%</td>
+      <td>21.48%</td>
+      <td>2.98%</td>
+      <td>21.86%</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Random Forest</td>
+      <td>-66.02%</td>
+      <td>-66.04%</td>
+      <td>67.03%</td>
+      <td>35.98%</td>
+      <td>6.28%</td>
+      <td>26.50%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Random Forest</td>
+      <td>-17.21%</td>
+      <td>-17.22%</td>
+      <td>27.76%</td>
+      <td>17.93%</td>
+      <td>2.55%</td>
+      <td>21.36%</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Random Forest</td>
+      <td>15.12%</td>
+      <td>15.09%</td>
+      <td>19.73%</td>
+      <td>34.61%</td>
+      <td>4.65%</td>
+      <td>32.97%</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Random Forest</td>
+      <td>-7.62%</td>
+      <td>-7.62%</td>
+      <td>31.70%</td>
+      <td>20.69%</td>
+      <td>2.88%</td>
+      <td>22.38%</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>-37.66%</td>
+      <td>-37.68%</td>
+      <td>40.91%</td>
+      <td>31.00%</td>
+      <td>4.26%</td>
+      <td>46.63%</td>
+      <td>215</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>86.37%</td>
+      <td>86.45%</td>
+      <td>12.73%</td>
+      <td>24.90%</td>
+      <td>2.39%</td>
+      <td>54.77%</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>33.67%</td>
+      <td>33.59%</td>
+      <td>16.03%</td>
+      <td>20.70%</td>
+      <td>2.26%</td>
+      <td>36.39%</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>8.25%</td>
+      <td>8.25%</td>
+      <td>8.70%</td>
+      <td>11.53%</td>
+      <td>1.31%</td>
+      <td>20.26%</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <td>2022</td>
+      <td>Ретроспективная постоянная доля</td>
+      <td>-31.27%</td>
+      <td>-31.29%</td>
+      <td>33.82%</td>
+      <td>25.25%</td>
+      <td>3.45%</td>
+      <td>39.55%</td>
+      <td>192</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Ретроспективная постоянная доля</td>
+      <td>48.40%</td>
+      <td>48.44%</td>
+      <td>9.12%</td>
+      <td>17.49%</td>
+      <td>1.77%</td>
+      <td>39.71%</td>
+      <td>177</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>Ретроспективная постоянная доля</td>
+      <td>41.15%</td>
+      <td>41.05%</td>
+      <td>13.20%</td>
+      <td>21.06%</td>
+      <td>2.20%</td>
+      <td>39.73%</td>
+      <td>177</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Ретроспективная постоянная доля</td>
+      <td>-0.74%</td>
+      <td>-0.74%</td>
+      <td>15.29%</td>
+      <td>16.57%</td>
+      <td>1.95%</td>
+      <td>39.70%</td>
+      <td>179</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Отказ от прогноза и движения рынка</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>decision_bar</th>
+      <th>origins</th>
+      <th>forecast_coverage</th>
+      <th>h1_coverage</th>
+      <th>outside_train_range</th>
+      <th>missing_context</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2022</td>
+      <td>365</td>
+      <td>0.928767</td>
+      <td>0.942466</td>
+      <td>0.230137</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>365</td>
+      <td>0.810959</td>
+      <td>0.810959</td>
+      <td>0.191781</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td>366</td>
+      <td>0.693989</td>
+      <td>0.693989</td>
+      <td>0.311475</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>365</td>
+      <td>0.841096</td>
+      <td>0.852055</td>
+      <td>0.227397</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>group</th>
+      <th>origins</th>
+      <th>evaluated</th>
+      <th>mean_absolute_underlying_return</th>
+      <th>underlying_es95</th>
+      <th>relative_forecast_rmse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>accepted_cash</td>
+      <td>585</td>
+      <td>584</td>
+      <td>0.01854</td>
+      <td>0.05783</td>
+      <td>0.06721</td>
+    </tr>
+    <tr>
+      <td>accepted_long</td>
+      <td>611</td>
+      <td>611</td>
+      <td>0.01787</td>
+      <td>0.06160</td>
+      <td>0.08979</td>
+    </tr>
+    <tr>
+      <td>no_terminal_forecast</td>
+      <td>265</td>
+      <td>265</td>
+      <td>0.01957</td>
+      <td>0.06749</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>Эти условные группы — диагностика, а не доходность стратегии. Последний 24-часовой target вне диапазона данных
+не оценивается. «cm» отключает growth gate, но сохраняет отказ при отсутствии соседей; forced nearest использует
+другой агрегатор avg. Потоки шума cm и rgdbscan расходуются по-разному из-за дополнительных пробных шагов,
+поэтому их сравнение не изолирует единственное булево решение при идентичных случайных траекториях.</p>
+<h2>Неопределённость</h2><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>comparator</th>
+      <th>primary</th>
+      <th>block_days</th>
+      <th>difference</th>
+      <th>lower</th>
+      <th>upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>False</td>
+      <td>7</td>
+      <td>1.47 п.п.</td>
+      <td>0.87 п.п.</td>
+      <td>1.98 п.п.</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>True</td>
+      <td>14</td>
+      <td>1.47 п.п.</td>
+      <td>0.79 п.п.</td>
+      <td>2.05 п.п.</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>False</td>
+      <td>28</td>
+      <td>1.47 п.п.</td>
+      <td>0.78 п.п.</td>
+      <td>2.12 п.п.</td>
+    </tr>
+    <tr>
+      <td>Ретроспективная постоянная доля</td>
+      <td>False</td>
+      <td>14</td>
+      <td>1.80 п.п.</td>
+      <td>1.27 п.п.</td>
+      <td>2.26 п.п.</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>False</td>
+      <td>14</td>
+      <td>-1.53 п.п.</td>
+      <td>-2.19 п.п.</td>
+      <td>-0.98 п.п.</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>False</td>
+      <td>14</td>
+      <td>-0.12 п.п.</td>
+      <td>-0.81 п.п.</td>
+      <td>0.58 п.п.</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>False</td>
+      <td>14</td>
+      <td>-0.08 п.п.</td>
+      <td>-0.93 п.п.</td>
+      <td>0.73 п.п.</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction без growth gate</td>
+      <td>False</td>
+      <td>14</td>
+      <td>-0.05 п.п.</td>
+      <td>-0.15 п.п.</td>
+      <td>0.00 п.п.</td>
+    </tr>
+  </tbody>
+</table>
+<p>Парный circular moving-block bootstrap: 2000 повторов, основной блок 14 дней, чувствительность 7/28 дней.
+Одна основная гипотеза — сравнение с причинной долей по прошлым 90 targets. Остальные интервалы описательные.
+Ретроспективная постоянная доля вычислена по всему тесту: это не исполнимая заранее стратегия, а диагностика;
+её bootstrap не учитывает неопределённость самой выбранной доли. Четыре года одного рынка не доказывают
+снижение риска на любых будущих режимах.</p>
+<h2>Другие seed</h2><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>seed</th>
+      <th>total_return</th>
+      <th>cagr</th>
+      <th>max_drawdown</th>
+      <th>daily_volatility</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+      <th>entries</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>42</td>
+      <td>-47.76%</td>
+      <td>-14.98%</td>
+      <td>51.39%</td>
+      <td>30.27%</td>
+      <td>4.25%</td>
+      <td>39.70%</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>-37.70%</td>
+      <td>-11.16%</td>
+      <td>46.37%</td>
+      <td>30.22%</td>
+      <td>4.12%</td>
+      <td>39.24%</td>
+      <td>119</td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>-52.65%</td>
+      <td>-17.05%</td>
+      <td>53.06%</td>
+      <td>30.19%</td>
+      <td>4.24%</td>
+      <td>39.31%</td>
+      <td>114</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Издержки и задержка</h2><div class="scroll"><table class="dataframe metrics">
+  <thead>
+    <tr style="text-align: right;">
+      <th>strategy</th>
+      <th>costs_bps</th>
+      <th>delay_hours</th>
+      <th>total_return</th>
+      <th>max_drawdown</th>
+      <th>es95</th>
+      <th>mean_exposure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-30.28%</td>
+      <td>48.94%</td>
+      <td>4.27%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70.85%</td>
+      <td>40.61%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>0</td>
+      <td>0</td>
+      <td>79.64%</td>
+      <td>64.02%</td>
+      <td>5.77%</td>
+      <td>94.02%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>0</td>
+      <td>0</td>
+      <td>66.22%</td>
+      <td>37.48%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>0</td>
+      <td>1</td>
+      <td>-27.50%</td>
+      <td>48.98%</td>
+      <td>4.22%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>0</td>
+      <td>1</td>
+      <td>70.86%</td>
+      <td>40.71%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>0</td>
+      <td>1</td>
+      <td>80.00%</td>
+      <td>64.03%</td>
+      <td>5.77%</td>
+      <td>94.03%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>0</td>
+      <td>1</td>
+      <td>68.43%</td>
+      <td>37.54%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>0</td>
+      <td>2</td>
+      <td>-31.27%</td>
+      <td>49.37%</td>
+      <td>4.23%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>0</td>
+      <td>2</td>
+      <td>71.50%</td>
+      <td>40.52%</td>
+      <td>2.78%</td>
+      <td>39.52%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>0</td>
+      <td>2</td>
+      <td>80.91%</td>
+      <td>64.05%</td>
+      <td>5.78%</td>
+      <td>94.06%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>0</td>
+      <td>2</td>
+      <td>71.56%</td>
+      <td>36.19%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>5</td>
+      <td>0</td>
+      <td>-37.49%</td>
+      <td>49.76%</td>
+      <td>4.28%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>5</td>
+      <td>0</td>
+      <td>69.92%</td>
+      <td>40.67%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>5</td>
+      <td>0</td>
+      <td>79.46%</td>
+      <td>64.02%</td>
+      <td>5.77%</td>
+      <td>94.02%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>5</td>
+      <td>0</td>
+      <td>65.43%</td>
+      <td>37.54%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>5</td>
+      <td>1</td>
+      <td>-35.01%</td>
+      <td>49.79%</td>
+      <td>4.23%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>5</td>
+      <td>1</td>
+      <td>69.94%</td>
+      <td>40.78%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>5</td>
+      <td>1</td>
+      <td>79.82%</td>
+      <td>64.03%</td>
+      <td>5.77%</td>
+      <td>94.03%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>5</td>
+      <td>1</td>
+      <td>67.63%</td>
+      <td>37.60%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>5</td>
+      <td>2</td>
+      <td>-38.38%</td>
+      <td>50.18%</td>
+      <td>4.24%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>5</td>
+      <td>2</td>
+      <td>70.57%</td>
+      <td>40.58%</td>
+      <td>2.78%</td>
+      <td>39.52%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>5</td>
+      <td>2</td>
+      <td>80.73%</td>
+      <td>64.05%</td>
+      <td>5.78%</td>
+      <td>94.05%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>5</td>
+      <td>2</td>
+      <td>70.75%</td>
+      <td>36.25%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>15</td>
+      <td>0</td>
+      <td>-49.76%</td>
+      <td>51.35%</td>
+      <td>4.30%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>15</td>
+      <td>0</td>
+      <td>68.08%</td>
+      <td>40.80%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>15</td>
+      <td>0</td>
+      <td>79.11%</td>
+      <td>64.02%</td>
+      <td>5.77%</td>
+      <td>94.01%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>15</td>
+      <td>0</td>
+      <td>63.86%</td>
+      <td>37.65%</td>
+      <td>4.37%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>15</td>
+      <td>1</td>
+      <td>-47.76%</td>
+      <td>51.39%</td>
+      <td>4.25%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>15</td>
+      <td>1</td>
+      <td>68.10%</td>
+      <td>40.91%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>15</td>
+      <td>1</td>
+      <td>79.47%</td>
+      <td>64.03%</td>
+      <td>5.77%</td>
+      <td>94.02%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>15</td>
+      <td>1</td>
+      <td>66.04%</td>
+      <td>37.72%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>15</td>
+      <td>2</td>
+      <td>-50.47%</td>
+      <td>51.76%</td>
+      <td>4.26%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>15</td>
+      <td>2</td>
+      <td>68.72%</td>
+      <td>40.71%</td>
+      <td>2.78%</td>
+      <td>39.52%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>15</td>
+      <td>2</td>
+      <td>80.38%</td>
+      <td>64.04%</td>
+      <td>5.78%</td>
+      <td>94.05%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>15</td>
+      <td>2</td>
+      <td>69.13%</td>
+      <td>36.37%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>30</td>
+      <td>0</td>
+      <td>-63.79%</td>
+      <td>63.96%</td>
+      <td>4.33%</td>
+      <td>39.69%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>30</td>
+      <td>0</td>
+      <td>65.36%</td>
+      <td>40.99%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>30</td>
+      <td>0</td>
+      <td>78.59%</td>
+      <td>64.02%</td>
+      <td>5.77%</td>
+      <td>94.01%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>30</td>
+      <td>0</td>
+      <td>61.54%</td>
+      <td>37.83%</td>
+      <td>4.37%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>30</td>
+      <td>1</td>
+      <td>-62.35%</td>
+      <td>62.57%</td>
+      <td>4.28%</td>
+      <td>39.69%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>30</td>
+      <td>1</td>
+      <td>65.39%</td>
+      <td>41.10%</td>
+      <td>2.78%</td>
+      <td>39.51%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>30</td>
+      <td>1</td>
+      <td>78.95%</td>
+      <td>64.02%</td>
+      <td>5.77%</td>
+      <td>94.02%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>30</td>
+      <td>1</td>
+      <td>63.68%</td>
+      <td>37.89%</td>
+      <td>4.37%</td>
+      <td>56.07%</td>
+    </tr>
+    <tr>
+      <td>Partial multistep prediction · TPE</td>
+      <td>30</td>
+      <td>2</td>
+      <td>-64.31%</td>
+      <td>64.65%</td>
+      <td>4.29%</td>
+      <td>39.70%</td>
+    </tr>
+    <tr>
+      <td>Контроль по прошлым 90 дням</td>
+      <td>30</td>
+      <td>2</td>
+      <td>65.98%</td>
+      <td>40.90%</td>
+      <td>2.78%</td>
+      <td>39.52%</td>
+    </tr>
+    <tr>
+      <td>Buy &amp; hold</td>
+      <td>30</td>
+      <td>2</td>
+      <td>79.86%</td>
+      <td>64.04%</td>
+      <td>5.77%</td>
+      <td>94.04%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>30</td>
+      <td>2</td>
+      <td>66.72%</td>
+      <td>36.55%</td>
+      <td>4.36%</td>
+      <td>56.07%</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Воспроизводимость</h2><p>Готовая платформа — Backtesting.py FractionalBacktest. В репозитории есть ledger прогнозов,
+границы обучения, хеши моделей/данных/кода, сделки, заявки и почасовой капитал. Тесты проверяют причинность,
+независимость RNG от будущих origins, точный пример комиссий и исполнения, годовую базу equity и ребалансировку.
+<a href="../model_manifest.json">Манифест моделей</a> · <a href="../data_manifest.json">Манифест данных</a> ·
+<a href="frozen.json">Замороженный вход теста</a>.</p>
+<pre>uv sync --extra trading
+uv run --extra trading python -m adis.trading.data
+uv run --extra trading python -m adis.trading.experiment tune --trials 32
+uv run --extra trading python -m adis.trading.evaluation
+uv run --extra trading python -m adis.trading.audit
+uv run --extra trading python -m adis.trading.report</pre>
+<h2>Источники и границы сравнения</h2><ul><li><a href="https://onlinelibrary.wiley.com/doi/10.1155/2023/6689371">Original partial-prediction article</a>: Motif, Wishart and trajectory rejection mechanism; the trading policy is our adaptation.</li><li><a href="https://github.com/binance/binance-public-data">Binance public market-data archive</a>: Official hourly BTCUSDT spot candles, SHA256 checksums, timestamp-unit change in 2025.</li><li><a href="https://kernc.github.io/backtesting.py/doc/backtesting/backtesting.html">Backtesting.py API</a>: Existing event-driven execution engine, next-open market fills, commission semantics and fractional trading.</li><li><a href="https://github.com/AI4Finance-Foundation/FinRL/blob/master/docs/source/finrl_meta/Benchmark.rst">FinRL cryptocurrency benchmarks</a>: Established cryptocurrency benchmark setting and buy-and-hold comparator. We do not import performance numbers from a different split.</li><li><a href="https://arxiv.org/abs/2606.00060">Machine Learning-Based Bitcoin Trading Under Transaction Costs: Evidence From Walk-Forward Forecasting</a>: Related hourly BTCUSDT forecasting-to-trading research. Our Random Forest and technical baselines are rerun on our own common split; this is not a reproduction of the paper&#x27;s XGBoost/LSTM/iTransformer results.</li><li><a href="https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.TPESampler.html">Optuna TPE sampler</a>: Constrained sequential hyperparameter optimization; exact installed version is pinned in uv.lock.</li></ul>
+<p>Чужие опубликованные доходности с иных периодов не перенесены в таблицу. Random Forest и технические стратегии
+реализованы как общие бенчмарки и исполнены на том же календаре и с теми же издержками. Оптимизация Partial multistep prediction и
+фиксированные стандартные настройки бенчмарков не позволяют объявлять превосходство над всеми их возможными настройками.</p>
+</html>

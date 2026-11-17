@@ -1,0 +1,74 @@
+{
+  "symbols": [
+    "ETHUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "EOSUSDT",
+    "LTCUSDT"
+  ],
+  "backtests": 90,
+  "frozen": {
+    "btc_selection_identity": {
+      "source_hashes": {
+        "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+        "clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+        "prediction.py": "9c6423981b33a3b394a00597b895c7e85a5664ab9b6c4dce787824e5f8357e96",
+        "forecasts.py": "14bf1a0957c4b61b509bc108e252df6366c1503cb5887ba039ef5d712dc3a7cf",
+        "backtest.py": "adf5f4fc3217ffe5266023eae7095bb5c8a12898f8aa71f05e96dd276e4f0d3e",
+        "baselines.py": "e4290d6771e0d69d30879df31002c57a5d6fe456d0ed698f3376885f7a71e5fb",
+        "experiment.py": "75c673510e54ad3bdf83c16a7d28970f497d25145e929aefe2740f0f8e60c36c"
+      },
+      "protocol_sha256": "ad3dad77ca34512740d2a5dabc6aa403342949c43725463cf6af6d70a6118743",
+      "data_sha256": "4001412262219346fd560733f5847611719dc1bd05b388d6d39a9bb2990e9468",
+      "manifest_sha256": "ed8146f23dcef51004280c02f55e5cf632a022b00fa5b03fbf4421b5a07dd191",
+      "packages": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scipy": "1.18.1",
+        "numba": "0.68.1",
+        "scikit-learn": "1.9.1",
+        "backtesting": "0.6.6",
+        "optuna": "4.9.0"
+      }
+    },
+    "parameters": {
+      "length": 3,
+      "max_gap": 3,
+      "r": 5,
+      "mu": 0.02,
+      "epsilon": 0.06502211399080364,
+      "cluster_eps": 0.008371633741976994,
+      "min_samples": 3,
+      "perturbation_variance": 5.8071705698799575e-05,
+      "paths": 16,
+      "training_hours": 10000
+    },
+    "symbols": [
+      "ETHUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "EOSUSDT",
+      "LTCUSDT"
+    ],
+    "files": {
+      "research/trading/transfer_protocol.json": "3d13527d0898e74c9adbf2b895cde007a50432dd2772aaba918408d9da14dae9",
+      "research/trading/transfer_retirement.json": "759c2d1cfc0969eeaf9c6b47f2256321584396e254aa93b38db3ad11c375812c",
+      "results/trading/transfer/universe.json": "3723097471f1b2be067a3926b8d8860465e83b4c4281fd2ebf4594894a9ddb72",
+      "research/trading/eos_announcement.txt": "b50d432375035af23807f0e43c73177f30296e175a1bcb1f4faed46caf0dcb00",
+      "/home/mkserdyuk/Personal/ADIS/adis/trading/transfer.py": "c9376cd537cd2a44b36a23b46e41b466b1ebb43e90d328d41bf415a922b7a4cf",
+      "/home/mkserdyuk/Personal/ADIS/adis/trading/transfer_data.py": "bf177b335a1156be9e9534b7b4e1b51ebd96f58fb189dc8605f33d1b57a54d7e",
+      "/home/mkserdyuk/Personal/ADIS/adis/trading/evaluation.py": "668d2b5ab9e79e9bd36babf2eeb679b4384a18c8ca09d058530ff5dd845bcef5",
+      "/home/mkserdyuk/Personal/ADIS/adis/trading/data.py": "b74f75217cbd09b67f2a68d8f1a12f4dae6df00c00cffed5acb099ee5b25862f",
+      "results/trading/transfer/ETHUSDT/data_manifest.json": "67666e4cd9d12116f073ea60fb1430b1af530bdd0feb8e2cb9b29e22108469c4",
+      "data/trading/transfer/ETHUSDT/market.csv.gz": "033e9757b0d7a4f5912c3ce33be396c873528bcbc04f6a2a34d86096676a4f4d",
+      "results/trading/transfer/BNBUSDT/data_manifest.json": "2d45358a98c19a86b388078e03e4545e0343efefa3620d28a00f973a6ca8550f",
+      "data/trading/transfer/BNBUSDT/market.csv.gz": "82d86c621f06fd411113d4264662e1409de89426941f41d663a122f2fd155258",
+      "results/trading/transfer/XRPUSDT/data_manifest.json": "458a75ce51db7e1ea353f3a48ff801e4a899f0a8b69f8a3ca40e55715183358f",
+      "data/trading/transfer/XRPUSDT/market.csv.gz": "d2c4e13a34f14cc65f2890e249be08af89c6a36bc148ff46bce508c0c591b8f2",
+      "results/trading/transfer/EOSUSDT/data_manifest.json": "f5721326926ee32efd3878d4c6e89a1bc3c9102f998fdfcf69518f504a5d783b",
+      "data/trading/transfer/EOSUSDT/market.csv.gz": "d96c50558d1dae3d6449fe0167dd65d6ddf93c5e9d658e3a34846ca5bdbf2e96",
+      "results/trading/transfer/LTCUSDT/data_manifest.json": "9d6a97318e5bd50e9fea1f702d822d622010c0cb9ec8dc24114189d0222a0985",
+      "data/trading/transfer/LTCUSDT/market.csv.gz": "a9997adaad1261973e32dcc8e5fcfda0bd33e7328bb142b949da0c9593cf10a4"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+symbol,period,retired_slot,active_origins,accepted
+ETHUSDT,historical,False,1461,1273
+ETHUSDT,holdout,False,304,300
+BNBUSDT,historical,False,1461,1309
+BNBUSDT,holdout,False,304,301
+XRPUSDT,historical,False,1461,1326
+XRPUSDT,holdout,False,304,278
+EOSUSDT,historical,False,1230,1118
+EOSUSDT,holdout,True,0,0
+LTCUSDT,historical,False,1461,1359
+LTCUSDT,holdout,False,304,216

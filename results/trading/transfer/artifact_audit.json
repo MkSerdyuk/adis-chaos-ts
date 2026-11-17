@@ -1,0 +1,10 @@
+{
+  "models": 114,
+  "forecast_rows": 10115,
+  "backtests": 90,
+  "closed_trade_records": 2466887,
+  "training_hashes_and_boundaries_verified": true,
+  "targets_and_lagged_control_verified": true,
+  "saved_fills_fees_pnl_and_risk_verified": true,
+  "retirement_and_fixed_panel_verified": true
+}

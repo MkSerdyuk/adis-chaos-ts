@@ -1,0 +1,14 @@
+{
+  "forecast_rows": 8766,
+  "unique_test_models": 32,
+  "strategies": 14,
+  "closed_trade_records": 689041,
+  "frozen_selection_verified": true,
+  "data_and_code_hashes_verified": true,
+  "training_boundaries_verified": true,
+  "no_synthetic_fills": true,
+  "next_real_open_order_fills_verified": true,
+  "independent_cash_pnl_verified": true,
+  "risk_metrics_independently_recomputed": true,
+  "yearly_returns_compound_to_total": true
+}
