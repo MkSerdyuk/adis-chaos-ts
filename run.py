@@ -283,7 +283,8 @@ def main():
         ],
         columns=["Directory", "Contents"],
     )
-    (ROOT / "README.md").write_text(report + "\n\n" + markdown_table(directories) + "\n")
+    (ROOT / "report.md").write_text(report + "\n")
+    (ROOT / "README.md").write_text("[Report](report.md)\n\n" + markdown_table(directories) + "\n")
     write_history()
     print(report)
 
