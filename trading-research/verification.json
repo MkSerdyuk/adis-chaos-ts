@@ -83,5 +83,19 @@
       "plots": 38,
       "browser_errors": []
     }
-  ]
+  ],
+  "published_reports": {
+    "btc": {
+      "file": "btc.html",
+      "sha256": "6d316331e174e78eafc509b9cbc17859f58d55c9f5d0214b49fee63f362a1e6d"
+    },
+    "crypto": {
+      "file": "crypto.html",
+      "sha256": "da6e574ca118fee26248bb6afe64c68d0c4ecb104af95d1f047aeac2f66fb13f"
+    },
+    "noncrypto": {
+      "file": "noncrypto.html",
+      "sha256": "e5cb8b8303aacb1a857dd47dec1b4406e5ad21075d8c54ff6e8762c215cd3ccd"
+    }
+  }
 }

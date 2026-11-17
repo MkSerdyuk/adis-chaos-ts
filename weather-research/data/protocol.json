@@ -1,0 +1,56 @@
+{
+  "created_before_forecast_evaluation": true,
+  "target": "DWD hourly 2 m air temperature, degrees Celsius",
+  "stations": {
+    "00433": "Berlin-Tempelhof",
+    "01975": "Hamburg-Fuhlsbuettel",
+    "03379": "Muenchen-Stadt"
+  },
+  "snapshot_start": "2018-01-01",
+  "snapshot_end_exclusive": "2026-11-01",
+  "periods": {
+    "validation": [
+      "2021-01-01",
+      "2022-01-01"
+    ],
+    "historical": [
+      "2022-01-01",
+      "2026-01-01"
+    ],
+    "holdout": [
+      "2026-01-01",
+      "2026-11-01"
+    ]
+  },
+  "interpretation": "Retrospective station-temperature benchmark; current DWD snapshots can contain revised observations. Recent 2026 data are provisional; this is not an operational as-of feed or an NWP comparison.",
+  "data_priority": "Historical archive wins over recent archive at overlapping timestamps. Keep source quality codes without ordinal thresholds. Missing sentinel -999 remains missing truth. Retain raw ZIPs and station metadata with SHA256.",
+  "input_policy": "Causal forward fill on the model grid only, no backfill. Keep Observed flags. All methods share eligible issue times requiring the current observation and all preceding 168 hourly observations to be observed. Verification requires observed target and origin+h strictly before period end.",
+  "issue_time_utc": "23:00, after observation availability; publication latency not modeled",
+  "horizons_hours": [
+    1,
+    6,
+    12,
+    24
+  ],
+  "training_hours": 10000,
+  "refit": "Quarterly, exclusively before quarter boundary; min-max and scalers fitted on training only",
+  "forecaster": "Unmodified src.Forecaster, mapped legacy BTC-selected configuration as primary, separate paper-geometry control; fixed Gaussian noise, strict growth. No weather or test tuning. Additional seeds7,123 for primary configuration.",
+  "comparators": [
+    "persistence",
+    "daily_seasonal",
+    "harmonic_climatology",
+    "ridge",
+    "svr",
+    "random_forest",
+    "gradient_boosting"
+  ],
+  "seasonal_forecast": "T[t+h-24], not T[t-24] for every horizon",
+  "climatology": "Least-squares harmonic annual/diurnal regression fitted only on each training window",
+  "supervised": "Direct predictions at four horizons from past temperature and known calendar; common purge24; same training window; no test fitting; all prespecified comparators reported",
+  "primary_estimand": "2026 h24 equal-station mean MAE(Forecaster)-MAE(comparator) on paired Forecaster-accepted eligible observed targets, one comparison per baseline",
+  "reporting": "Full eligible baseline metrics and paired accepted-mask comparisons separately; counts and coverage, MAE/RMSE/bias, mean worst5percent absolute errors in Celsius. Paper-geometry control has its own paired-mask panel. No MAPE or temperature returns.",
+  "bootstrap": "Synchronized calendar-day circular blocks across stations and models, carry masks, recompute conditional per-station MAE, equal station weights; primary block14, sensitivity7/28,10000 replicates, seed20261117, Bonferroni family of7comparators. Do not drop a station because coverage is zero.",
+  "selection_policy": "Validation2021 is reported but no retuning or removal of models by test results. Both fixed Forecaster configurations and every baseline remain in reports.",
+  "source_specification": "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/DESCRIPTION_obsgermany_climate_hourly_air_temperature_en.pdf",
+  "baseline_details": "Direct four-target temperature-change regression; RF200/depth6/leaf50/maxfeatures0.8, HGB200/rate0.05/leaves15/leaf30/l2=1/no early stopping, Ridge(alpha10) with training-only X scaling, SVR(C1/epsilon0.01/gamma=scale) with training-only X and target scaling. Calendar and past temperature features only."
+}

@@ -1,0 +1,59 @@
+{
+  "run": "1974c15bd4209715b076",
+  "src_unchanged_from": "21d07ec",
+  "forecast_rows": 281160,
+  "metric_rows": 972,
+  "fits": 360,
+  "station_origin_pairs": 6390,
+  "snapshot_hashes": true,
+  "utc_station_metadata": {
+    "00433": true,
+    "01975": true,
+    "03379": true
+  },
+  "past_only_training": true,
+  "purged_labels": true,
+  "observed_truth_and_context": true,
+  "all_metrics_independently_recomputed": true,
+  "primary_equal_station_differences_verified": true,
+  "clean_python_files": 7,
+  "adapter_checks": {
+    "origins": 3,
+    "direct_forecaster_match": true,
+    "forecaster_future_prefix": true,
+    "comparator_future_prefix": true,
+    "purged_labels": true,
+    "causal_daily_seasonal": true,
+    "core_unchanged": true
+  },
+  "metric_checks": {
+    "affine_prediction_cache": true,
+    "synchronized_masked_bootstrap": true,
+    "paired_sample_counts": true,
+    "zero_temperature_errors": true,
+    "equal_station_weights_with_unequal_coverage": true,
+    "missing_data_and_refusals_separated": true
+  },
+  "primary_mean_mae": {
+    "daily_seasonal": 2.546197010858205,
+    "forecaster": 2.7779625304515463,
+    "gradient_boosting": 2.540631877925217,
+    "harmonic_climatology": 2.9459123771067297,
+    "persistence": 2.546197010858205,
+    "random_forest": 2.4635358778278875,
+    "ridge": 2.3339401799112807,
+    "svr": 2.4457457391115422
+  },
+  "browser": {
+    "title": "Weather research",
+    "plot_groups": 3,
+    "errors": [],
+    "report": "/home/mkserdyuk/.codex/worktrees/forecast-library/ADIS/weather-research/results/1974c15bd4209715b076/report.html"
+  },
+  "published_report": {
+    "file": "weather.html",
+    "sha256": "732c83f840e9bb10863b78a08e9081c27d70f878645148698402c0219285b595"
+  },
+  "cached_rerun_forecasts_identical": true,
+  "cached_rerun_metrics_unchanged": true
+}

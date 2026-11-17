@@ -1,0 +1,5 @@
+trading-research/*.html binary linguist-generated=true
+weather-research/*.html binary linguist-generated=true
+trading-research/data/** -text
+weather-research/data/** -text
+weather-research/data/raw/* -diff
