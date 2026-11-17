@@ -5,3 +5,6 @@ __pycache__/
 *.egg-info/
 data/opsd_*.csv
 results/**/motifs.npz
+data/trading/
+results/trading/models/
+results/trading/study.db*

@@ -1,0 +1,8 @@
+[
+  {"title": "Original partial-prediction article", "url": "https://onlinelibrary.wiley.com/doi/10.1155/2023/6689371", "use": "Motif, Wishart and trajectory rejection mechanism; the trading policy is our adaptation."},
+  {"title": "Binance public market-data archive", "url": "https://github.com/binance/binance-public-data", "use": "Official hourly BTCUSDT spot candles, SHA256 checksums, timestamp-unit change in 2025."},
+  {"title": "Backtesting.py API", "url": "https://kernc.github.io/backtesting.py/doc/backtesting/backtesting.html", "use": "Existing event-driven execution engine, next-open market fills, commission semantics and fractional trading."},
+  {"title": "FinRL cryptocurrency benchmarks", "url": "https://github.com/AI4Finance-Foundation/FinRL/blob/master/docs/source/finrl_meta/Benchmark.rst", "use": "Established cryptocurrency benchmark setting and buy-and-hold comparator. We do not import performance numbers from a different split."},
+  {"title": "Machine Learning-Based Bitcoin Trading Under Transaction Costs: Evidence From Walk-Forward Forecasting", "url": "https://arxiv.org/abs/2606.00060", "use": "Related hourly BTCUSDT forecasting-to-trading research. Our Random Forest and technical baselines are rerun on our own common split; this is not a reproduction of the paper's XGBoost/LSTM/iTransformer results."},
+  {"title": "Optuna TPE sampler", "url": "https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.TPESampler.html", "use": "Constrained sequential hyperparameter optimization; exact installed version is pinned in uv.lock."}
+]

@@ -18,6 +18,12 @@ dependencies = [
 [project.scripts]
 adis = "adis.experiment:main"
 
+[project.optional-dependencies]
+trading = [
+    "backtesting>=0.6.5,<0.7",
+    "optuna>=4.5,<5",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
