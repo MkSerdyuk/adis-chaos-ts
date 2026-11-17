@@ -8,3 +8,4 @@ results/**/motifs.npz
 data/trading/
 results/trading/models/
 results/trading/study.db*
+results/trading/transfer/*/models/

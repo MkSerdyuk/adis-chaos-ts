@@ -74,6 +74,20 @@ def save_result(name, result, folder):
     result["daily_returns"].rename("return").to_csv(destination / "daily_returns.csv")
 
 
+def collect_model_metadata(root):
+    manifest = root / "model_manifest.json"
+    models = {row["model_id"]: row for row in json.loads(manifest.read_text())} if manifest.exists() else {}
+    for path in sorted((root / "models").glob("*/metadata.json")):
+        metadata = json.loads(path.read_text())
+        model_id = metadata["model_id"]
+        if model_id in models:
+            assert all(
+                value == models[model_id][key] for key, value in metadata.items() if key != "fit_seconds"
+            )
+        models[model_id] = metadata
+    return [models[key] for key in sorted(models)]
+
+
 def forecast_diagnostics(frame, ledger, folder):
     diagnostic = ledger.copy()
     future = frame.Close.reindex(ledger.index + pd.Timedelta(hours=24)).to_numpy()
@@ -133,7 +147,7 @@ def run_test():
     start, end = "2022-01-01", "2026-01-01"
     parameters = selected["parameters"]
     ledger = walk_forward(frame, start, end, parameters)
-    ledger.to_csv(folder / "adis_predictions.csv")
+    ledger.to_csv(folder / "partial_prediction_predictions.csv")
     forecast_diagnostics(frame, ledger, folder)
     paper = walk_forward(frame, start, end, PAPER)
     paper.to_csv(folder / "paper_control_predictions.csv")
@@ -154,9 +168,9 @@ def run_test():
     (folder / "forest_fits.json").write_text(json.dumps(fits, indent=2))
     strategies = {name: (targets[name], name == "vol_target_20pct_30daily") for name in targets}
     strategies.update(
-        adis_tuned=(ledger.target, False),
-        adis_paper_control=(paper.target, False),
-        adis_no_growth_gate=(no_growth.target, False),
+        partial_prediction_tuned=(ledger.target, False),
+        partial_prediction_paper=(paper.target, False),
+        partial_prediction_cm=(no_growth.target, False),
         forced_nearest_avg=(forced.target, False),
         random_forest_24h_return=(forest, False),
         causal_exposure_control=(causal_control, True),
@@ -169,7 +183,7 @@ def run_test():
         records.append(dict(strategy=name, **result["metrics"]))
         yearly.extend(dict(strategy=name, **row) for row in yearly_metrics(result))
         print(name, result["metrics"], flush=True)
-    requested_fraction = results["adis_tuned"]["metrics"]["mean_exposure"]
+    requested_fraction = results["partial_prediction_tuned"]["metrics"]["mean_exposure"]
     used_fraction = min(requested_fraction, 0.95)
     diagnostic_target = pd.Series(used_fraction, index=ledger.index)
     (folder / "retrospective_control.json").write_text(
@@ -205,11 +219,11 @@ def run_test():
         "buy_hold",
         "sma_50_200_daily",
         "random_forest_24h_return",
-        "adis_no_growth_gate",
+        "partial_prediction_cm",
     ]:
         for block in [7, 14, 28] if name == "causal_exposure_control" else [14]:
             interval = paired_bootstrap(
-                results["adis_tuned"]["daily_returns"], results[name]["daily_returns"], block
+                results["partial_prediction_tuned"]["daily_returns"], results[name]["daily_returns"], block
             )
             intervals.append(
                 dict(comparator=name, primary=name == "causal_exposure_control" and block == 14, **interval)
@@ -218,7 +232,12 @@ def run_test():
     sensitivity = []
     for cost in [0, 5, 15, 30]:
         for delay in [0, 1, 2]:
-            for name in ["adis_tuned", "causal_exposure_control", "buy_hold", "sma_50_200_daily"]:
+            for name in [
+                "partial_prediction_tuned",
+                "causal_exposure_control",
+                "buy_hold",
+                "sma_50_200_daily",
+            ]:
                 target, rebalance = strategies[name]
                 result = run_backtest(
                     frame, target, start, end, costs_bps=cost, delay_hours=delay, rebalance_daily=rebalance
@@ -227,21 +246,21 @@ def run_test():
                     dict(strategy=name, costs_bps=cost, delay_hours=delay, **result["metrics"])
                 )
     pd.DataFrame(sensitivity).to_csv(folder / "sensitivity.csv", index=False)
-    seeds = [dict(seed=42, **results["adis_tuned"]["metrics"])]
+    seeds = [dict(seed=42, **results["partial_prediction_tuned"]["metrics"])]
     for seed in [7, 123]:
         alternative = walk_forward(frame, start, end, parameters, seed=seed)
         alternative.to_csv(folder / f"seed_{seed}_predictions.csv")
         result = run_backtest(frame, alternative.target, start, end)
-        save_result(f"adis_seed_{seed}", result, folder)
+        save_result(f"partial_prediction_seed_{seed}", result, folder)
         seeds.append(dict(seed=seed, **result["metrics"]))
     pd.DataFrame(seeds).to_csv(folder / "seeds.csv", index=False)
-    models = [json.loads(path.read_text()) for path in sorted((ROOT / "models").glob("*/metadata.json"))]
+    models = collect_model_metadata(ROOT)
     (ROOT / "model_manifest.json").write_text(json.dumps(models, indent=2))
     (ROOT / "data_manifest.json").write_bytes(Path("data/trading/manifest.json").read_bytes())
-    demo = results["adis_tuned"]
+    demo = results["partial_prediction_tuned"]
     plot = demo["engine"].plot(
         results=demo["stats"],
-        filename=str(folder / "adis_backtest.html"),
+        filename=str(folder / "partial_prediction_backtest.html"),
         open_browser=False,
         resample="1D",
         plot_drawdown=True,
@@ -250,7 +269,12 @@ def run_test():
     from bokeh.io import save
     from bokeh.resources import INLINE
 
-    save(plot, filename=str(folder / "adis_backtest.html"), resources=INLINE, title="ADIS BTC/USDT backtest")
+    save(
+        plot,
+        filename=str(folder / "partial_prediction_backtest.html"),
+        resources=INLINE,
+        title="Partial multistep prediction BTC/USDT backtest",
+    )
     (folder / "completed.json").write_text(
         json.dumps(
             dict(

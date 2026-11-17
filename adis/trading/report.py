@@ -12,8 +12,8 @@ import pandas as pd
 from .experiment import ROOT
 
 LABELS = {
-    "adis_tuned": "ADIS · TPE",
-    "adis_paper_control": "ADIS · параметры статьи",
+    "partial_prediction_tuned": "Partial multistep prediction · TPE",
+    "partial_prediction_paper": "Partial multistep prediction · параметры статьи",
     "buy_hold": "Buy & hold",
     "sma_50_200_daily": "SMA 50/200",
     "momentum_90_daily": "Momentum 90",
@@ -21,9 +21,9 @@ LABELS = {
     "rsi_14_daily": "RSI 14",
     "vol_target_20pct_30daily": "Vol-target 20%",
     "random_forest_24h_return": "Random Forest",
-    "adis_no_growth_gate": "ADIS без growth gate",
+    "partial_prediction_cm": "Partial multistep prediction без growth gate",
     "forced_nearest_avg": "Ближайшие мотивы + avg",
-    "causal_exposure_control": "Доля по прошлым 90 дням ADIS",
+    "causal_exposure_control": "Контроль по прошлым 90 дням",
     "retrospective_exposure_control": "Ретроспективная постоянная доля",
     "cash": "Деньги",
 }
@@ -33,6 +33,8 @@ def formatted_table(frame, columns):
     table = frame[columns].copy()
     if "strategy" in table:
         table["strategy"] = table.strategy.map(LABELS)
+    if "comparator" in table:
+        table["comparator"] = table.comparator.map(LABELS)
     percentages = [
         "total_return",
         "cagr",
@@ -48,7 +50,8 @@ def formatted_table(frame, columns):
     ]
     for column in percentages:
         if column in table:
-            table[column] = table[column].map(lambda value: f"{100 * value:.2f}%")
+            suffix = " п.п." if column in {"difference", "lower", "upper"} else "%"
+            table[column] = table[column].map(lambda value, suffix=suffix: f"{100 * value:.2f}{suffix}")
     return table.to_html(index=False, border=0, classes="metrics", escape=True)
 
 
@@ -77,8 +80,13 @@ def build_report():
     equity = pd.read_csv(folder / "equities.csv.gz", index_col=0, parse_dates=True)
     daily = equity.resample("1D").last()
     primary = intervals.loc[intervals.primary].iloc[0]
-    tuned = metrics.set_index("strategy").loc["adis_tuned"]
+    tuned = metrics.set_index("strategy").loc["partial_prediction_tuned"]
     control = metrics.set_index("strategy").loc["causal_exposure_control"]
+    without_costs = sensitivity.loc[
+        (sensitivity.strategy == "partial_prediction_tuned")
+        & (sensitivity.costs_bps == 0)
+        & (sensitivity.delay_hours == 1)
+    ].iloc[0]
     ordinary = metrics.loc[
         metrics.strategy.isin(
             [
@@ -98,13 +106,13 @@ def build_report():
         & (ordinary.es95 > tuned.es95)
     ]
     conclusion = (
-        f"У ADIS ниже одновременно просадка, волатильность и ES95, чем у {len(improvements)} "
+        f"У Partial multistep prediction ниже одновременно просадка, волатильность и ES95, чем у {len(improvements)} "
         f"из {len(ordinary)} обычных стратегий в этом тесте."
     )
     if primary.upper < 0:
-        inference = "Парный блочный интервал основной разности ES95 целиком ниже нуля: результат благоприятен для ADIS против заданного причинного контроля."
+        inference = "Парный блочный интервал основной разности ES95 целиком ниже нуля: результат благоприятен для Partial multistep prediction против заданного причинного контроля."
     elif primary.lower > 0:
-        inference = "Парный блочный интервал основной разности ES95 целиком выше нуля: ADIS имеет больший хвостовой риск, чем заданный причинный контроль."
+        inference = "Парный блочный интервал основной разности ES95 целиком выше нуля: Partial multistep prediction имеет больший хвостовой риск, чем заданный причинный контроль."
     else:
         inference = "Парный блочный интервал основной разности ES95 включает ноль: устойчивое преимущество перед заданным причинным контролем не установлено."
     eligibility = (
@@ -114,7 +122,7 @@ def build_report():
     )
     figure, axes = plt.subplots(2, 2, figsize=(14, 9), layout="constrained")
     shown = [
-        "adis_tuned",
+        "partial_prediction_tuned",
         "buy_hold",
         "sma_50_200_daily",
         "vol_target_20pct_30daily",
@@ -133,15 +141,29 @@ def build_report():
     axes[0, 0].set(title="Капитал после издержек", ylabel="Начальный капитал = 1", yscale="log")
     axes[0, 0].legend(fontsize=8)
     axes[0, 1].set(title="Просадка по часовому equity", ylabel="%")
-    for _, row in metrics.iterrows():
+    comparison = metrics.set_index("strategy")
+    for name, color in [
+        ("partial_prediction_tuned", "C0"),
+        ("causal_exposure_control", "C5"),
+        ("buy_hold", "C1"),
+    ]:
+        row = comparison.loc[name]
         axes[1, 0].scatter(
-            100 * row.mean_exposure, 100 * row.es95, s=45 if row.strategy == "adis_tuned" else 20
+            100 * row.mean_exposure,
+            100 * row.es95,
+            s=50,
+            color=color,
+            label=LABELS[name],
         )
-        axes[1, 0].annotate(LABELS[row.strategy], (100 * row.mean_exposure, 100 * row.es95), fontsize=7)
     axes[1, 0].set(
-        title="Риск и фактическая доля BTC", xlabel="Средняя экспозиция, %", ylabel="Дневной ES95, %"
+        title="Основное сравнение: риск и доля BTC",
+        xlabel="Средняя экспозиция, %",
+        ylabel="Дневной ES95, %",
+        xlim=(0, 100),
+        ylim=(0, 7),
     )
-    subset = yearly[yearly.strategy.isin(["adis_tuned", "causal_exposure_control", "buy_hold"])]
+    axes[1, 0].legend(fontsize=8, loc="upper left")
+    subset = yearly[yearly.strategy.isin(["partial_prediction_tuned", "causal_exposure_control", "buy_hold"])]
     pivot = subset.pivot(index="year", columns="strategy", values="es95")
     for i, name in enumerate(pivot.columns):
         axes[1, 1].bar(
@@ -172,16 +194,22 @@ def build_report():
         for source in sources
     )
     parameters = html.escape(json.dumps(selected["parameters"], indent=2))
-    report = f"""<!doctype html><html lang="ru"><meta charset="utf-8"><title>ADIS: торговля BTC/USDT и риск</title>
+    report = f"""<!doctype html><html lang="ru"><meta charset="utf-8"><title>Partial multistep prediction: торговля BTC/USDT и риск</title>
 <style>body{{max-width:1280px;margin:40px auto;padding:0 24px;font:16px/1.6 system-ui;color:#203040;background:#fafcfe}}
 h1,h2{{line-height:1.2}}table{{border-collapse:collapse;width:100%;font-size:13px}}td,th{{padding:8px;border-bottom:1px solid #dce3ea;text-align:right}}td:first-child,th:first-child{{text-align:left}}pre{{background:#edf2f7;padding:20px;overflow:auto}}img{{width:100%}}.lead{{font-size:20px}}.panel{{background:white;border:1px solid #dce3ea;border-radius:10px;padding:22px;margin:24px 0}}a{{color:#145fa1}}.scroll{{overflow:auto}}</style>
-<h1>ADIS в торговле BTC/USDT: проверка риска</h1>
-<p class="lead">{html.escape(conclusion)} {html.escape(inference)}</p><p>{html.escape(eligibility)}</p>
-<div class="panel"><strong>Основной результат:</strong> разность дневного ES95 ADIS − причинный контроль:
+<h1>Partial multistep prediction в торговле BTC/USDT: проверка риска</h1>
+<p>Метод Gromov–Baranov из статьи «Prediction after a Horizon of Predictability: Nonpredictable Points and
+Partial Multistep Prediction for Chaotic Time Series». Используется вариант с возмущёнными траекториями,
+усреднением конечных значений и правилом отказа rgdbscan. Торговые правила добавлены в этом исследовании.</p>
+<p class="lead">{html.escape(inference)}</p><p>{html.escape(conclusion)} {html.escape(eligibility)}</p>
+<div class="panel"><strong>Основной результат:</strong> разность дневного ES95 Partial multistep prediction − причинный контроль:
 {primary.difference * 100:.3f} процентного пункта; 95% блочный интервал [{primary.lower * 100:.3f}; {primary.upper * 100:.3f}].
-Средняя фактическая доля BTC: {tuned.mean_exposure * 100:.2f}% у ADIS и {control.mean_exposure * 100:.2f}% у контроля.
+Средняя фактическая доля BTC: {tuned.mean_exposure * 100:.2f}% у Partial multistep prediction и {control.mean_exposure * 100:.2f}% у контроля.
 Это сравнение с причинно сглаженной долей, а не точное равенство риск-бюджетов.</div>
-<p><a href="adis_backtest.html">Открыть интерактивный бэк-тест: капитал, сделки и просадки</a> ·
+<p>Чистая доходность Partial multistep prediction за четыре года: {tuned.total_return * 100:.2f}%; у причинного контроля:
+{control.total_return * 100:.2f}%. При нулевых издержках и той же задержке результат Partial multistep prediction:
+{without_costs.total_return * 100:.2f}%. Поэтому весь результат нельзя объяснить одними комиссиями.</p>
+<p><a href="partial_prediction_backtest.html">Открыть интерактивный бэк-тест: капитал, сделки и просадки</a> ·
 <a href="metrics.csv">Все метрики CSV</a> · <a href="../selected.json">Выбранные параметры</a> ·
 <a href="../../../research/trading/protocol.json">Протокол</a></p>
 <h2>Данные и исполнение</h2><p>Официальные часовые свечи Binance BTCUSDT spot, 2019–2025. Архивы проверены SHA256.
@@ -237,10 +265,11 @@ ceil(5% × n) днях, ограниченная снизу нулём. max_draw
 uv run --extra trading python -m adis.trading.data
 uv run --extra trading python -m adis.trading.experiment tune --trials 32
 uv run --extra trading python -m adis.trading.evaluation
+uv run --extra trading python -m adis.trading.audit
 uv run --extra trading python -m adis.trading.report</pre>
 <h2>Источники и границы сравнения</h2><ul>{links}</ul>
 <p>Чужие опубликованные доходности с иных периодов не перенесены в таблицу. Random Forest и технические стратегии
-реализованы как общие бенчмарки и исполнены на том же календаре и с теми же издержками. Оптимизация ADIS и
+реализованы как общие бенчмарки и исполнены на том же календаре и с теми же издержками. Оптимизация Partial multistep prediction и
 фиксированные стандартные настройки бенчмарков не позволяют объявлять превосходство над всеми их возможными настройками.</p>
 </html>"""
     (folder / "report.html").write_text(report)

@@ -1,4 +1,5 @@
 import hashlib
+import json
 from dataclasses import replace
 from zipfile import ZipFile
 
@@ -11,7 +12,7 @@ from adis.prediction import ForecastConfig, trajectory_forecast
 from adis.trading.backtest import expected_shortfall, run_backtest
 from adis.trading.baselines import technical_targets
 from adis.trading.data import download_month
-from adis.trading.evaluation import paired_bootstrap, yearly_metrics
+from adis.trading.evaluation import collect_model_metadata, paired_bootstrap, yearly_metrics
 from adis.trading.forecasts import fit_quarter, predict_quarter, trajectory_predictions
 
 
@@ -21,6 +22,20 @@ def candles(count=300, start="2020-12-25"):
     return pd.DataFrame(
         dict(Open=close, High=close + 2, Low=close - 2, Close=close, Volume=1.0, Observed=True), index=index
     )
+
+
+def test_model_manifest_survives_prediction_cache_without_local_models(tmp_path):
+    existing = {"model_id": "cached", "training_sha256": "unchanged", "fit_seconds": 2.0}
+    (tmp_path / "model_manifest.json").write_text(json.dumps([existing]))
+    assert collect_model_metadata(tmp_path) == [existing]
+    folder = tmp_path / "models" / "new"
+    folder.mkdir(parents=True)
+    new = {"model_id": "new", "training_sha256": "different", "fit_seconds": 3.0}
+    (folder / "metadata.json").write_text(json.dumps(new))
+    assert collect_model_metadata(tmp_path) == [existing, new]
+    (folder / "metadata.json").write_text(json.dumps(dict(existing, training_sha256="corrupted")))
+    with pytest.raises(AssertionError):
+        collect_model_metadata(tmp_path)
 
 
 @pytest.mark.parametrize("month,factor", [("2020-01", 1000), ("2025-01", 1000000)])

@@ -1,0 +1,5 @@
+Source: https://www.binance.com/en/support/announcement/detail/1e89a9ca957c4b0ca7502e60b993e201
+Retrieved: 2026-11-17 via web page reader; direct HTTP retrieval returned an empty response.
+Printed publication time: 2025-05-14 09:00; timezone not shown alongside it.
+Source excerpt: “At 2025-05-26 03:00 (UTC), Binance will remove all existing EOS spot trading pairs”
+The announcement includes EOS/USDT among the affected pairs and describes replacement trading in Vaulta/A from 2025-05-28 08:00 UTC, with a 1:1 token swap. This study exits EOS after the announcement and does not splice to A.
