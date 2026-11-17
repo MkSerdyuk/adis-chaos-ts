@@ -1,0 +1,38 @@
+{
+  "strategies": 14,
+  "test_start": "2022-01-01",
+  "test_end_exclusive": "2026-01-01",
+  "forecast_origins": 1461,
+  "seeds": [
+    42,
+    7,
+    123
+  ],
+  "freeze": {
+    "selection_sha256": "67f55ff869520e21fb3d725eb26212a7d915107aae7d20e27db9b050b130c366",
+    "identity": {
+      "source_hashes": {
+        "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+        "clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+        "prediction.py": "9c6423981b33a3b394a00597b895c7e85a5664ab9b6c4dce787824e5f8357e96",
+        "forecasts.py": "14bf1a0957c4b61b509bc108e252df6366c1503cb5887ba039ef5d712dc3a7cf",
+        "backtest.py": "adf5f4fc3217ffe5266023eae7095bb5c8a12898f8aa71f05e96dd276e4f0d3e",
+        "baselines.py": "e4290d6771e0d69d30879df31002c57a5d6fe456d0ed698f3376885f7a71e5fb",
+        "experiment.py": "75c673510e54ad3bdf83c16a7d28970f497d25145e929aefe2740f0f8e60c36c"
+      },
+      "protocol_sha256": "ad3dad77ca34512740d2a5dabc6aa403342949c43725463cf6af6d70a6118743",
+      "data_sha256": "4001412262219346fd560733f5847611719dc1bd05b388d6d39a9bb2990e9468",
+      "manifest_sha256": "ed8146f23dcef51004280c02f55e5cf632a022b00fa5b03fbf4421b5a07dd191",
+      "packages": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.1",
+        "scipy": "1.18.1",
+        "numba": "0.68.1",
+        "scikit-learn": "1.9.1",
+        "backtesting": "0.6.6",
+        "optuna": "4.9.0"
+      }
+    },
+    "evaluation_code_sha256": "668d2b5ab9e79e9bd36babf2eeb679b4384a18c8ca09d058530ff5dd845bcef5"
+  }
+}

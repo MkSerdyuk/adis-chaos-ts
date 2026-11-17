@@ -1,0 +1,120 @@
+{
+  "backtests": 210,
+  "portfolios": 30,
+  "candidates": [
+    "random_forest",
+    "gradient_boosting",
+    "ridge",
+    "svr",
+    "sma50_200",
+    "momentum90"
+  ],
+  "eligibility_sha256": "38d048d5bf5ddadce72680e59e53a95454a6f1a28ff47872c38fb950e5a2f3b9",
+  "frozen": {
+    "noncrypto": {
+      "symbols": [
+        "AAPL",
+        "MSFT",
+        "XOM",
+        "SPY",
+        "QQQ",
+        "TLT",
+        "GLD"
+      ],
+      "instruments": {
+        "AAPL": "equity",
+        "MSFT": "equity",
+        "XOM": "equity",
+        "SPY": "equity",
+        "QQQ": "equity",
+        "TLT": "treasury_bonds",
+        "GLD": "gold"
+      },
+      "parameters": {
+        "length": 3,
+        "max_gap": 3,
+        "r": 5,
+        "mu": 0.02,
+        "epsilon": 0.06502211399080364,
+        "cluster_eps": 0.008371633741976994,
+        "min_samples": 3,
+        "perturbation_variance": 5.8071705698799575e-05,
+        "paths": 16
+      },
+      "paper_parameters": {
+        "length": 4,
+        "max_gap": 10,
+        "r": 11,
+        "mu": 0.2,
+        "epsilon": 0.01,
+        "cluster_eps": 0.01,
+        "min_samples": 3,
+        "perturbation_variance": 1e-05,
+        "paths": 16
+      },
+      "btc_identity": {
+        "source_hashes": {
+          "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+          "clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+          "prediction.py": "9c6423981b33a3b394a00597b895c7e85a5664ab9b6c4dce787824e5f8357e96",
+          "forecasts.py": "14bf1a0957c4b61b509bc108e252df6366c1503cb5887ba039ef5d712dc3a7cf",
+          "backtest.py": "adf5f4fc3217ffe5266023eae7095bb5c8a12898f8aa71f05e96dd276e4f0d3e",
+          "baselines.py": "e4290d6771e0d69d30879df31002c57a5d6fe456d0ed698f3376885f7a71e5fb",
+          "experiment.py": "75c673510e54ad3bdf83c16a7d28970f497d25145e929aefe2740f0f8e60c36c"
+        },
+        "protocol_sha256": "ad3dad77ca34512740d2a5dabc6aa403342949c43725463cf6af6d70a6118743",
+        "data_sha256": "4001412262219346fd560733f5847611719dc1bd05b388d6d39a9bb2990e9468",
+        "manifest_sha256": "ed8146f23dcef51004280c02f55e5cf632a022b00fa5b03fbf4421b5a07dd191",
+        "packages": {
+          "numpy": "2.5.4",
+          "pandas": "3.1.1",
+          "scipy": "1.18.1",
+          "numba": "0.68.1",
+          "scikit-learn": "1.9.1",
+          "backtesting": "0.6.6",
+          "optuna": "4.9.0"
+        }
+      },
+      "exchange_calendars": "4.13.3",
+      "files": {
+        "research/trading/noncrypto/protocol.json": "1be1fe52b80d0b1746e79d5c037ce0fcc6d8d2d17bed617ffa5b317d71b21672",
+        "results/trading/selected.json": "67f55ff869520e21fb3d725eb26212a7d915107aae7d20e27db9b050b130c366",
+        "uv.lock": "da8e981414f4ff11c0acb44a3a09bc9861188f02b480b850e5460e9c4cb3d930",
+        "results/trading/noncrypto/calendar.csv": "ee68232ef6560fbf704e612b727c8a724a09697133fee7e2d42be83a327ad119",
+        "results/trading/noncrypto/data_manifest.json": "940e1894a7576f0558651d5737beefd001edc8978b0ad4f363fd21dd946705d4",
+        "results/trading/noncrypto/corporate_action_checks.json": "54ca46dcea0c9537663f4eb88d757c2129392945e9a9fc97fa4a8588dcf2e244",
+        "research/trading/noncrypto/corporate_action_reference.json": "4b87e51396c0e5cced80332002809ab2cc28db47169ee6e02226500b5c6212b2",
+        "adis/trading/equity_experiment.py": "afa2b36e45916394303afde457ca06002d5ae529f382c494065a438d18083d1f",
+        "adis/trading/equity_data.py": "13d9f1354e049ab652d7f626f10ff7f6cd66357eb204e19aac3932598d3f4961",
+        "adis/trading/equity_forecasts.py": "518fd76709422af404539906060b0f296645498d89ec3388bf528ddc5b1a2bb6",
+        "adis/trading/equity_backtest.py": "b38c09b400a1ed12f23c99bddfe4c9102d199d5c51e850c42ae2b5fba59d08cc",
+        "data/trading/noncrypto/AAPL.json": "b8a965107a94191c4659a4404e9ea597fc07c4ffe7a24316ab76a2d3f54283f1",
+        "data/trading/noncrypto/AAPL.csv.gz": "b4d105287a013815e6e3b2e0d1b861b3d23714440856720f98271c8f61c1a5ae",
+        "data/trading/noncrypto/MSFT.json": "ef4eeae440f8ab64df9e83597d0cbc37d5426c3551ed798e851eeabb306d2c39",
+        "data/trading/noncrypto/MSFT.csv.gz": "12a14ce8ad6998cd0d08a7825083118b7f2101217ec4d55fef5f90d573e35dd6",
+        "data/trading/noncrypto/XOM.json": "d4b8734523efcc4dc85619a6ad7390d9c0eca7a567ba1e3afe78cb03603ff974",
+        "data/trading/noncrypto/XOM.csv.gz": "c0992d4ba9a90d72ef4f23667300ec2a384f64aa10cb85cce0d2741e1da542d2",
+        "data/trading/noncrypto/SPY.json": "f0061fae4e9424dab1ddc0ae79c4c21e539803672799ef3f06d999d7b645f39c",
+        "data/trading/noncrypto/SPY.csv.gz": "e89b3a779f15ed833f66ee08dc660bf117e5e48823406dd5132c9f2e0adf0a0e",
+        "data/trading/noncrypto/QQQ.json": "a1f2c60f03b2a88f6d8bca2b25858e5bf58a0ca5f7f95dda898b9e80a767d9e5",
+        "data/trading/noncrypto/QQQ.csv.gz": "9865b66ac8229f777f0adc3f3f1d1a4996bc59aa27656a95d1cd784da5542122",
+        "data/trading/noncrypto/TLT.json": "6bcf6dbf61f0b954cff22d28904c2bb8b9df5eb68545fac27b829fc4ec4bf554",
+        "data/trading/noncrypto/TLT.csv.gz": "e2236626b5af491cd74cf14990a25974a3e8a38e3cf29b3774ee10de352b6905",
+        "data/trading/noncrypto/GLD.json": "45accad5121f00bb102f35fa4f3bdbcd1b1e56e70fc77abefda78f4f9b85e9e9",
+        "data/trading/noncrypto/GLD.csv.gz": "ed6ee66eefd86784df77391509f35c0acd2663d67fe4405bb5f92b6f78f1427e"
+      }
+    },
+    "files": {
+      "research/trading/noncrypto/predictive_protocol.json": "25165f49aea6ce8b68ee19bedc80b3e8270c003c14680899e5fc457cf62aa18d",
+      "adis/trading/predictive_comparison.py": "a851e17e4a2995752eaf98944589892f646013fc6cb9c6f1547d92125b85bcd0",
+      "results/trading/noncrypto/frozen.json": "83f96cd5b5ab12381858c2c066540655c068b1db0d0febbb5ffba2a58d91e85b",
+      "results/trading/noncrypto/AAPL/targets.csv": "97d883d085655e4fba262b4c63fb82bac673f2c679982f040e65f9e917543aa3",
+      "results/trading/noncrypto/MSFT/targets.csv": "62f038959387f13d41bfb9672fa9bfbb5e816327ee33455a08eb822a447bee4b",
+      "results/trading/noncrypto/XOM/targets.csv": "1385396dfcb952a4592d3bf8f2a863a32e34732f12f1eb6ad932e18f8c8ed441",
+      "results/trading/noncrypto/SPY/targets.csv": "7907166f92fd5d4bb7036993c4801daabdf8fdc89a3d5c17e090d373ac8aa4ff",
+      "results/trading/noncrypto/QQQ/targets.csv": "badb970a0b0a637112ebe4a49145671dc87e4f7607062e6bdb54dfd711676c38",
+      "results/trading/noncrypto/TLT/targets.csv": "9883145ec4563f6f3e8afe20c475b4206d554a76c6338317e4c7c5c04081803e",
+      "results/trading/noncrypto/GLD/targets.csv": "b722a1af6695800c4c12daecc5c8205488952371864025d7820e3afc9118b3fe"
+    }
+  }
+}

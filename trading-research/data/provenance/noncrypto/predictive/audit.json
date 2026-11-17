@@ -1,0 +1,1472 @@
+{
+  "AAPL/validation/partial_prediction": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/random_forest": {
+    "trade_records": 6,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/gradient_boosting": {
+    "trade_records": 10,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/ridge": {
+    "trade_records": 5,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/svr": {
+    "trade_records": 8,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/momentum90": {
+    "trade_records": 2,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/causal_control": {
+    "trade_records": 130,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/validation/paper_control": {
+    "trade_records": 0,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/partial_prediction": {
+    "trade_records": 0,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/random_forest": {
+    "trade_records": 12,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/gradient_boosting": {
+    "trade_records": 16,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/ridge": {
+    "trade_records": 10,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/svr": {
+    "trade_records": 14,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/momentum90": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/causal_control": {
+    "trade_records": 0,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/validation/paper_control": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/partial_prediction": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/random_forest": {
+    "trade_records": 6,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/gradient_boosting": {
+    "trade_records": 11,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/ridge": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/svr": {
+    "trade_records": 13,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/momentum90": {
+    "trade_records": 4,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/causal_control": {
+    "trade_records": 266,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/validation/paper_control": {
+    "trade_records": 4,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/partial_prediction": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/random_forest": {
+    "trade_records": 6,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/gradient_boosting": {
+    "trade_records": 8,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/ridge": {
+    "trade_records": 3,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/svr": {
+    "trade_records": 10,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/momentum90": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/causal_control": {
+    "trade_records": 26,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/validation/paper_control": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/partial_prediction": {
+    "trade_records": 2,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/random_forest": {
+    "trade_records": 10,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/gradient_boosting": {
+    "trade_records": 11,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/ridge": {
+    "trade_records": 11,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/svr": {
+    "trade_records": 13,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/momentum90": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/causal_control": {
+    "trade_records": 43,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/validation/paper_control": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/partial_prediction": {
+    "trade_records": 11,
+    "dividend_records": 6,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/random_forest": {
+    "trade_records": 8,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/gradient_boosting": {
+    "trade_records": 10,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/ridge": {
+    "trade_records": 12,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/svr": {
+    "trade_records": 10,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/momentum90": {
+    "trade_records": 3,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 12,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/causal_control": {
+    "trade_records": 198,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/validation/paper_control": {
+    "trade_records": 5,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/partial_prediction": {
+    "trade_records": 12,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/random_forest": {
+    "trade_records": 6,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/gradient_boosting": {
+    "trade_records": 9,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/ridge": {
+    "trade_records": 2,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/svr": {
+    "trade_records": 13,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/sma50_200": {
+    "trade_records": 3,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/momentum90": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/causal_control": {
+    "trade_records": 197,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/validation/paper_control": {
+    "trade_records": 9,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/partial_prediction": {
+    "trade_records": 34,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/random_forest": {
+    "trade_records": 23,
+    "dividend_records": 12,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/gradient_boosting": {
+    "trade_records": 33,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/ridge": {
+    "trade_records": 29,
+    "dividend_records": 14,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/svr": {
+    "trade_records": 40,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/sma50_200": {
+    "trade_records": 4,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/momentum90": {
+    "trade_records": 16,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 16,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/causal_control": {
+    "trade_records": 2129,
+    "dividend_records": 14,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/historical/paper_control": {
+    "trade_records": 23,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/partial_prediction": {
+    "trade_records": 33,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/random_forest": {
+    "trade_records": 26,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/gradient_boosting": {
+    "trade_records": 38,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/ridge": {
+    "trade_records": 27,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/svr": {
+    "trade_records": 35,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/sma50_200": {
+    "trade_records": 5,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/momentum90": {
+    "trade_records": 10,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 16,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/causal_control": {
+    "trade_records": 2937,
+    "dividend_records": 15,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/historical/paper_control": {
+    "trade_records": 30,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/partial_prediction": {
+    "trade_records": 35,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/random_forest": {
+    "trade_records": 16,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/gradient_boosting": {
+    "trade_records": 37,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/ridge": {
+    "trade_records": 14,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/svr": {
+    "trade_records": 43,
+    "dividend_records": 6,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/sma50_200": {
+    "trade_records": 4,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/momentum90": {
+    "trade_records": 13,
+    "dividend_records": 10,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 16,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/causal_control": {
+    "trade_records": 2217,
+    "dividend_records": 15,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/historical/paper_control": {
+    "trade_records": 30,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/partial_prediction": {
+    "trade_records": 21,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/random_forest": {
+    "trade_records": 22,
+    "dividend_records": 6,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/gradient_boosting": {
+    "trade_records": 42,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/ridge": {
+    "trade_records": 15,
+    "dividend_records": 6,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/svr": {
+    "trade_records": 42,
+    "dividend_records": 7,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/sma50_200": {
+    "trade_records": 3,
+    "dividend_records": 12,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/momentum90": {
+    "trade_records": 10,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 16,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/causal_control": {
+    "trade_records": 2179,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/historical/paper_control": {
+    "trade_records": 21,
+    "dividend_records": 6,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/partial_prediction": {
+    "trade_records": 26,
+    "dividend_records": 7,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/random_forest": {
+    "trade_records": 28,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/gradient_boosting": {
+    "trade_records": 42,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/ridge": {
+    "trade_records": 22,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/svr": {
+    "trade_records": 44,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/sma50_200": {
+    "trade_records": 3,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/momentum90": {
+    "trade_records": 6,
+    "dividend_records": 12,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 17,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/causal_control": {
+    "trade_records": 2394,
+    "dividend_records": 14,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/historical/paper_control": {
+    "trade_records": 25,
+    "dividend_records": 5,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/partial_prediction": {
+    "trade_records": 30,
+    "dividend_records": 37,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/random_forest": {
+    "trade_records": 10,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/gradient_boosting": {
+    "trade_records": 35,
+    "dividend_records": 13,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/ridge": {
+    "trade_records": 10,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/svr": {
+    "trade_records": 41,
+    "dividend_records": 18,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/sma50_200": {
+    "trade_records": 5,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/momentum90": {
+    "trade_records": 13,
+    "dividend_records": 11,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 48,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/causal_control": {
+    "trade_records": 5936,
+    "dividend_records": 48,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/historical/paper_control": {
+    "trade_records": 39,
+    "dividend_records": 24,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/partial_prediction": {
+    "trade_records": 14,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/random_forest": {
+    "trade_records": 18,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/gradient_boosting": {
+    "trade_records": 37,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/ridge": {
+    "trade_records": 11,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/svr": {
+    "trade_records": 38,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/sma50_200": {
+    "trade_records": 4,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/momentum90": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/causal_control": {
+    "trade_records": 921,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/historical/paper_control": {
+    "trade_records": 17,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/partial_prediction": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/random_forest": {
+    "trade_records": 8,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/gradient_boosting": {
+    "trade_records": 6,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/ridge": {
+    "trade_records": 4,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/svr": {
+    "trade_records": 11,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/momentum90": {
+    "trade_records": 3,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/causal_control": {
+    "trade_records": 130,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "AAPL/holdout/paper_control": {
+    "trade_records": 4,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/partial_prediction": {
+    "trade_records": 7,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/random_forest": {
+    "trade_records": 7,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/gradient_boosting": {
+    "trade_records": 8,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/ridge": {
+    "trade_records": 8,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/svr": {
+    "trade_records": 7,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/sma50_200": {
+    "trade_records": 2,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/momentum90": {
+    "trade_records": 2,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/causal_control": {
+    "trade_records": 370,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "MSFT/holdout/paper_control": {
+    "trade_records": 12,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/partial_prediction": {
+    "trade_records": 5,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/random_forest": {
+    "trade_records": 7,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/gradient_boosting": {
+    "trade_records": 10,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/ridge": {
+    "trade_records": 4,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/svr": {
+    "trade_records": 11,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/momentum90": {
+    "trade_records": 2,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/causal_control": {
+    "trade_records": 177,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "XOM/holdout/paper_control": {
+    "trade_records": 3,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/partial_prediction": {
+    "trade_records": 2,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/random_forest": {
+    "trade_records": 8,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/gradient_boosting": {
+    "trade_records": 10,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/ridge": {
+    "trade_records": 5,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/svr": {
+    "trade_records": 9,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/momentum90": {
+    "trade_records": 3,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/causal_control": {
+    "trade_records": 101,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "SPY/holdout/paper_control": {
+    "trade_records": 4,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/partial_prediction": {
+    "trade_records": 6,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/random_forest": {
+    "trade_records": 4,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/gradient_boosting": {
+    "trade_records": 8,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/ridge": {
+    "trade_records": 7,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/svr": {
+    "trade_records": 10,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/momentum90": {
+    "trade_records": 3,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/causal_control": {
+    "trade_records": 113,
+    "dividend_records": 3,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "QQQ/holdout/paper_control": {
+    "trade_records": 5,
+    "dividend_records": 2,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/partial_prediction": {
+    "trade_records": 4,
+    "dividend_records": 7,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/random_forest": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/gradient_boosting": {
+    "trade_records": 6,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/ridge": {
+    "trade_records": 0,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/svr": {
+    "trade_records": 4,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/sma50_200": {
+    "trade_records": 2,
+    "dividend_records": 1,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/momentum90": {
+    "trade_records": 2,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/causal_control": {
+    "trade_records": 314,
+    "dividend_records": 9,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "TLT/holdout/paper_control": {
+    "trade_records": 4,
+    "dividend_records": 4,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/partial_prediction": {
+    "trade_records": 6,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/random_forest": {
+    "trade_records": 5,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/gradient_boosting": {
+    "trade_records": 9,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/ridge": {
+    "trade_records": 6,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/svr": {
+    "trade_records": 7,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/sma50_200": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/momentum90": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/buy_hold": {
+    "trade_records": 1,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/causal_control": {
+    "trade_records": 112,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  },
+  "GLD/holdout/paper_control": {
+    "trade_records": 2,
+    "dividend_records": 0,
+    "fills_fees_pnl_verified": true,
+    "entitlement_and_cash_verified": true,
+    "raw_adjusted_value_equivalence_verified": true
+  }
+}

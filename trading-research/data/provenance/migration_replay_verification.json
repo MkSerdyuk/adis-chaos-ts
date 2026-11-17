@@ -1,0 +1,67 @@
+{
+  "scope": "Legacy predictor replay before replacement by src.Forecaster; not the current trading results",
+  "checks": {
+    "crypto/main": {
+      "rows": 90,
+      "maximum_absolute_difference": 0.0
+    },
+    "crypto/curves": {
+      "curves": 90,
+      "maximum_absolute_difference": 0.0
+    },
+    "crypto/run": {
+      "id": "3e79e985c70b1bd0",
+      "counts": {
+        "backtests": 90,
+        "scenarios": {
+          "main": 90
+        }
+      }
+    },
+    "noncrypto/main": {
+      "rows": 154,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/sensitivity": {
+      "rows": 140,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/seed": {
+      "rows": 56,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/predictive": {
+      "rows": 210,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/portfolio": {
+      "rows": 30,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/eligibility": {
+      "rows": 6,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/portfolio_comparisons": {
+      "rows": 36,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/curves": {
+      "curves": 394,
+      "maximum_absolute_difference": 0.0
+    },
+    "noncrypto/run": {
+      "id": "a1d09cb04ddac1b0",
+      "counts": {
+        "backtests": 590,
+        "scenarios": {
+          "main": 154,
+          "portfolio": 30,
+          "predictive": 210,
+          "seed": 56,
+          "sensitivity": 140
+        }
+      }
+    }
+  }
+}

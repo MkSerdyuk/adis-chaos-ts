@@ -1,0 +1,13 @@
+{
+  "rule": "2021 net portfolio return>0 and mean exposure>=10%; all six candidates retained",
+  "eligibility_sha256": "38d048d5bf5ddadce72680e59e53a95454a6f1a28ff47872c38fb950e5a2f3b9",
+  "before_test_backtests": true,
+  "eligible": [
+    "random_forest",
+    "gradient_boosting",
+    "ridge",
+    "svr",
+    "sma50_200",
+    "momentum90"
+  ]
+}

@@ -16,6 +16,13 @@ dependencies = [
 [dependency-groups]
 dev = ["ruff>=0.17.4"]
 
+[project.optional-dependencies]
+trading = [
+    "backtesting>=0.6.5,<0.7",
+    "bokeh>=3.8,<4",
+    "joblib>=1.5,<2",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

@@ -1,0 +1,741 @@
+{
+  "symbol": "BNBUSDT",
+  "interval": "1h",
+  "csv_sha256": "82d86c621f06fd411113d4264662e1409de89426941f41d663a122f2fd155258",
+  "missing_active_hours": 63,
+  "missing_times": [
+    "2019-03-12 02:00:00+00:00",
+    "2019-03-12 03:00:00+00:00",
+    "2019-03-12 04:00:00+00:00",
+    "2019-03-12 05:00:00+00:00",
+    "2019-03-12 06:00:00+00:00",
+    "2019-03-12 07:00:00+00:00",
+    "2019-05-15 03:00:00+00:00",
+    "2019-05-15 04:00:00+00:00",
+    "2019-05-15 05:00:00+00:00",
+    "2019-05-15 06:00:00+00:00",
+    "2019-05-15 07:00:00+00:00",
+    "2019-05-15 08:00:00+00:00",
+    "2019-05-15 09:00:00+00:00",
+    "2019-05-15 10:00:00+00:00",
+    "2019-05-15 11:00:00+00:00",
+    "2019-05-15 12:00:00+00:00",
+    "2019-06-07 21:00:00+00:00",
+    "2019-08-15 02:00:00+00:00",
+    "2019-08-15 03:00:00+00:00",
+    "2019-08-15 04:00:00+00:00",
+    "2019-08-15 05:00:00+00:00",
+    "2019-08-15 06:00:00+00:00",
+    "2019-08-15 07:00:00+00:00",
+    "2019-08-15 08:00:00+00:00",
+    "2019-08-15 09:00:00+00:00",
+    "2019-11-13 02:00:00+00:00",
+    "2019-11-13 03:00:00+00:00",
+    "2019-11-25 02:00:00+00:00",
+    "2019-11-25 03:00:00+00:00",
+    "2020-02-09 02:00:00+00:00",
+    "2020-02-19 12:00:00+00:00",
+    "2020-02-19 13:00:00+00:00",
+    "2020-02-19 14:00:00+00:00",
+    "2020-02-19 15:00:00+00:00",
+    "2020-02-19 16:00:00+00:00",
+    "2020-03-04 10:00:00+00:00",
+    "2020-04-25 02:00:00+00:00",
+    "2020-04-25 03:00:00+00:00",
+    "2020-06-28 02:00:00+00:00",
+    "2020-06-28 03:00:00+00:00",
+    "2020-06-28 04:00:00+00:00",
+    "2020-11-30 06:00:00+00:00",
+    "2020-12-21 14:00:00+00:00",
+    "2020-12-21 15:00:00+00:00",
+    "2020-12-21 16:00:00+00:00",
+    "2020-12-21 17:00:00+00:00",
+    "2020-12-25 02:00:00+00:00",
+    "2021-02-11 03:00:00+00:00",
+    "2021-02-11 04:00:00+00:00",
+    "2021-03-06 02:00:00+00:00",
+    "2021-04-20 02:00:00+00:00",
+    "2021-04-20 03:00:00+00:00",
+    "2021-04-25 05:00:00+00:00",
+    "2021-04-25 06:00:00+00:00",
+    "2021-04-25 07:00:00+00:00",
+    "2021-08-13 02:00:00+00:00",
+    "2021-08-13 03:00:00+00:00",
+    "2021-08-13 04:00:00+00:00",
+    "2021-08-13 05:00:00+00:00",
+    "2021-09-29 07:00:00+00:00",
+    "2021-09-29 08:00:00+00:00",
+    "2023-03-24 12:00:00+00:00",
+    "2023-03-24 13:00:00+00:00"
+  ],
+  "last_observed": "2026-10-31 23:00:00+00:00",
+  "retirement": null,
+  "archives": [
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-01.zip",
+      "sha256": "fab1f4d8efc9978956530efb57c9a68fe390dd0a79348426aab73b2555a6438b",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-02.zip",
+      "sha256": "33c2c515d6c04edfc6418626a6b11191d68c67ff796b8427644f8a8ed0a35232",
+      "rows": 672,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-03.zip",
+      "sha256": "da199264f411a43222cb2af089226d10e30b06b6c32b576b3f92809042f45cd7",
+      "rows": 738,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-04.zip",
+      "sha256": "40c0bc056473ef0cee27bb6f5581f97b8618df3b5b56c448ed13dc4961becf33",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-05.zip",
+      "sha256": "d5c3c8c2b0dbe21b04acaf39779011a622a054d2c535a45c540eabb55d1c13fc",
+      "rows": 734,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-06.zip",
+      "sha256": "b3f6c0d041b2fa945d485eb4b2805d20eac3d6be5c020e0e3956f846873fbde5",
+      "rows": 719,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": [
+        1559941200000
+      ]
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-07.zip",
+      "sha256": "0fe6fb80aa91c45e2bc8840a156965fe71104085e128204c7d824d15b23ecd56",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-08.zip",
+      "sha256": "af790ed24b662f5f68bd27c5fde95f2a11924cf28880b134eeb42b6f54ab6f06",
+      "rows": 736,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-09.zip",
+      "sha256": "7ef077252f2dcf0257173cc4970b7cf13e34f7e2b46022c486574827e8cd58b0",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-10.zip",
+      "sha256": "7f3e63d09c4609aa40366520820591f79acc57353b9abdef94f464b0174571de",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-11.zip",
+      "sha256": "1ca416955111421077893e24b67b7316acb64ead64bd6b65d5cd4b08f8b3d54e",
+      "rows": 716,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2019-12.zip",
+      "sha256": "393a169bce92cda5393800c5d4f3a2287f07b766f1b0d811e330a696c1c16205",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-01.zip",
+      "sha256": "c7c633f64a90da9d3b26437e795334dda7400088edbf46e3dd276ab8104627d6",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-02.zip",
+      "sha256": "cce9cb682bee3e14a5fddf41cb19c91e1cd8892ba01fd378d7029f1efc77dcf6",
+      "rows": 690,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-03.zip",
+      "sha256": "961a87ed37f1ab7347f62ddf849d5148d1d8118b510b76e8439de0dc12355484",
+      "rows": 743,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-04.zip",
+      "sha256": "3328ea16356715151fe25d50e2e571211e3eb61df5e48296f2bb2045ed11fc5e",
+      "rows": 718,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-05.zip",
+      "sha256": "5efb838267b1fb2d697eb882ba2594f50e0a39059f9bc1230f9731455de757a0",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-06.zip",
+      "sha256": "7be1b27d6944570a9605d46f01fc40e97298c17864491fe960daef2ef1509622",
+      "rows": 717,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-07.zip",
+      "sha256": "9e5b8debbed787781379dc5d34a55c2752b6c142b60b35a1ecbe213c3da053dd",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-08.zip",
+      "sha256": "0cf6d7391bc0fe9adeea6d1e0c9bb283fe3f0d35697d3c08146964277d586b16",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-09.zip",
+      "sha256": "c9c96f9c69e6d049fd9439cd5637c86ffdc100340bcb351327c120e726b688e0",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-10.zip",
+      "sha256": "beff332c397453baf21f80ea4c4eb603649a455c6bbdacb614c097b0e38bc275",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-11.zip",
+      "sha256": "0f021ef432d688d84402beeb699d56af37c286fbdbb755568c5befe3533215bd",
+      "rows": 719,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2020-12.zip",
+      "sha256": "787805f1a8f7721ab1e9908ea446d806d09a210a2120aeda9667e66e09ab6ccd",
+      "rows": 739,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": [
+        1608559200000
+      ]
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-01.zip",
+      "sha256": "5cdf6cb04631af89dcf108fb7cb8f5c0a5d23ee6c7a5ab9fbd3db3086637e694",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-02.zip",
+      "sha256": "43b7f41f3f21631ff10bd8773dc15b51fad7e34e71781abe44e293d783be2215",
+      "rows": 670,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": [
+        1613012400000
+      ]
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-03.zip",
+      "sha256": "3b91972b1b96f3744ac6cd176ce805a2205ca0e04695ca86c0cda5d2adcb600a",
+      "rows": 743,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-04.zip",
+      "sha256": "7a7c1d9b77747355826fcc8bfafa02881baacda993dd6aa552229697b7809864",
+      "rows": 715,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-05.zip",
+      "sha256": "487847e1fb70123743a58793305629d327d6cd4515e059d40e4017a9e120fe01",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-06.zip",
+      "sha256": "6778ed4eacf42e5c8fe3ae44cfbc932fff6c690db59cfa93b096010628441f99",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-07.zip",
+      "sha256": "ca4060e5f13413a1b861483641d4dd9d3fe81c7a612caba21b565b4e20346934",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-08.zip",
+      "sha256": "40c898781fa5eb29fa76b4fd6950a119fdf743c2305b99d2727e96d8730c52a5",
+      "rows": 740,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-09.zip",
+      "sha256": "2aaf3c5358b46ef7d59d7013fd3dacf2a9ecf27037929f061611c028d205abe1",
+      "rows": 718,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-10.zip",
+      "sha256": "dc2acb054fdcea05d7c8cb4511376b20954d034f6ddfd4d5cd07cb405886c082",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-11.zip",
+      "sha256": "dc3f62a12d9f21818c9bd8b35511e3e255fc4f4bf114fc4e4506a32267f97e6f",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2021-12.zip",
+      "sha256": "8bbc6c5be0dd58d060085a2048d2d9a807183fce333234cee1cfb03447b14b36",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-01.zip",
+      "sha256": "663ea08387d4c5155b2421ebeaaaba14850e4362cc9e24ee7979bfefab03f625",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-02.zip",
+      "sha256": "00b3aab119398a6ef303a9b122f7ee819eb1c62c358d3d511ceae345b74ba6db",
+      "rows": 672,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-03.zip",
+      "sha256": "c6c3ae3b1332fc39d92749bd126fb675571fbe80576cd95d56d0a16a0ec77afd",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-04.zip",
+      "sha256": "496c543a2aac62b3d8ab6a71c89da4db9ad4fcd9bc640905edbeda7b4487004f",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-05.zip",
+      "sha256": "e183a9b786ba8c2ddcfb48cf974dcd8edad5c6816e865e3ec62d9d94eec08c7e",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-06.zip",
+      "sha256": "ea7faf8f2d22c27768b868ca431c56d2cbb83d955d3debe1e6dfb70f034de32a",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-07.zip",
+      "sha256": "829ef1e541a13599cba457ce963674c2f14447899c7f43b878299e5f59a2b7f5",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-08.zip",
+      "sha256": "927a92e9c381729b063cbe89a4a8bca10898aca61e1a6919a016ea7eb959304f",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-09.zip",
+      "sha256": "054d3296f060a815d7ad5c6485d4883430dad0fc08e78f0be10df66884620eed",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-10.zip",
+      "sha256": "dfc624a65e466abc9698c1d153843d78f1df449107bce97c5215525417fa3718",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-11.zip",
+      "sha256": "f9f9497753bd5d1df5a2a59ee5dfe07edd79f2be7aaa14a5371511a464fa2495",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2022-12.zip",
+      "sha256": "acc9f21b1ed51b5f4cc2978ee95a0e50ffea7891cd1037a01c8c88c4e71a7104",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-01.zip",
+      "sha256": "4d7ad8f2cc41682200d6e8d1ab6088219e302b3a356f9997c19395b0208497b5",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-02.zip",
+      "sha256": "0e15c412a2a14f40e67c12b5546ef736f88d045815e68341f1f5a567cc428ac6",
+      "rows": 672,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-03.zip",
+      "sha256": "55bba490654b69c26cc1989f17902737535682f70491132f66246fbea3b7017a",
+      "rows": 742,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": [
+        1679659200000
+      ]
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-04.zip",
+      "sha256": "d45f37c1f4c7bce00774074ab01c5f385ba150e28e5cb0c84a73371d2042c313",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-05.zip",
+      "sha256": "882253ca7518d2b5cebdc388b6e8cf5a1c19d180e629f848d201c5bda54c46c3",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-06.zip",
+      "sha256": "27607d49c36f479d582801faa9b8eb698b79032ca4aac69d65c720eeca6cf122",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-07.zip",
+      "sha256": "7bfa51be86f9822859af309dc579134089c2e8040a9f66503be0d5cd96499060",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-08.zip",
+      "sha256": "5eebe4ec692c43e9bc8722632da94cd79187aa17b848da9361656ce0be430bd0",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-09.zip",
+      "sha256": "159a99069e8826ee23aca59b5dc7864a083fe5a4d8b13f888b68dfaa4317816b",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-10.zip",
+      "sha256": "65e6c269037fb53ed74b9cd03219a42d98dff1d48cffde8307e9d9c73dfce63b",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-11.zip",
+      "sha256": "486035abf6083f90e53e0c49e0fa829d0380d174a65ea6e8bb9066f76b139554",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2023-12.zip",
+      "sha256": "9153d4b7bf9e5cc6c49857b65ad7a3566faf525774deb0336aad1af9b44bd639",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-01.zip",
+      "sha256": "e06554367764c662b9690e28359193fb9c8b9d5d44cd09f4b23d6d022fe9552a",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-02.zip",
+      "sha256": "c79637210a9b67dcd198cdff3d75c8f275bbb0be13ff0a7703378e16fe051d52",
+      "rows": 696,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-03.zip",
+      "sha256": "06e124d8cdeda60dd327ad23d9f61470f874e14e6fe495cb1739b50961af48dc",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-04.zip",
+      "sha256": "623fae707bcafc75e01281565626f1ea0fac03d010d630dad7f67fc76ff31e72",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-05.zip",
+      "sha256": "489692791a583ed29b26fcadfba774832820a842e8e393e41764df9221279d2e",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-06.zip",
+      "sha256": "c9f4bf8e332c1a4dc3e57655f17c12a5554f8bd085ddabf70fbe464b7071ba95",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-07.zip",
+      "sha256": "6fd039df81b4a12d699b9f810cb39dfbb389edb1d508571d49432247c630fb4a",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-08.zip",
+      "sha256": "4334244cd1cd0e2ed4d9a1e42d92e67418b83b9565d8eb9618f826005f1655f2",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-09.zip",
+      "sha256": "2697bc4cfc775ad17de0adfabd4b94ac4d575414dd374e72a9b77339f7dd2930",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-10.zip",
+      "sha256": "36768457c4e40c9b80088d0e2559876822e18269ecb782b5f570f0b205ef9d8f",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-11.zip",
+      "sha256": "133bb27dc562eafce74b7a7deaaf7742a5e7790efbd23130876b2ce41a18c77b",
+      "rows": 720,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2024-12.zip",
+      "sha256": "9ffb3beebc21b20ac140d985050a49fa1e11b475aa9dff3f9b75e55a9b832165",
+      "rows": 744,
+      "timestamp_unit": "ms",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-01.zip",
+      "sha256": "c2df916221d659c4ea89daff3b7c2f14aa44e48e8163191580b8579664621ab0",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-02.zip",
+      "sha256": "75effe494d7a7d29b020f73c5acb23c0a2f8731df29d95837c489c359de62db1",
+      "rows": 672,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-03.zip",
+      "sha256": "74161c8cd3e6869d3d42a321af8590002f7666e0507220eff513a3c84751dc6d",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-04.zip",
+      "sha256": "e93a57bbaddfe264cc0b697aa52486ebdf8901195d7363eefa2f0208ad7b7e45",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-05.zip",
+      "sha256": "0f77041a1e43581b7b67210e35432c997d33b2b450ff5586ee2aaaf1a7e1cceb",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-06.zip",
+      "sha256": "4738dcff9c08bdd71a98d81cb5caab2e31edde3e6e152a0d89689e41f2d3c110",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-07.zip",
+      "sha256": "8541283a264382b0d8d3cec5c563e457dae00cf97c8c0b4d3cee1781825d0246",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-08.zip",
+      "sha256": "74939c2d6afa29f927ceb4a0adacc873ba975e0f37ecd2b05c5a3f4c45673a6b",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-09.zip",
+      "sha256": "edb2ba0c725e932b6adb162a38470b29a0f3888a216a4663851de202b2c7937b",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-10.zip",
+      "sha256": "22b2595e7df28f89e12523fac0aaf14e742fbf7ab4ff8feb081201fe3f714edc",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-11.zip",
+      "sha256": "34eebef4cf7743a1d44567b9857eddc020c3a96b4c9aac65702a4537df72ae76",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2025-12.zip",
+      "sha256": "3d0d7dd68c548d3439ba773e1556a89911fff14af7aac9ed34d16090b85cad5e",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-01.zip",
+      "sha256": "c2524b2a5a48fa55cd6c8321118b7ad0de7ef83794344ccfd86d161e11b7c6a5",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-02.zip",
+      "sha256": "819761ffd58e265f471c4edbe5ffd2e7abbeb747a85a6b2c0cb389f921850f29",
+      "rows": 672,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-03.zip",
+      "sha256": "b80b2124644a48ce2fbf90cd2cedadfdf79aa2de72ac14d0dcd7c487fe75196c",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-04.zip",
+      "sha256": "4283e0a097dc65dbf0658744352086a46e0862023825f60d815da5ccd8f7f835",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-05.zip",
+      "sha256": "74aac29cedf0fc0b94a1bb7bb1b8ba3aebfef827da0c21be181884789dcef9ae",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-06.zip",
+      "sha256": "0c3b052bd921899ca8216f86cbd2830a8f20bc5725bcf49611486267fb704997",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-07.zip",
+      "sha256": "7257a39b939fce6c29ba7f44ae42fbec4517d18dacc2b3d27c9c536881af7d10",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-08.zip",
+      "sha256": "420f85b0f1440f209d4ac1aaecf1b0d91e165a18f4edea3de11695589d5578c7",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-09.zip",
+      "sha256": "caccd0ca4bd8b63257f402381e3a869a358943fd17f98a13d0f00c88aab21050",
+      "rows": 720,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    },
+    {
+      "url": "https://data.binance.vision/data/spot/monthly/klines/BNBUSDT/1h/BNBUSDT-1h-2026-10.zip",
+      "sha256": "77600e455a4a415628276c6a3560f25d9a34f89bdeefb0435477505087110478",
+      "rows": 744,
+      "timestamp_unit": "us",
+      "zero_volume_open_times": []
+    }
+  ]
+}

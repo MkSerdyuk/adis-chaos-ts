@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "method": "Partial multistep prediction (Gromov\u2013Baranov), perturbed trajectories with avg aggregation and rgdbscan; trading adaptation",
+  "scope": "Fixed-parameter transfer between Binance spot cryptoassets; not a comparison of different asset classes.",
+  "prior_information": "BTCUSDT 2022\u20132025 results were inspected before this protocol. Other assets share market regimes with BTC; historical transfer is not independent temporal confirmation.",
+  "universe_rule": "Top five non-BTC USDT spot pairs by total quote-asset volume in official 2019 monthly 1h archives, requiring a real candle at 2019-01-01 00:00 UTC, all twelve monthly archives and >=99% real hourly candles in 2019. Ties broken by symbol. Current listings and post-2019 returns are not selection inputs. Save all candidates, exclusions and source checksums before forecasting.",
+  "excluded_base_assets": [
+    "BTC",
+    "USDT",
+    "USDC",
+    "TUSD",
+    "PAX",
+    "USDP",
+    "USDS",
+    "USDSB",
+    "BUSD",
+    "DAI",
+    "SUSD",
+    "UST",
+    "USTC",
+    "USDD",
+    "FDUSD",
+    "USD1",
+    "EUR",
+    "GBP",
+    "AUD",
+    "RUB",
+    "TRY",
+    "BIDR",
+    "IDRT",
+    "BVND"
+  ],
+  "excluded_token_suffixes": [
+    "UP",
+    "DOWN",
+    "BULL",
+    "BEAR"
+  ],
+  "universe_count": 5,
+  "parameters_source": "results/trading/selected.json",
+  "selection_sha256": "67f55ff869520e21fb3d725eb26212a7d915107aae7d20e27db9b050b130c366",
+  "hyperparameter_search": "None. Transfer all BTC-selected parameters and trading rules unchanged. Refit motifs on each asset using past 10000 hours only. 2021 forecasts initialize causal exposure control; no asset-local validation choice.",
+  "data_start": "2019-01-01",
+  "historical_test": [
+    "2022-01-01",
+    "2026-01-01"
+  ],
+  "temporal_holdout": [
+    "2026-01-01",
+    "2026-11-01"
+  ],
+  "temporal_holdout_status": "New unopened complete-month period; no tuning or changes after either transfer period is evaluated. Correlated across assets and only ten months long.",
+  "seed": 42,
+  "baselines": [
+    "cash",
+    "buy_hold",
+    "sma_50_200_daily",
+    "momentum_90_daily",
+    "donchian_20_10_daily",
+    "rsi_14_daily",
+    "vol_target_20pct_30daily",
+    "causal_exposure_control"
+  ],
+  "execution": "Same next real open plus one additional completed hour, 95% entry allocation, 15bps per side, no leverage, zero cash interest. Delayed prior-target90 daily-rebalanced causal control. Each evaluation period starts with 100000 cash; indicator/model history and prior targets may precede it.",
+  "primary_estimand": "Equal-weight mean across ALL FIVE preselected assets of daily ES95(method) minus daily ES95(causal control), on temporal holdout 2026-01-01 to 2026-11-01. Negative favors method. This is average asset-level risk, not portfolio risk. 2022\u20132025 aggregate is secondary descriptive.",
+  "bootstrap": {
+    "method": "paired circular moving blocks with the SAME sampled calendar blocks for every asset and both strategies",
+    "replicates": 10000,
+    "block_days": 14,
+    "sensitivity_block_days": [
+      7,
+      28
+    ],
+    "seed": 20261117,
+    "confidence": 0.95,
+    "asset_intervals": "Two-sided Bonferroni-adjusted percentile intervals, alpha=0.05/5; no winning-market selection. Other comparisons descriptive."
+  },
+  "activity": "Report coverage, entries and realized exposure. A method-control pair with both exposure<1% is labelled inactive, not evidence of risk recognition. It remains in the fixed-panel mean.",
+  "data_quality": "Do not replace selected assets. Every missing archive or terminal discontinuity is recorded. No backward stitching of token migrations. A delisted asset requires an independently dated exchange notice plus a preannounced exit rule before any forecast is evaluated; otherwise mark full-period execution unresolved and do not compute the all-five primary aggregate. Publish remaining rows as descriptive only.",
+  "stopping_rule": "Evaluate every selected asset once for both fixed periods, publish all outcomes. No new markets, windows, seeds, thresholds or optimization after results. Any later selected market requires new forward data.",
+  "interpretation": "Per-asset familywise intervals and calendar-synchronized bootstrap address multiple comparisons and cross-asset correlation. They do not make cryptoassets economically independent or eliminate archive reconstruction limitations.",
+  "delisting_rule": "After a dated exchange announcement, at the first daily decision whose bar closes after the announcement, permanently set ALL strategies targets to zero. Execute with normal next-real-open and delay; require exit before the announced cessation, otherwise unresolved. Never infer a timely exit from the last bar. Keep the retired cash slot in fixed-panel aggregation; report number of active assets and do not interpret retirement as risk-prediction success. No model refits after retirement.",
+  "known_announcements": {
+    "EOSUSDT": {
+      "published_utc": "2025-05-14 09:00:00+00:00",
+      "spot_ceases_utc": "2025-05-26 03:00:00+00:00",
+      "source": "https://www.binance.com/en/support/announcement/detail/1e89a9ca957c4b0ca7502e60b993e201",
+      "handling": "Sell after the first daily decision following notice. Do not replace or splice to Vaulta/A."
+    }
+  },
+  "protocol_history": "Delisting execution rule and EOS notice added during universe reconstruction before any non-BTC strategy forecasts/results. Metadata download initially failed on an unescaped non-ASCII ticker; URL encoding fixed without changing selection rules."
+}

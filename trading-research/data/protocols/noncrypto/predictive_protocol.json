@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "purpose": "User-requested direct risk/return comparison with predictive alternatives, with profitable comparators identified using2021 only.",
+  "prior_information": "The seven-instrument partial-prediction/control2022\u20132025 and2026 results are already known. This is a declared exploratory comparison, not a newly untouched confirmatory experiment. No tuning to the known test is allowed.",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "SPY",
+    "QQQ",
+    "TLT",
+    "GLD"
+  ],
+  "data_and_execution": "Reuse frozen noncrypto daily snapshot,2520-session quarterly train,5-session forward price return,weekly calendar decisions,nextOpen,95% long/cash at predictedreturn>0.003,15bps per side,ex-date dividend credit and split-adjusted fractional units. All labels purged5sessions before quarterly fit.",
+  "features": "Same predictors for all four supervised models: log price momentum1/5/20/60sessions, logreturn volatility20/60sessions, volume divided by trailing20-session mean. No future values or dividend schedules.",
+  "predictive_candidates": {
+    "random_forest": {
+      "n_estimators": 200,
+      "max_depth": 6,
+      "min_samples_leaf": 50,
+      "max_features": 0.8,
+      "random_state": 42
+    },
+    "gradient_boosting": {
+      "estimator": "HistGradientBoostingRegressor",
+      "learning_rate": 0.05,
+      "max_iter": 200,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 30,
+      "l2_regularization": 1.0,
+      "early_stopping": false,
+      "random_state": 42
+    },
+    "ridge": {
+      "features": "StandardScaler fitted on each train window",
+      "alpha": 10.0
+    },
+    "svr": {
+      "features": "StandardScaler fitted on each train window",
+      "kernel": "rbf",
+      "C": 1.0,
+      "epsilon": 0.01,
+      "gamma": "scale"
+    },
+    "sma50_200": {
+      "role": "Fixed standard trend-direction baseline, existing saved targets"
+    },
+    "momentum90": {
+      "role": "Fixed standard momentum-direction baseline, existing saved targets"
+    }
+  },
+  "no_hyperparameter_search": true,
+  "validation": [
+    "2021-01-01",
+    "2022-01-01"
+  ],
+  "profitability_eligibility": "A comparator is validation-profitable only if its initially class-balanced portfolio has net totalreturn>0 and mean actual portfolio exposure>=10% during2021. Eligibility is computed before comparing its test performance. Do not require or select positive testreturn. Save and show all six candidates regardless of eligibility; also show all per-asset results.",
+  "portfolio": "Initial capital allocated1/15 to each of five equity instruments,1/3TLT,1/3GLD. No inter-asset rebalancing or leverage. Portfolioequity=sum(initialweight*normalizedinstrumentequity), so weights drift with performance; portfolioexposure=value-weighted current exposures. This is an actual self-financing combination of the simulated subaccounts, unlike the earlier mean asset-level ES estimand.",
+  "comparison_periods": {
+    "historical": [
+      "2022-01-01",
+      "2026-01-01"
+    ],
+    "holdout": [
+      "2026-01-01",
+      "2026-11-01"
+    ]
+  },
+  "comparators": "Direct portfolioES95(partial_prediction)-portfolioES95(each of6candidates), together with netreturn,drawdown,volatility,meanexposure. Buyhold and causal_control remain contextual references, not the focus.",
+  "uncertainty": "Paired circular bootstrap10000replicates,10sessionblocks with5/20sensitivity; same calendar blocks across all candidates. Bonferroni6 portfolio-comparison intervals, alpha=0.05/6. Per-asset numbers descriptive only. Do not claim significance for observed profitable subsets selected after test.",
+  "interpretation": "Lower risk with much lower exposure does not establish better timing or a superior risk/return tradeoff. Positive2021 return does not guarantee positive2026 return. Preserve all adverse/negative results and do not choose the winning market or model from test.",
+  "stopping": "One run of all fixed candidates on all fixed instruments and periods; no model,hyperparameter,feature,threshold,universe or date changes from output.",
+  "contextual_references": [
+    "buy_hold",
+    "causal_control",
+    "paper_control"
+  ],
+  "contextual_control_warmup": "In2021 the causal-control reference holds cash until13priorweeklytargets exist; this reference is not among eligibility-selected candidates."
+}

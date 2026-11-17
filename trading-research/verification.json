@@ -1,0 +1,87 @@
+{
+  "src_unchanged_from": "21d07ec775158bbfbc05e4013b5d072ce3043681",
+  "adapter": [
+    {
+      "symbol": "BTCUSDT",
+      "origins": 3,
+      "direct_forecaster_match": true,
+      "future_prefix_invariance": true,
+      "missing_context_cash": true,
+      "alternate_seed_matches_direct": true
+    },
+    {
+      "symbol": "AAPL",
+      "origins": 3,
+      "direct_forecaster_match": true,
+      "future_prefix_invariance": true
+    }
+  ],
+  "incomplete_cache_rejected": true,
+  "execution_tests_passed": 13,
+  "clean_python_files": 15,
+  "runs": {
+    "btc": {
+      "id": "7f0667449da072ad",
+      "backtests": 62,
+      "portfolios": 0,
+      "scenarios": {
+        "main": 12,
+        "seed": 2,
+        "sensitivity": 48
+      },
+      "unchanged_baseline_rows": 8,
+      "forecast_ledgers": 5,
+      "forecast_origins": 6209
+    },
+    "crypto": {
+      "id": "e1df123e9cc3a138",
+      "backtests": 90,
+      "portfolios": 0,
+      "scenarios": {
+        "main": 90
+      },
+      "unchanged_baseline_rows": 70,
+      "forecast_ledgers": 5,
+      "forecast_origins": 10115
+    },
+    "noncrypto": {
+      "id": "708bc4538b2aa870",
+      "backtests": 560,
+      "portfolios": 30,
+      "scenarios": {
+        "main": 154,
+        "portfolio": 30,
+        "predictive": 210,
+        "seed": 56,
+        "sensitivity": 140
+      },
+      "unchanged_baseline_rows": 280,
+      "forecast_ledgers": 28,
+      "forecast_origins": 8512
+    }
+  },
+  "scope": "New trading experiment using unchanged src.Forecaster; legacy method results are provenance only",
+  "browser": [
+    {
+      "block": "btc",
+      "run": "7f0667449da072ad",
+      "title": "Bitcoin research",
+      "plots": 1,
+      "browser_errors": []
+    },
+    {
+      "block": "crypto",
+      "run": "e1df123e9cc3a138",
+      "title": "Crypto transfer research",
+      "plots": 10,
+      "browser_errors": []
+    },
+    {
+      "block": "noncrypto",
+      "run": "708bc4538b2aa870",
+      "title": "Stocks, bonds and gold research",
+      "plots": 38,
+      "browser_errors": []
+    }
+  ]
+}

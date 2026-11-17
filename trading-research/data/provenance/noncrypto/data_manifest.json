@@ -1,0 +1,92 @@
+[
+  {
+    "symbol": "AAPL",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "b8a965107a94191c4659a4404e9ea597fc07c4ffe7a24316ab76a2d3f54283f1",
+    "csv_sha256": "b4d105287a013815e6e3b2e0d1b861b3d23714440856720f98271c8f61c1a5ae",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [
+      {
+        "date": "2005-02-28",
+        "Split": 2.0
+      },
+      {
+        "date": "2014-06-09",
+        "Split": 7.0
+      },
+      {
+        "date": "2020-08-31",
+        "Split": 4.0
+      }
+    ],
+    "dividend_events": 58
+  },
+  {
+    "symbol": "MSFT",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "ef4eeae440f8ab64df9e83597d0cbc37d5426c3551ed798e851eeabb306d2c39",
+    "csv_sha256": "12a14ce8ad6998cd0d08a7825083118b7f2101217ec4d55fef5f90d573e35dd6",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 87
+  },
+  {
+    "symbol": "XOM",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/XOM?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "d4b8734523efcc4dc85619a6ad7390d9c0eca7a567ba1e3afe78cb03603ff974",
+    "csv_sha256": "c0992d4ba9a90d72ef4f23667300ec2a384f64aa10cb85cce0d2741e1da542d2",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 88
+  },
+  {
+    "symbol": "SPY",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "f0061fae4e9424dab1ddc0ae79c4c21e539803672799ef3f06d999d7b645f39c",
+    "csv_sha256": "e89b3a779f15ed833f66ee08dc660bf117e5e48823406dd5132c9f2e0adf0a0e",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 87
+  },
+  {
+    "symbol": "QQQ",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/QQQ?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "a1f2c60f03b2a88f6d8bca2b25858e5bf58a0ca5f7f95dda898b9e80a767d9e5",
+    "csv_sha256": "9865b66ac8229f777f0adc3f3f1d1a4996bc59aa27656a95d1cd784da5542122",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 88
+  },
+  {
+    "symbol": "TLT",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/TLT?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "6bcf6dbf61f0b954cff22d28904c2bb8b9df5eb68545fac27b829fc4ec4bf554",
+    "csv_sha256": "e2236626b5af491cd74cf14990a25974a3e8a38e3cf29b3774ee10de352b6905",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 261
+  },
+  {
+    "symbol": "GLD",
+    "source": "https://query1.finance.yahoo.com/v8/finance/chart/GLD?period1=1104537600&period2=1794873600&interval=1d&events=div%2Csplits%2CcapitalGains&includeAdjustedClose=true",
+    "raw_sha256": "45accad5121f00bb102f35fa4f3bdbcd1b1e56e70fc77abefda78f4f9b85e9e9",
+    "csv_sha256": "ed6ee66eefd86784df77391509f35c0acd2663d67fe4405bb5f92b6f78f1427e",
+    "sessions": 5503,
+    "first": "2005-01-03 00:00:00",
+    "last": "2026-11-16 00:00:00",
+    "splits": [],
+    "dividend_events": 0
+  }
+]

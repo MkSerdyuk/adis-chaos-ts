@@ -1,0 +1,15 @@
+{
+  "studies": [
+    {
+      "study": "v2_engineering_pilot",
+      "complete": 3,
+      "unfinished": 1
+    },
+    {
+      "study": "v3_quarter_activity",
+      "complete": 16,
+      "unfinished": 1
+    }
+  ],
+  "reason": "Quarterly activity constraint removed during validation development; overall exposure>=10% and entries>=12 retained. No test results computed."
+}
