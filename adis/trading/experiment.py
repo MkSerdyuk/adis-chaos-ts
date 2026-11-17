@@ -71,7 +71,7 @@ def tune(frame, trials=32):
     study = optuna.create_study(
         direction="minimize",
         sampler=sampler,
-        study_name="btc_risk_validation_v3",
+        study_name="btc_risk_validation_v4",
         storage=f"sqlite:///{ROOT / 'study.db'}",
         load_if_exists=True,
     )
@@ -107,7 +107,6 @@ def tune(frame, trials=32):
         constraints = [
             (0.10 - metrics["mean_exposure"]) / 0.10,
             (12 - metrics["entries"]) / 12,
-            (0.02 - min(quarterly_exposure)) / 0.02,
         ]
         score = float(np.mean(quarterly_es) + 0.5 * np.std(quarterly_es))
         trial.set_user_attr("constraints", constraints)

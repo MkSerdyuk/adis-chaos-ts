@@ -56,6 +56,17 @@ def build_report():
     folder = ROOT / "test"
     completed = json.loads((folder / "completed.json").read_text())
     selected = json.loads((ROOT / "selected.json").read_text())
+    development = json.loads((ROOT / "development_history.json").read_text())
+    configurations = []
+    for filename in ["v2_engineering_pilot_trials.json", "v3_quarter_activity_trials.json"]:
+        for trial in json.loads((ROOT / filename).read_text()):
+            if trial["state"] == "COMPLETE":
+                configurations.append(trial["attributes"]["parameters"])
+    configurations.extend(
+        json.loads(path.read_text())["parameters"] for path in (ROOT / "validation").glob("*/result.json")
+    )
+    unique_configurations = len({json.dumps(value, sort_keys=True) for value in configurations})
+    prior_trials = sum(study["complete"] for study in development["studies"])
     metrics = pd.read_csv(folder / "metrics.csv")
     yearly = pd.read_csv(folder / "yearly_metrics.csv")
     intervals = pd.read_csv(folder / "bootstrap.csv")
@@ -179,11 +190,18 @@ h1,h2{{line-height:1.2}}table{{border-collapse:collapse;width:100%;font-size:13p
 доходность денег равна нулю. Решение после закрытия бара 23:00 UTC, исполнение на следующем реальном открытии
 после ещё одного законченного часа: обычно в 01:00 UTC. Издержки 15 bps в каждую сторону:
 10 bps комиссии плюс 5 bps дополнительной пропорциональной платы за проскальзывание.</p>
-<h2>Подбор и проверка</h2><p>Optuna TPE, 32 настройки, четыре последовательных квартала 2021 года.
+<h2>Подбор и проверка</h2><p>Финальный Optuna TPE: 32 оценки, четыре последовательных квартала 2021 года.
 Критерий: средний квартальный ES95 плюс половина его стандартного отклонения. Ограничения: средняя экспозиция
-не ниже 10%, минимум 12 входов и не менее 2% экспозиции в каждом квартале. Затем параметры заморожены;
+не ниже 10% и минимум 12 входов за validation-год. Затем параметры заморожены;
 тест 2022–2025 выполняется с квартальным переобучением на последних 10 000 часах. Предыдущие наблюдения теста
 становятся обучающей историей только после наступления их времени. В гиперпараметры test не передаётся.</p>
+<p>Протокол разрабатывался на validation: до финального поиска выполнено ещё {prior_trials} завершённых оценок.
+Всего сохранено {len(configurations)} завершённых оценок и {unique_configurations} уникальных конфигураций,
+часть повторов использовала кэш. Первый инженерный запуск остановлен для усиления проверки кэшей.
+В следующем запуске было требование 2% экспозиции в каждом квартале; первые 16 вариантов его не выполнили.
+Его сняли до просмотра test, сохранив общие ограничения активности. Длительный отказ от торговли допустим
+для этого метода. Отсутствие входов в Q1 2021 связано с выходом цены за исторический диапазон мотивов,
+а само по себе не доказывает распознавание повышенного риска. Все предыдущие trials сохранены.</p>
 <p>Разрешённый пользователем поиск меняет L/K, r/μ Wishart и параметры прогноза. Все комбинации промежутков
 выбранного L/K сохраняются, Wishart включён. Прогноз всегда на 24 часа. Long на 95% доступного капитала при
 принятом прогнозе роста более 0,3%, иначе cash. Неизменный сигнал не вызывает повторного входа; отдельно

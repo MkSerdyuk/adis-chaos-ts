@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "market": "Binance BTCUSDT spot",
   "data_start": "2019-01-01",
   "data_end_exclusive": "2026-01-01",
@@ -32,7 +32,7 @@
     1,
     2
   ],
-  "selection_rule": "Validation only: minimize mean quarterly daily ES95 loss + 0.5*standard deviation of quarterly ES95; constraints mean exposure>=10%, >=12 entries overall and every quarter exposure>=2%. Tie-break larger net return then trial number. If no trial qualifies, report failed eligibility and choose the least total normalized constraint violation, then objective; never call zero-activity low risk a success.",
+  "selection_rule": "Validation only: minimize mean quarterly daily ES95 loss + 0.5*standard deviation of quarterly ES95; constraints mean exposure>=10%, >=12 entries overall. Tie-break larger net return then trial number. If no trial qualifies, report failed eligibility and choose the least total normalized constraint violation, then objective; never call zero-activity low risk a success.",
   "baselines": [
     "cash",
     "buy_hold",
@@ -138,5 +138,20 @@
     "clustered": true
   },
   "es_estimator": "Mean of the worst ceil(0.05*n) daily returns, sign inverted and floored at zero; used identically in selection and bootstrap.",
-  "audit_pilot": "Initial validation-only engineering run stopped after3 complete trials to add cache/provenance guards and daily exposure-control rebalancing. No test results were computed. Fresh32-trial study follows v3."
+  "audit_pilot": "Initial validation-only engineering run stopped after3 complete trials to add cache/provenance guards and daily exposure-control rebalancing. No test results were computed. Fresh32-trial study follows v3.",
+  "validation_development": {
+    "history": [
+      {
+        "study": "v2_engineering_pilot",
+        "complete": 3,
+        "unfinished": 1
+      },
+      {
+        "study": "v3_quarter_activity",
+        "complete": 16,
+        "unfinished": 1
+      }
+    ],
+    "change": "Remove minimum exposure within each quarter: prolonged abstention is allowed. Keep >=10% overall mean exposure, >=12 entries, original objective/search space and32 final TPE trials. Preserve old quarter exposure as a diagnostic. No test results inspected."
+  }
 }
