@@ -1,0 +1,14 @@
+{
+  "backtests_verified": 210,
+  "portfolios_verified": 30,
+  "forecast_rows_verified": 8512,
+  "shared_instrument_curves_exactly_match_main": 98,
+  "split_and_five_session_label_purge_verified": true,
+  "rf_targets_match_original": true,
+  "all_candidates_retained": true,
+  "eligibility_recomputed_from_2021_only": true,
+  "eligibility_sha256": "38d048d5bf5ddadce72680e59e53a95454a6f1a28ff47872c38fb950e5a2f3b9",
+  "portfolio_initial_allocations_and_drift_verified": true,
+  "saved_portfolio_risk_recomputed_independently": true,
+  "comparison_differences_verified": 36
+}

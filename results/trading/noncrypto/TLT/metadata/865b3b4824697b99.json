@@ -1,0 +1,25 @@
+{
+  "model_id": "865b3b4824697b99",
+  "fit_start": "2015-12-23 00:00:00",
+  "fit_end_exclusive": "2026-01-01 00:00:00",
+  "last_training_session": "2025-12-31 00:00:00",
+  "training_sessions": 2520,
+  "training_sha256": "fb55a8fb22cdd044e48883568eb229c6a4e445a5d54c30330d49663bcd47a61f",
+  "minimum": 82.7699966430664,
+  "scale": 88.80001068115234,
+  "settings": {
+    "length": 3,
+    "max_gap": 3,
+    "r": 5,
+    "mu": 0.02
+  },
+  "source_hashes": {
+    "motifs.py": "d731bc7767f5e6c60760f0d1f1200de46c58eef63146ed3d34d1ce3f85175113",
+    "clustering.py": "d33cb34d72e64e2d29285cfecfb72c2febc75d142381c92a28b8ca674fd38dcf",
+    "prediction.py": "9c6423981b33a3b394a00597b895c7e85a5664ab9b6c4dce787824e5f8357e96",
+    "forecasts.py": "14bf1a0957c4b61b509bc108e252df6366c1503cb5887ba039ef5d712dc3a7cf",
+    "equity_forecasts.py": "518fd76709422af404539906060b0f296645498d89ec3388bf528ddc5b1a2bb6"
+  },
+  "fit_seconds": 0.16833927482366562,
+  "motifs": 835
+}

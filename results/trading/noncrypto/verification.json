@@ -1,0 +1,80 @@
+{
+  "test_suite": {
+    "passed": 92,
+    "third_party_deprecation_warnings": 19,
+    "log": "test_results.txt"
+  },
+  "lint": "ruff check adis tests: passed",
+  "formatting": "ruff format --check all new equity/predictive modules and tests: passed",
+  "shell_syntax": "bash -n research/trading/noncrypto/reproduce.sh: passed",
+  "main_artifact_audit": {
+    "backtests_verified": 350,
+    "forecast_rows_verified": 8512,
+    "symbols": [
+      "AAPL",
+      "MSFT",
+      "XOM",
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD"
+    ],
+    "snapshot_archives_verified": true,
+    "complete_session_calendars_verified": true,
+    "training_boundaries_and_hashes_verified": true,
+    "lagged_controls_verified": true,
+    "dividend_entitlement_and_receivables_verified": true,
+    "independent_saved_pnl_fees_and_risk_verified": true,
+    "raw_projection_scope": "Internal value-equivalence; not validation against independent raw exchange quotes",
+    "yearly_returns_compound": true
+  },
+  "predictive_artifact_audit": {
+    "backtests_verified": 210,
+    "portfolios_verified": 30,
+    "forecast_rows_verified": 8512,
+    "shared_instrument_curves_exactly_match_main": 98,
+    "split_and_five_session_label_purge_verified": true,
+    "rf_targets_match_original": true,
+    "all_candidates_retained": true,
+    "eligibility_recomputed_from_2021_only": true,
+    "eligibility_sha256": "38d048d5bf5ddadce72680e59e53a95454a6f1a28ff47872c38fb950e5a2f3b9",
+    "portfolio_initial_allocations_and_drift_verified": true,
+    "saved_portfolio_risk_recomputed_independently": true,
+    "comparison_differences_verified": 36
+  },
+  "main_cleanroom": "cleanroom_reproduction.json",
+  "predictive_cleanroom": "predictive/cleanroom_reproduction.json",
+  "portable_manifest_revision": "run_revisions.json",
+  "local_html_links": {
+    "main": 16,
+    "predictive": 12
+  },
+  "plots": "PNG files inspected visually; no browser rendering check",
+  "astra_read_only_review": {
+    "status": "no blocking issues found",
+    "checked": [
+      "dividend accounting and scientific scope of noncrypto study",
+      "validation profitability fixed before new test backtests",
+      "self-financing initial portfolio allocations and drifting weights",
+      "saved-artifact audit and balanced reporting of results"
+    ],
+    "limitations": [
+      "Forecast audit checks structure/dates/targets; independent rerun separately checks numeric reproducibility",
+      "Saved-artifact audit checks point ES differences; bootstrap quantiles reproduced by the separate complete rerun"
+    ]
+  },
+  "files": {
+    "adis/trading/predictive_audit.py": "46e073d017a630d04b14a5c5a0a55156fc97ae73bea01a65b56ef729f5485662",
+    "adis/trading/predictive_report.py": "413e65bad93581f006473ab9bb2959ac62282b03adc40fdad3a85c941ce097d3",
+    "adis/trading/equity_audit.py": "72a41cf1f838372cf6efa39b1499d346c2f4c47a52206499aeb9f605e612624f",
+    "adis/trading/equity_report.py": "d4cff704e548956c088b5e83ea29620b6ade7352427afeaad0503f9eaa4d8533",
+    "research/trading/noncrypto/reproduce.sh": "05999c748af7f8eaf9351c3256de621262a6afb9261dc74dd005614cd9606363"
+  },
+  "json_artifacts_reproduced_exactly": [
+    "main bootstrap.json",
+    "main frozen.json",
+    "main completed.json",
+    "main artifact_audit.json",
+    "all560 per-backtest metrics.json"
+  ]
+}

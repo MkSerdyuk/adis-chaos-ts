@@ -1,0 +1,1359 @@
+<!doctype html><html lang="ru"><meta charset="utf-8">
+<title>Риск и доходность: Partial multistep prediction и альтернативы</title>
+<style>body{max-width:1250px;margin:40px auto;padding:0 24px;font:16px/1.6 system-ui;color:#203040;background:#fafcfe}h1,h2{line-height:1.2}table{border-collapse:collapse;font-size:13px;width:100%}td,th{padding:9px;border-bottom:1px solid #dce3ea;text-align:right}td:first-child,th:first-child{text-align:left}.scroll{overflow:auto}.panel{background:white;border:1px solid #dce3ea;border-radius:10px;padding:24px}img{width:100%}pre{background:#edf2f7;padding:20px;overflow:auto}a{color:#145fa1}</style>
+<h1>Риск относительно других прогнозных стратегий</h1>
+<p>Partial multistep prediction (Gromov–Baranov): дневная торговая адаптация на акциях, облигациях и золоте.</p>
+<div class="panel"><strong>В 2026 у метода ниже наблюдаемый риск, чем у шести альтернатив.
+Устойчивое преимущество между периодами не установлено.</strong>
+<p>Январь–октябрь 2026: доходность метода +2,25%, ES95 0,866%, просадка 3,15%.
+SMA и momentum заработали больше (+3,22% и +3,90%), но имели ES95 1,748% и 1,504%,
+просадку 9,00% и 6,77%. Все четыре ML-модели за этот период убыточны и имеют более высокие ES, просадку и волатильность.</p>
+<p>На 2022–2025 годах картина другая: Random Forest дал +8,17% против +0,55% у метода,
+ES95 0,754% против 0,944% и просадку 6,26% против 12,02%.</p></div>
+<p><a href="../report.html">Исходный эксперимент и учёт сделок</a> · <a href="portfolio_metrics.csv">Метрики портфелей</a> ·
+<a href="instrument_metrics.csv">Все инструменты и методы</a> · <a href="comparisons.csv">Интервалы</a> ·
+<a href="../../../../research/trading/noncrypto/predictive_protocol.json">Протокол</a> ·
+<a href="frozen.json">Хеши входов и кода</a> · <a href="artifact_audit.json">Аудит</a></p>
+<h2>Честный смысл «доходного метода»</h2>
+<p>Шесть кандидатов заданы до их нового сравнения. Прибыльность проверяется только на 2021 году:
+чистая доходность портфеля выше нуля и средняя фактическая доля капитала в рынке не менее 10%.
+Все шесть прошли правило; флаги и их хеш сохранены до тестовых бэк-тестов. Убыточные строки теста
+не исключены. Положительная доходность одного года не доказывает положительное математическое ожидание.</p>
+<table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Альтернатива</th>
+      <th>Доходность 2021</th>
+      <th>Доля в рынке 2021</th>
+      <th>Прошла правило</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Random Forest</td>
+      <td>0.93%</td>
+      <td>29.12%</td>
+      <td>да</td>
+    </tr>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>2.37%</td>
+      <td>38.38%</td>
+      <td>да</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>3.68%</td>
+      <td>21.92%</td>
+      <td>да</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>0.10%</td>
+      <td>43.68%</td>
+      <td>да</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>9.91%</td>
+      <td>52.07%</td>
+      <td>да</td>
+    </tr>
+    <tr>
+      <td>Momentum 90</td>
+      <td>8.33%</td>
+      <td>56.31%</td>
+      <td>да</td>
+    </tr>
+  </tbody>
+</table>
+<p>Это исследовательское приложение, добавленное после знакомства с исходными результатами вне криптовалют.
+Периоды 2022–2025 и январь–октябрь 2026 не объявляются новым независимым подтверждающим тестом.
+Настройки и рынки по их новым результатам не менялись, гиперпараметры альтернатив не подбирались.</p>
+<h2>Сравнение портфелей: январь–октябрь 2026</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Метод</th>
+      <th>Доходность</th>
+      <th>ES95 за день</th>
+      <th>Макс. просадка</th>
+      <th>Волатильность / год</th>
+      <th>Средняя доля в рынке</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Partial multistep prediction</td>
+      <td>2.25%</td>
+      <td>0.87%</td>
+      <td>3.15%</td>
+      <td>6.22%</td>
+      <td>43.43%</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>-3.24%</td>
+      <td>1.15%</td>
+      <td>6.60%</td>
+      <td>7.35%</td>
+      <td>36.80%</td>
+    </tr>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>-4.04%</td>
+      <td>1.29%</td>
+      <td>6.31%</td>
+      <td>7.28%</td>
+      <td>37.05%</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>-5.15%</td>
+      <td>1.30%</td>
+      <td>7.60%</td>
+      <td>7.38%</td>
+      <td>32.52%</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>-3.22%</td>
+      <td>1.54%</td>
+      <td>7.87%</td>
+      <td>9.00%</td>
+      <td>38.21%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>3.22%</td>
+      <td>1.75%</td>
+      <td>9.00%</td>
+      <td>10.11%</td>
+      <td>54.01%</td>
+    </tr>
+    <tr>
+      <td>Momentum 90</td>
+      <td>3.90%</td>
+      <td>1.50%</td>
+      <td>6.77%</td>
+      <td>8.84%</td>
+      <td>41.06%</td>
+    </tr>
+    <tr>
+      <td>Buy-and-hold</td>
+      <td>2.64%</td>
+      <td>1.86%</td>
+      <td>8.70%</td>
+      <td>12.06%</td>
+      <td>93.55%</td>
+    </tr>
+    <tr>
+      <td>Причинный контроль</td>
+      <td>-0.10%</td>
+      <td>0.57%</td>
+      <td>3.72%</td>
+      <td>3.93%</td>
+      <td>38.64%</td>
+    </tr>
+    <tr>
+      <td>Геометрия статьи</td>
+      <td>-1.48%</td>
+      <td>0.70%</td>
+      <td>3.71%</td>
+      <td>4.73%</td>
+      <td>26.95%</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>ES95 — средняя потеря в худших ceil(5% × n) торговых сессиях, минимум ноль; меньше — лучше.
+Волатильность годовая, просадка по закрытиям. Доходность за весь указанный период после 15 bps издержек
+с каждой стороны и с дивидендами; без налогов и процентов на cash. Для 2026 имеется 209 сессий.</p>
+<p>Доля капитала в рынке у метода 43,43%: выше четырёх ML-моделей (32,52–38,21%) и momentum (41,06%),
+ниже SMA (54,01%). Поэтому все различия нельзя объяснить только меньшей экспозицией метода.
+Это также не доказывает способность распознавать риск: состав позиций и их время различаются.</p>
+<img src="risk_return.png" alt="Риск и доходность семи стратегий на двух периодах">
+<h2>Что именно суммируется</h2>
+<p>Начальный капитал распределён по 1/15 между AAPL, MSFT, XOM, SPY и QQQ; по 1/3 — между TLT и GLD.
+Каждая стратегия торгует в семи отдельных субсчетах. Между инструментами капитал не перераспределяется;
+их веса дрейфуют. Общий капитал равен сумме стоимостей субсчетов, доходности и ES вычисляются уже из этой суммы.
+Доля в рынке взвешена текущей стоимостью субсчетов. Каждый оцениваемый период начинается с нового капитала и
+денежной позиции, позиции закрываются на последнем Open; это отдельные эксперименты, не одна непрерывная инвестиция.</p>
+<p>Это риск портфеля с учётом совместного движения активов. В исходном отчёте оценивалось среднее
+инструментальных ES с равными весами классов. Эти два показателя различаются; их численные значения нельзя подменять друг другом.</p>
+<h2>Неопределённость сравнения</h2>
+<p>Парный круговой блочный bootstrap использует 10 000 выборок и одинаковые сессии у всех стратегий.
+Основной блок — 10 сессий; 5 и 20 — заранее заданные проверки чувствительности. Для шести сравнений
+применена поправка Bonferroni: приблизительные интервалы 99,167% каждый, семейный уровень 95% для одного периода и блока.
+Это не общая поправка на все исследования репозитория, оба периода или все длины блока.</p>
+<p>В 2026 основной интервал исключает ноль только против SMA: разность ES −0,882 п.п.,
+интервал [−1,737; −0,054]. При блоке 20 он включает ноль. Остальные пять основных интервалов тоже включают ноль.
+В 2022–2025 преимущество Random Forest по ES видно при блоках 5/10, но не отделяется от нуля при 20.
+Уверенного устойчивого превосходства по риску эти данные не устанавливают.</p>
+<img src="portfolio_comparison.png" alt="Капитал и интервалы разности хвостового риска">
+<div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Период</th>
+      <th>Альтернатива</th>
+      <th>Блок, сессий</th>
+      <th>Разность ES, п.п.</th>
+      <th>Нижняя граница</th>
+      <th>Верхняя граница</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>historical</td>
+      <td>Random Forest</td>
+      <td>5</td>
+      <td>+0.190</td>
+      <td>+0.032</td>
+      <td>+0.329</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Gradient Boosting</td>
+      <td>5</td>
+      <td>+0.023</td>
+      <td>-0.139</td>
+      <td>+0.161</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Ridge</td>
+      <td>5</td>
+      <td>+0.126</td>
+      <td>-0.023</td>
+      <td>+0.276</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SVR</td>
+      <td>5</td>
+      <td>-0.021</td>
+      <td>-0.155</td>
+      <td>+0.102</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SMA 50/200</td>
+      <td>5</td>
+      <td>-0.112</td>
+      <td>-0.362</td>
+      <td>+0.114</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Momentum 90</td>
+      <td>5</td>
+      <td>-0.156</td>
+      <td>-0.423</td>
+      <td>+0.077</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Random Forest</td>
+      <td>10</td>
+      <td>+0.190</td>
+      <td>+0.008</td>
+      <td>+0.349</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Gradient Boosting</td>
+      <td>10</td>
+      <td>+0.023</td>
+      <td>-0.147</td>
+      <td>+0.172</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Ridge</td>
+      <td>10</td>
+      <td>+0.126</td>
+      <td>-0.049</td>
+      <td>+0.298</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SVR</td>
+      <td>10</td>
+      <td>-0.021</td>
+      <td>-0.162</td>
+      <td>+0.114</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SMA 50/200</td>
+      <td>10</td>
+      <td>-0.112</td>
+      <td>-0.372</td>
+      <td>+0.138</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Momentum 90</td>
+      <td>10</td>
+      <td>-0.156</td>
+      <td>-0.445</td>
+      <td>+0.102</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Random Forest</td>
+      <td>20</td>
+      <td>+0.190</td>
+      <td>-0.004</td>
+      <td>+0.365</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Gradient Boosting</td>
+      <td>20</td>
+      <td>+0.023</td>
+      <td>-0.158</td>
+      <td>+0.182</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Ridge</td>
+      <td>20</td>
+      <td>+0.126</td>
+      <td>-0.052</td>
+      <td>+0.322</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SVR</td>
+      <td>20</td>
+      <td>-0.021</td>
+      <td>-0.161</td>
+      <td>+0.116</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>SMA 50/200</td>
+      <td>20</td>
+      <td>-0.112</td>
+      <td>-0.406</td>
+      <td>+0.165</td>
+    </tr>
+    <tr>
+      <td>historical</td>
+      <td>Momentum 90</td>
+      <td>20</td>
+      <td>-0.156</td>
+      <td>-0.479</td>
+      <td>+0.130</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Random Forest</td>
+      <td>5</td>
+      <td>-0.287</td>
+      <td>-0.573</td>
+      <td>+0.050</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Gradient Boosting</td>
+      <td>5</td>
+      <td>-0.428</td>
+      <td>-0.817</td>
+      <td>+0.118</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Ridge</td>
+      <td>5</td>
+      <td>-0.432</td>
+      <td>-0.724</td>
+      <td>+0.026</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SVR</td>
+      <td>5</td>
+      <td>-0.679</td>
+      <td>-1.432</td>
+      <td>+0.008</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SMA 50/200</td>
+      <td>5</td>
+      <td>-0.882</td>
+      <td>-1.765</td>
+      <td>-0.154</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Momentum 90</td>
+      <td>5</td>
+      <td>-0.638</td>
+      <td>-1.583</td>
+      <td>+0.181</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Random Forest</td>
+      <td>10</td>
+      <td>-0.287</td>
+      <td>-0.590</td>
+      <td>+0.084</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Gradient Boosting</td>
+      <td>10</td>
+      <td>-0.428</td>
+      <td>-0.828</td>
+      <td>+0.116</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Ridge</td>
+      <td>10</td>
+      <td>-0.432</td>
+      <td>-0.723</td>
+      <td>+0.111</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SVR</td>
+      <td>10</td>
+      <td>-0.679</td>
+      <td>-1.383</td>
+      <td>+0.049</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SMA 50/200</td>
+      <td>10</td>
+      <td>-0.882</td>
+      <td>-1.737</td>
+      <td>-0.054</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Momentum 90</td>
+      <td>10</td>
+      <td>-0.638</td>
+      <td>-1.584</td>
+      <td>+0.287</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Random Forest</td>
+      <td>20</td>
+      <td>-0.287</td>
+      <td>-0.575</td>
+      <td>+0.091</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Gradient Boosting</td>
+      <td>20</td>
+      <td>-0.428</td>
+      <td>-0.833</td>
+      <td>+0.135</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Ridge</td>
+      <td>20</td>
+      <td>-0.432</td>
+      <td>-0.737</td>
+      <td>+0.200</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SVR</td>
+      <td>20</td>
+      <td>-0.679</td>
+      <td>-1.429</td>
+      <td>+0.151</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>SMA 50/200</td>
+      <td>20</td>
+      <td>-0.882</td>
+      <td>-1.833</td>
+      <td>+0.151</td>
+    </tr>
+    <tr>
+      <td>holdout</td>
+      <td>Momentum 90</td>
+      <td>20</td>
+      <td>-0.638</td>
+      <td>-1.704</td>
+      <td>+0.430</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Сравнение портфелей: 2022–2025</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Метод</th>
+      <th>Доходность</th>
+      <th>ES95 за день</th>
+      <th>Макс. просадка</th>
+      <th>Волатильность / год</th>
+      <th>Средняя доля в рынке</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Partial multistep prediction</td>
+      <td>0.55%</td>
+      <td>0.94%</td>
+      <td>12.02%</td>
+      <td>6.45%</td>
+      <td>35.69%</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>8.17%</td>
+      <td>0.75%</td>
+      <td>6.26%</td>
+      <td>5.06%</td>
+      <td>22.93%</td>
+    </tr>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>3.90%</td>
+      <td>0.92%</td>
+      <td>13.58%</td>
+      <td>6.36%</td>
+      <td>36.20%</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>10.84%</td>
+      <td>0.82%</td>
+      <td>7.57%</td>
+      <td>5.40%</td>
+      <td>21.77%</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>1.36%</td>
+      <td>0.96%</td>
+      <td>17.47%</td>
+      <td>6.44%</td>
+      <td>41.85%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>36.97%</td>
+      <td>1.06%</td>
+      <td>6.10%</td>
+      <td>7.28%</td>
+      <td>56.33%</td>
+    </tr>
+    <tr>
+      <td>Momentum 90</td>
+      <td>43.56%</td>
+      <td>1.10%</td>
+      <td>6.43%</td>
+      <td>7.75%</td>
+      <td>59.38%</td>
+    </tr>
+    <tr>
+      <td>Buy-and-hold</td>
+      <td>56.15%</td>
+      <td>1.49%</td>
+      <td>17.48%</td>
+      <td>10.85%</td>
+      <td>92.66%</td>
+    </tr>
+    <tr>
+      <td>Причинный контроль</td>
+      <td>5.43%</td>
+      <td>0.74%</td>
+      <td>9.77%</td>
+      <td>5.06%</td>
+      <td>34.49%</td>
+    </tr>
+    <tr>
+      <td>Геометрия статьи</td>
+      <td>-2.68%</td>
+      <td>0.76%</td>
+      <td>12.21%</td>
+      <td>5.04%</td>
+      <td>25.39%</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Все портфели на validation 2021</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Метод</th>
+      <th>Доходность</th>
+      <th>ES95 за день</th>
+      <th>Макс. просадка</th>
+      <th>Волатильность / год</th>
+      <th>Средняя доля в рынке</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Partial multistep prediction</td>
+      <td>0.13%</td>
+      <td>0.76%</td>
+      <td>3.44%</td>
+      <td>4.61%</td>
+      <td>30.02%</td>
+    </tr>
+    <tr>
+      <td>Random Forest</td>
+      <td>0.93%</td>
+      <td>0.72%</td>
+      <td>5.25%</td>
+      <td>4.89%</td>
+      <td>29.12%</td>
+    </tr>
+    <tr>
+      <td>Gradient Boosting</td>
+      <td>2.37%</td>
+      <td>0.76%</td>
+      <td>5.49%</td>
+      <td>5.20%</td>
+      <td>38.38%</td>
+    </tr>
+    <tr>
+      <td>Ridge</td>
+      <td>3.68%</td>
+      <td>0.64%</td>
+      <td>4.83%</td>
+      <td>4.17%</td>
+      <td>21.92%</td>
+    </tr>
+    <tr>
+      <td>SVR</td>
+      <td>0.10%</td>
+      <td>0.79%</td>
+      <td>6.26%</td>
+      <td>5.36%</td>
+      <td>43.68%</td>
+    </tr>
+    <tr>
+      <td>SMA 50/200</td>
+      <td>9.91%</td>
+      <td>0.82%</td>
+      <td>3.12%</td>
+      <td>6.12%</td>
+      <td>52.07%</td>
+    </tr>
+    <tr>
+      <td>Momentum 90</td>
+      <td>8.33%</td>
+      <td>0.93%</td>
+      <td>3.86%</td>
+      <td>6.55%</td>
+      <td>56.31%</td>
+    </tr>
+    <tr>
+      <td>Buy-and-hold</td>
+      <td>11.31%</td>
+      <td>1.17%</td>
+      <td>6.08%</td>
+      <td>8.57%</td>
+      <td>92.38%</td>
+    </tr>
+    <tr>
+      <td>Причинный контроль</td>
+      <td>2.63%</td>
+      <td>0.43%</td>
+      <td>1.56%</td>
+      <td>2.75%</td>
+      <td>23.66%</td>
+    </tr>
+    <tr>
+      <td>Геометрия статьи</td>
+      <td>-0.75%</td>
+      <td>0.40%</td>
+      <td>2.55%</td>
+      <td>2.64%</td>
+      <td>14.72%</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2>Одинаковые условия прогнозирования</h2>
+<p>Random Forest, HistGradientBoosting, Ridge и SVR предсказывают доходность Close через пять сессий.
+Признаки: log-momentum 1/5/20/60, волатильность log-return 20/60 и объём относительно среднего за 20 сессий.
+Поквартальное обучение использует предыдущие 2520 сессий; последние пять origins исключены, чтобы все метки
+предшествовали началу квартала. StandardScaler для Ridge/SVR обучается только на train. Параметры полностью
+перечислены в протоколе; настроек по тесту нет. Это фиксированные представители семейств, не лучшие возможные версии моделей.</p>
+<p>SMA50/200 и momentum90 — две стратегии прогноза направления по тренду, а не обучаемые регрессоры.
+Buy-and-hold, сглаженный причинный контроль и контроль с геометрией статьи добавлены для контекста.
+Основная модель использует ранее выбранные настройки мотивов/Wishart и отказов; дневной train и горизонт — явная адаптация.
+Торговое правило отсутствует в исходной статье и не выдается за её результат.</p>
+<p>Решения принимаются после последнего закрытия каждой недели, исполняются на следующем реальном Open.
+Для регрессоров и основного метода прогноз роста выше 0,3% даёт целевую позицию 95%, иначе cash;
+позиция держится до смены сигнала. У трендовых стратегий собственное фиксированное условие направления.
+Дивиденды, сплиты, праздничные сессии и допущения поставщика совпадают с исходным экспериментом.</p>
+<h2>Все инструменты: январь–октябрь 2026</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Инструмент</th>
+      <th>Метод</th>
+      <th>Доходность</th>
+      <th>ES95 за день</th>
+      <th>Макс. просадка</th>
+      <th>Волатильность / год</th>
+      <th>Средняя доля в рынке</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AAPL</td>
+      <td>Partial multistep prediction</td>
+      <td>5.51%</td>
+      <td>0.92%</td>
+      <td>5.51%</td>
+      <td>6.56%</td>
+      <td>15.00%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Random Forest</td>
+      <td>16.51%</td>
+      <td>2.60%</td>
+      <td>8.88%</td>
+      <td>18.36%</td>
+      <td>59.14%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Gradient Boosting</td>
+      <td>10.48%</td>
+      <td>2.96%</td>
+      <td>12.62%</td>
+      <td>19.85%</td>
+      <td>63.73%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Ridge</td>
+      <td>14.94%</td>
+      <td>3.28%</td>
+      <td>12.17%</td>
+      <td>21.73%</td>
+      <td>78.34%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>SVR</td>
+      <td>21.54%</td>
+      <td>2.40%</td>
+      <td>8.12%</td>
+      <td>17.66%</td>
+      <td>58.74%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>SMA 50/200</td>
+      <td>26.62%</td>
+      <td>3.54%</td>
+      <td>12.14%</td>
+      <td>24.44%</td>
+      <td>94.29%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Momentum 90</td>
+      <td>13.36%</td>
+      <td>3.49%</td>
+      <td>12.13%</td>
+      <td>22.21%</td>
+      <td>74.78%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Buy-and-hold</td>
+      <td>26.62%</td>
+      <td>3.54%</td>
+      <td>12.14%</td>
+      <td>24.44%</td>
+      <td>94.29%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Причинный контроль</td>
+      <td>7.48%</td>
+      <td>0.65%</td>
+      <td>2.50%</td>
+      <td>5.01%</td>
+      <td>14.70%</td>
+    </tr>
+    <tr>
+      <td>AAPL</td>
+      <td>Геометрия статьи</td>
+      <td>-5.73%</td>
+      <td>1.56%</td>
+      <td>10.17%</td>
+      <td>8.23%</td>
+      <td>17.27%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Partial multistep prediction</td>
+      <td>9.47%</td>
+      <td>2.59%</td>
+      <td>16.95%</td>
+      <td>24.73%</td>
+      <td>50.35%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Random Forest</td>
+      <td>0.44%</td>
+      <td>3.46%</td>
+      <td>24.74%</td>
+      <td>23.76%</td>
+      <td>64.26%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Gradient Boosting</td>
+      <td>10.97%</td>
+      <td>2.95%</td>
+      <td>20.62%</td>
+      <td>27.38%</td>
+      <td>58.46%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Ridge</td>
+      <td>1.40%</td>
+      <td>2.89%</td>
+      <td>19.25%</td>
+      <td>22.84%</td>
+      <td>64.87%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>SVR</td>
+      <td>8.30%</td>
+      <td>3.10%</td>
+      <td>17.38%</td>
+      <td>22.01%</td>
+      <td>58.96%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>SMA 50/200</td>
+      <td>3.76%</td>
+      <td>1.63%</td>
+      <td>7.74%</td>
+      <td>10.18%</td>
+      <td>23.67%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Momentum 90</td>
+      <td>9.55%</td>
+      <td>1.77%</td>
+      <td>4.84%</td>
+      <td>11.50%</td>
+      <td>30.96%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Buy-and-hold</td>
+      <td>10.49%</td>
+      <td>4.02%</td>
+      <td>25.34%</td>
+      <td>32.75%</td>
+      <td>93.35%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Причинный контроль</td>
+      <td>16.57%</td>
+      <td>2.25%</td>
+      <td>14.92%</td>
+      <td>19.59%</td>
+      <td>52.11%</td>
+    </tr>
+    <tr>
+      <td>MSFT</td>
+      <td>Геометрия статьи</td>
+      <td>13.21%</td>
+      <td>3.06%</td>
+      <td>20.79%</td>
+      <td>26.32%</td>
+      <td>40.89%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Partial multistep prediction</td>
+      <td>7.07%</td>
+      <td>2.21%</td>
+      <td>9.18%</td>
+      <td>12.78%</td>
+      <td>20.00%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Random Forest</td>
+      <td>24.69%</td>
+      <td>1.64%</td>
+      <td>4.96%</td>
+      <td>11.53%</td>
+      <td>26.37%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Gradient Boosting</td>
+      <td>5.31%</td>
+      <td>2.53%</td>
+      <td>10.54%</td>
+      <td>15.60%</td>
+      <td>39.53%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Ridge</td>
+      <td>-10.59%</td>
+      <td>2.44%</td>
+      <td>18.82%</td>
+      <td>13.18%</td>
+      <td>24.05%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>SVR</td>
+      <td>22.97%</td>
+      <td>2.16%</td>
+      <td>5.82%</td>
+      <td>14.97%</td>
+      <td>37.28%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>SMA 50/200</td>
+      <td>48.03%</td>
+      <td>3.63%</td>
+      <td>19.20%</td>
+      <td>26.10%</td>
+      <td>93.94%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Momentum 90</td>
+      <td>25.27%</td>
+      <td>3.64%</td>
+      <td>21.57%</td>
+      <td>23.90%</td>
+      <td>74.18%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Buy-and-hold</td>
+      <td>48.03%</td>
+      <td>3.63%</td>
+      <td>19.20%</td>
+      <td>26.10%</td>
+      <td>93.94%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Причинный контроль</td>
+      <td>7.10%</td>
+      <td>1.00%</td>
+      <td>6.03%</td>
+      <td>7.28%</td>
+      <td>20.17%</td>
+    </tr>
+    <tr>
+      <td>XOM</td>
+      <td>Геометрия статьи</td>
+      <td>-7.82%</td>
+      <td>1.97%</td>
+      <td>13.62%</td>
+      <td>10.05%</td>
+      <td>10.90%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Partial multistep prediction</td>
+      <td>5.71%</td>
+      <td>0.96%</td>
+      <td>5.24%</td>
+      <td>6.69%</td>
+      <td>15.43%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Random Forest</td>
+      <td>1.78%</td>
+      <td>1.05%</td>
+      <td>4.25%</td>
+      <td>6.72%</td>
+      <td>28.17%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Gradient Boosting</td>
+      <td>-3.10%</td>
+      <td>1.33%</td>
+      <td>7.25%</td>
+      <td>7.59%</td>
+      <td>28.61%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Ridge</td>
+      <td>0.41%</td>
+      <td>1.23%</td>
+      <td>7.31%</td>
+      <td>7.46%</td>
+      <td>28.60%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>SVR</td>
+      <td>4.48%</td>
+      <td>1.20%</td>
+      <td>5.86%</td>
+      <td>7.61%</td>
+      <td>30.46%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>SMA 50/200</td>
+      <td>10.81%</td>
+      <td>1.60%</td>
+      <td>8.44%</td>
+      <td>12.22%</td>
+      <td>94.04%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Momentum 90</td>
+      <td>6.91%</td>
+      <td>1.47%</td>
+      <td>4.28%</td>
+      <td>10.89%</td>
+      <td>83.23%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Buy-and-hold</td>
+      <td>10.81%</td>
+      <td>1.60%</td>
+      <td>8.44%</td>
+      <td>12.22%</td>
+      <td>94.04%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Причинный контроль</td>
+      <td>4.50%</td>
+      <td>0.38%</td>
+      <td>1.66%</td>
+      <td>2.73%</td>
+      <td>15.32%</td>
+    </tr>
+    <tr>
+      <td>SPY</td>
+      <td>Геометрия статьи</td>
+      <td>0.09%</td>
+      <td>1.04%</td>
+      <td>4.03%</td>
+      <td>6.14%</td>
+      <td>12.73%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Partial multistep prediction</td>
+      <td>-3.89%</td>
+      <td>1.90%</td>
+      <td>9.33%</td>
+      <td>10.65%</td>
+      <td>24.08%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Random Forest</td>
+      <td>-0.21%</td>
+      <td>2.05%</td>
+      <td>11.15%</td>
+      <td>14.38%</td>
+      <td>60.94%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Gradient Boosting</td>
+      <td>5.92%</td>
+      <td>2.44%</td>
+      <td>10.42%</td>
+      <td>16.52%</td>
+      <td>60.44%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Ridge</td>
+      <td>5.96%</td>
+      <td>2.07%</td>
+      <td>9.65%</td>
+      <td>16.06%</td>
+      <td>65.43%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>SVR</td>
+      <td>-0.77%</td>
+      <td>2.01%</td>
+      <td>9.99%</td>
+      <td>13.88%</td>
+      <td>49.07%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>SMA 50/200</td>
+      <td>11.98%</td>
+      <td>2.49%</td>
+      <td>11.14%</td>
+      <td>19.72%</td>
+      <td>94.33%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Momentum 90</td>
+      <td>2.46%</td>
+      <td>2.38%</td>
+      <td>10.72%</td>
+      <td>17.75%</td>
+      <td>77.49%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Buy-and-hold</td>
+      <td>11.98%</td>
+      <td>2.49%</td>
+      <td>11.14%</td>
+      <td>19.72%</td>
+      <td>94.33%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Причинный контроль</td>
+      <td>6.20%</td>
+      <td>0.65%</td>
+      <td>2.61%</td>
+      <td>4.70%</td>
+      <td>19.79%</td>
+    </tr>
+    <tr>
+      <td>QQQ</td>
+      <td>Геометрия статьи</td>
+      <td>-6.05%</td>
+      <td>1.79%</td>
+      <td>14.05%</td>
+      <td>10.77%</td>
+      <td>35.44%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Partial multistep prediction</td>
+      <td>-3.29%</td>
+      <td>1.28%</td>
+      <td>9.49%</td>
+      <td>8.97%</td>
+      <td>82.32%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Random Forest</td>
+      <td>-1.66%</td>
+      <td>0.16%</td>
+      <td>1.66%</td>
+      <td>1.24%</td>
+      <td>2.27%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Gradient Boosting</td>
+      <td>-3.69%</td>
+      <td>0.77%</td>
+      <td>5.06%</td>
+      <td>3.90%</td>
+      <td>13.63%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Ridge</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>SVR</td>
+      <td>-1.75%</td>
+      <td>0.80%</td>
+      <td>3.69%</td>
+      <td>4.17%</td>
+      <td>13.18%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>SMA 50/200</td>
+      <td>-4.19%</td>
+      <td>0.82%</td>
+      <td>5.49%</td>
+      <td>4.26%</td>
+      <td>17.71%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Momentum 90</td>
+      <td>-1.56%</td>
+      <td>0.34%</td>
+      <td>2.65%</td>
+      <td>2.18%</td>
+      <td>6.36%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Buy-and-hold</td>
+      <td>-2.90%</td>
+      <td>1.27%</td>
+      <td>11.63%</td>
+      <td>9.21%</td>
+      <td>92.39%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Причинный контроль</td>
+      <td>-3.54%</td>
+      <td>1.09%</td>
+      <td>9.99%</td>
+      <td>7.69%</td>
+      <td>74.68%</td>
+    </tr>
+    <tr>
+      <td>TLT</td>
+      <td>Геометрия статьи</td>
+      <td>-3.86%</td>
+      <td>1.07%</td>
+      <td>5.56%</td>
+      <td>6.36%</td>
+      <td>39.47%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Partial multistep prediction</td>
+      <td>5.26%</td>
+      <td>2.10%</td>
+      <td>8.20%</td>
+      <td>13.18%</td>
+      <td>24.08%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Random Forest</td>
+      <td>-16.71%</td>
+      <td>3.07%</td>
+      <td>19.32%</td>
+      <td>19.41%</td>
+      <td>63.00%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Gradient Boosting</td>
+      <td>-14.35%</td>
+      <td>2.99%</td>
+      <td>20.87%</td>
+      <td>16.75%</td>
+      <td>47.64%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Ridge</td>
+      <td>-17.88%</td>
+      <td>3.35%</td>
+      <td>24.78%</td>
+      <td>18.41%</td>
+      <td>45.40%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>SVR</td>
+      <td>-19.21%</td>
+      <td>4.06%</td>
+      <td>23.62%</td>
+      <td>24.26%</td>
+      <td>55.84%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>SMA 50/200</td>
+      <td>-6.39%</td>
+      <td>4.10%</td>
+      <td>25.13%</td>
+      <td>24.85%</td>
+      <td>56.50%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Momentum 90</td>
+      <td>1.76%</td>
+      <td>3.90%</td>
+      <td>18.41%</td>
+      <td>22.93%</td>
+      <td>44.26%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Buy-and-hold</td>
+      <td>-10.76%</td>
+      <td>4.18%</td>
+      <td>26.09%</td>
+      <td>28.46%</td>
+      <td>94.14%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Причинный контроль</td>
+      <td>-5.13%</td>
+      <td>1.14%</td>
+      <td>8.13%</td>
+      <td>6.21%</td>
+      <td>18.20%</td>
+    </tr>
+    <tr>
+      <td>GLD</td>
+      <td>Геометрия статьи</td>
+      <td>0.67%</td>
+      <td>1.59%</td>
+      <td>5.85%</td>
+      <td>9.19%</td>
+      <td>17.72%</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>Полная таблица, включая 2021 и 2022–2025, сохранена в <a href="instrument_metrics.csv">instrument_metrics.csv</a>.
+Панель состоит из известных сохранившихся инструментов; результат не распространяется автоматически на все акции.
+Допущения о выплатах дивидендов, издержках и бесплатном cash сохраняются. Дополнительных тестов издержек
+для всех новых ML-моделей в этом приложении нет.</p>
+<h2>Проверка и воспроизведение</h2><p>Повторно проверены 210 бэк-тестов,
+30 портфелей, структура и причинные границы 8512 прогнозов.
+Сохранённые сделки сверены с Open, комиссиями и дивидендами; портфельные кривые пересобраны из субсчетов,
+риск независимо пересчитан. 98 общих кривых совпали с исходным экспериментом точно.
+Read-only проверка GPT Astra подтверждает порядок validation/test и способ сборки портфелей.</p>
+<p><a href="cleanroom_reproduction.json">Отдельный повторный запуск</a> заново обучил все четыре ML-модели
+без их прогнозных кэшей. Максимальное отличие прогнозной доходности — ≈1,04 × 10⁻¹⁷; targets, сделки,
+кривые капитала, метрики и bootstrap-интервалы воспроизвелись точно при численном чтении CSV.
+Проверены 1128 CSV-файлов. Основное исследование отдельно воспроизведено из сохранённых прогнозов и снимков данных.
+<a href="../verification.json">Общая проверка</a>: 92 теста пройдены, lint и форматирование пройдены.</p>
+<pre>bash research/trading/noncrypto/reproduce.sh</pre>
+<p>Сценарий восстанавливает сохранённые снимки данных и запускает оба исследования, аудит и отчёты.
+Чтобы заново обучить четыре альтернативных ML-модели, удалите их кэши predictive/*/forecasts.csv
+в отдельной копии репозитория перед запуском. Хеши исходного кода и протокола должны совпасть.</p>
+</html>

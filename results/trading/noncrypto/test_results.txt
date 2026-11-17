@@ -1,0 +1,19 @@
+........................................................................ [ 78%]
+....................                                                     [100%]
+=============================== warnings summary ===============================
+tests/test_equity_trading.py: 8 warnings
+tests/test_trading.py: 6 warnings
+tests/test_trading_transfer.py: 1 warning
+  /home/mkserdyuk/Personal/ADIS/.venv/lib/python3.13/site-packages/backtesting/_stats.py:125: Pandas4Warning: DatetimeIndex.dayofweek is deprecated and will be removed in a future version. Use DatetimeIndex.day_of_week instead.
+    have_weekends = index.dayofweek.to_series().between(5, 6).mean() > 2 / 7 * .6
+
+tests/test_equity_trading.py::test_weekly_decision_uses_exchange_holiday_calendar
+tests/test_equity_trading.py::test_weekly_decision_uses_exchange_holiday_calendar
+tests/test_equity_trading.py::test_weekly_decision_uses_exchange_holiday_calendar
+tests/test_equity_trading.py::test_weekly_decision_uses_exchange_holiday_calendar
+  /home/mkserdyuk/Personal/ADIS/.venv/lib/python3.13/site-packages/pandas/core/series.py:848: Pandas4Warning: Series.values returning an ndarray that drops timezone information for DatetimeTZDtype is deprecated. In a future version, this will return the underlying DatetimeArray instead. Use 'Series.dt.tz_convert(None).to_numpy()' to get a NumPy array of UTC values, or 'Series.array' to get the ExtensionArray.
+  See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#whatsnew-310-deprecations-values for more details.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+92 passed, 19 warnings in 11.05s

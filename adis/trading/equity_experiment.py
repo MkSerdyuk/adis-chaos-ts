@@ -82,7 +82,12 @@ def freeze():
         paper_parameters={key: value for key, value in PAPER.items() if key != "training_hours"},
         btc_identity=selected["identity"],
         exchange_calendars=importlib.metadata.version("exchange_calendars"),
-        files={str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in files},
+        files={
+            str(path.resolve().relative_to(Path.cwd().resolve())): hashlib.sha256(
+                path.read_bytes()
+            ).hexdigest()
+            for path in files
+        },
     )
     output = ROOT / "frozen.json"
     if output.exists():

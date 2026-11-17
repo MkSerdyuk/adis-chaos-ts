@@ -8,6 +8,7 @@ from adis.trading.equity_backtest import audit_result, run_daily
 from adis.trading.equity_data import weekly_decisions
 from adis.trading.equity_experiment import weighted_bootstrap
 from adis.trading.forecasts import trajectory_predictions
+from adis.trading.predictive_comparison import portfolio
 
 
 def market():
@@ -100,3 +101,12 @@ def test_bootstrap_balances_asset_classes_and_preserves_calendar_dependence():
     control = np.array([low] * 5 + [high, low])
     result = weighted_bootstrap(method, control, [1 / 15] * 5 + [1 / 3, 1 / 3], repetitions=100)
     np.testing.assert_allclose([result["difference"], result["lower"], result["upper"]], 0, atol=1e-15)
+
+
+def test_portfolio_preserves_initial_allocations_without_daily_rebalancing():
+    dates = pd.bdate_range("2022-01-03", periods=3)
+    first = pd.DataFrame(dict(equity=[100000, 200000, 300000], exposure=1.0), index=dates)
+    second = pd.DataFrame(dict(equity=100000, exposure=0.0), index=dates)
+    combined = portfolio({"first": first, "second": second}, {"first": 0.5, "second": 0.5})
+    np.testing.assert_allclose(combined.equity, [100000, 150000, 200000])
+    np.testing.assert_allclose(combined.exposure, [0.5, 2 / 3, 0.75])

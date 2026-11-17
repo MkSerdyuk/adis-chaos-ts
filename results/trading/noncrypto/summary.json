@@ -1,0 +1,370 @@
+{
+  "conclusion": "В этой проверке торговая адаптация метода имеет больший средний хвостовой риск, чем причинный контроль: основной блочный интервал целиком выше нуля.",
+  "primary": {
+    "period": "holdout",
+    "primary": true,
+    "symbols": [
+      "AAPL",
+      "MSFT",
+      "XOM",
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD"
+    ],
+    "difference": 0.006244053912421219,
+    "lower": 0.0026671220317075377,
+    "upper": 0.008919192742838398,
+    "asset_differences": [
+      0.002630479250010154,
+      0.003402030048809318,
+      0.012058357502067116,
+      0.005812089408874555,
+      0.01249613494054707,
+      0.0018446340051228739,
+      0.009607709502079141
+    ],
+    "asset_lower": [
+      -0.006316271378153613,
+      -0.007576379486496634,
+      -0.004694431375353305,
+      -0.0048844690653176825,
+      -5.423786113881292e-05,
+      -0.00020934442172224085,
+      -0.0032172524664274963
+    ],
+    "asset_upper": [
+      0.008008333139635651,
+      0.012141172472752164,
+      0.020565671764273413,
+      0.013491178733393061,
+      0.016830452309344164,
+      0.004906484758731015,
+      0.01954391939769766
+    ],
+    "weights": [
+      0.06666666666666667,
+      0.06666666666666667,
+      0.06666666666666667,
+      0.06666666666666667,
+      0.06666666666666667,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "sessions": 209,
+    "block": 10,
+    "repetitions": 10000,
+    "seed": 20261117
+  },
+  "comparisons": [
+    {
+      "period": "historical",
+      "symbol": "AAPL",
+      "method_return": -0.11098574762697866,
+      "control_return": 0.21897755221967552,
+      "method_es95": 0.03264750057030102,
+      "control_es95": 0.02033517728479984,
+      "difference": 0.012312323285501178,
+      "lower": 0.006368452291174006,
+      "upper": 0.016869955181012218,
+      "method_exposure": 0.32738901873458315,
+      "control_exposure": 0.328217040827914,
+      "method_entries": 34,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "MSFT",
+      "method_return": 0.5370711999395359,
+      "control_return": 0.41663224547856426,
+      "method_es95": 0.02742651555307813,
+      "control_es95": 0.016203512199117604,
+      "difference": 0.011223003353960526,
+      "lower": 0.0051005814616410785,
+      "upper": 0.016227360615722605,
+      "method_exposure": 0.3058134631796295,
+      "control_exposure": 0.2983245091700807,
+      "method_entries": 33,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "XOM",
+      "method_return": 0.6422187295476236,
+      "control_return": 0.31388591295786106,
+      "method_es95": 0.020226813659347503,
+      "control_es95": 0.012636480307303712,
+      "difference": 0.007590333352043791,
+      "lower": 0.0021159030868267577,
+      "upper": 0.01323106273387925,
+      "method_exposure": 0.2772839242985753,
+      "control_exposure": 0.2777348426037504,
+      "method_entries": 35,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "SPY",
+      "method_return": 0.09476731354400103,
+      "control_return": 0.23126253439467614,
+      "method_es95": 0.019157393791149415,
+      "control_es95": 0.00853999994272161,
+      "difference": 0.010617393848427805,
+      "lower": 0.0041016717422384975,
+      "upper": 0.018614501689192958,
+      "method_exposure": 0.24422402319867334,
+      "control_exposure": 0.24078072008685864,
+      "method_entries": 21,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "QQQ",
+      "method_return": -0.24782397669039313,
+      "control_return": 0.26113936962805573,
+      "method_es95": 0.028766317088301508,
+      "control_es95": 0.016626992721195912,
+      "difference": 0.012139324367105596,
+      "lower": 0.007074677271827274,
+      "upper": 0.01848601202669422,
+      "method_exposure": 0.34388894749922255,
+      "control_exposure": 0.33930589819004814,
+      "method_entries": 26,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "TLT",
+      "method_return": -0.11616304128828792,
+      "control_return": -0.22141456561062633,
+      "method_es95": 0.01822794809791304,
+      "control_es95": 0.016401523159060995,
+      "difference": 0.0018264249388520448,
+      "lower": -0.0012309878097380817,
+      "upper": 0.004563197897537921,
+      "method_exposure": 0.6547431169846646,
+      "control_exposure": 0.6682927985619359,
+      "method_entries": 30,
+      "inactive_pair": false
+    },
+    {
+      "period": "historical",
+      "symbol": "GLD",
+      "method_return": -0.05045565907043181,
+      "control_return": 0.09588255998592032,
+      "method_es95": 0.009213858264224804,
+      "control_es95": 0.006010158365794976,
+      "difference": 0.003203699898429828,
+      "lower": -3.823667336308055e-05,
+      "upper": 0.005990306476827396,
+      "method_exposure": 0.145758370921704,
+      "control_exposure": 0.1608561232528434,
+      "method_entries": 14,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "AAPL",
+      "method_return": 0.055134173993511615,
+      "control_return": 0.07479439509533647,
+      "method_es95": 0.009177318568260288,
+      "control_es95": 0.006546839318250134,
+      "difference": 0.002630479250010154,
+      "lower": -0.006316271378153613,
+      "upper": 0.008008333139635651,
+      "method_exposure": 0.15003260568043136,
+      "control_exposure": 0.14699581065062522,
+      "method_entries": 5,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "MSFT",
+      "method_return": 0.09466618937129745,
+      "control_return": 0.16572391536205577,
+      "method_es95": 0.025926237573700203,
+      "control_es95": 0.022524207524890885,
+      "difference": 0.003402030048809318,
+      "lower": -0.007576379486496634,
+      "upper": 0.012141172472752164,
+      "method_exposure": 0.5035315362110323,
+      "control_exposure": 0.5211394124059727,
+      "method_entries": 7,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "XOM",
+      "method_return": 0.07071637216545223,
+      "control_return": 0.07096993051168732,
+      "method_es95": 0.022053120832663784,
+      "control_es95": 0.009994763330596668,
+      "difference": 0.012058357502067116,
+      "lower": -0.004694431375353305,
+      "upper": 0.020565671764273413,
+      "method_exposure": 0.1999871546653806,
+      "control_exposure": 0.20169064530095593,
+      "method_entries": 5,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "SPY",
+      "method_return": 0.05713657407237038,
+      "control_return": 0.04504073708997258,
+      "method_es95": 0.009623284336801747,
+      "control_es95": 0.003811194927927192,
+      "difference": 0.005812089408874555,
+      "lower": -0.0048844690653176825,
+      "upper": 0.013491178733393061,
+      "method_exposure": 0.15426264442595838,
+      "control_exposure": 0.15322350563630177,
+      "method_entries": 2,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "QQQ",
+      "method_return": -0.03890345538912299,
+      "control_return": 0.062012079099273754,
+      "method_es95": 0.019026042662546996,
+      "control_es95": 0.006529907721999926,
+      "difference": 0.01249613494054707,
+      "lower": -5.423786113881292e-05,
+      "upper": 0.016830452309344164,
+      "method_exposure": 0.2407574802038669,
+      "control_exposure": 0.19789126378646404,
+      "method_entries": 6,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "TLT",
+      "method_return": -0.032888140551801004,
+      "control_return": -0.03535554791623652,
+      "method_es95": 0.012765827540113088,
+      "control_es95": 0.010921193534990215,
+      "difference": 0.0018446340051228739,
+      "lower": -0.00020934442172224085,
+      "upper": 0.004906484758731015,
+      "method_exposure": 0.8231640943404391,
+      "control_exposure": 0.7468143872709954,
+      "method_entries": 4,
+      "inactive_pair": false
+    },
+    {
+      "period": "holdout",
+      "symbol": "GLD",
+      "method_return": 0.05260914748281409,
+      "control_return": -0.051258120177680055,
+      "method_es95": 0.021047648409689666,
+      "control_es95": 0.011439938907610525,
+      "difference": 0.009607709502079141,
+      "lower": -0.0032172524664274963,
+      "upper": 0.01954391939769766,
+      "method_exposure": 0.24083087918786902,
+      "control_exposure": 0.1820035106813226,
+      "method_entries": 6,
+      "inactive_pair": false
+    }
+  ],
+  "sensitivity": [
+    {
+      "period": "historical",
+      "costs_bps": 0,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.005134069710044222
+    },
+    {
+      "period": "historical",
+      "costs_bps": 5,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.005175487521359846
+    },
+    {
+      "period": "historical",
+      "costs_bps": 15,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 30,
+      "difference": 0.005269253339284251
+    },
+    {
+      "period": "historical",
+      "costs_bps": 15,
+      "extra_delay_sessions": 1,
+      "dividend_delay_days": 0,
+      "difference": 0.005675665367864354
+    },
+    {
+      "period": "historical",
+      "costs_bps": 30,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.0054397377479363795
+    },
+    {
+      "period": "holdout",
+      "costs_bps": 0,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.006121438672325301
+    },
+    {
+      "period": "holdout",
+      "costs_bps": 5,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.006161217206663285
+    },
+    {
+      "period": "holdout",
+      "costs_bps": 15,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 30,
+      "difference": 0.006244008464786323
+    },
+    {
+      "period": "holdout",
+      "costs_bps": 15,
+      "extra_delay_sessions": 1,
+      "dividend_delay_days": 0,
+      "difference": 0.005636291102947127
+    },
+    {
+      "period": "holdout",
+      "costs_bps": 30,
+      "extra_delay_sessions": 0,
+      "dividend_delay_days": 0,
+      "difference": 0.006396520259628937
+    }
+  ],
+  "seeds": [
+    {
+      "period": "historical",
+      "seed": 7,
+      "difference": 0.005703642595739526
+    },
+    {
+      "period": "historical",
+      "seed": 123,
+      "difference": 0.005275410910769166
+    },
+    {
+      "period": "holdout",
+      "seed": 7,
+      "difference": 0.005923916140683047
+    },
+    {
+      "period": "holdout",
+      "seed": 123,
+      "difference": 0.006202325403778337
+    }
+  ],
+  "completed": {
+    "main_backtests": 154,
+    "sensitivity_backtests": 140,
+    "seed_backtests": 56
+  }
+}

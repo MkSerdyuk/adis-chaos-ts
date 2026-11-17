@@ -1,0 +1,6 @@
+decision_session,close,prediction,accepted,accepted_h1,outside_train_range,model_id,fit_end_exclusive,seed,predicted_return,target
+2026-10-02,77.4800033569336,,False,True,True,ab968a44a0a9722c,2026-10-01 00:00:00,42,,0.0
+2026-10-09,77.9800033569336,,False,False,True,ab968a44a0a9722c,2026-10-01 00:00:00,42,,0.0
+2026-10-16,80.05000305175781,,False,False,True,ab968a44a0a9722c,2026-10-01 00:00:00,42,,0.0
+2026-10-23,81.33999633789062,,False,False,True,ab968a44a0a9722c,2026-10-01 00:00:00,42,,0.0
+2026-10-30,81.83999633789062,,False,False,True,ab968a44a0a9722c,2026-10-01 00:00:00,42,,0.0

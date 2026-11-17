@@ -1,0 +1,21 @@
+{
+  "backtests_verified": 350,
+  "forecast_rows_verified": 8512,
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "XOM",
+    "SPY",
+    "QQQ",
+    "TLT",
+    "GLD"
+  ],
+  "snapshot_archives_verified": true,
+  "complete_session_calendars_verified": true,
+  "training_boundaries_and_hashes_verified": true,
+  "lagged_controls_verified": true,
+  "dividend_entitlement_and_receivables_verified": true,
+  "independent_saved_pnl_fees_and_risk_verified": true,
+  "raw_projection_scope": "Internal value-equivalence; not validation against independent raw exchange quotes",
+  "yearly_returns_compound": true
+}
